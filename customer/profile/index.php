@@ -25,6 +25,22 @@ if (!isset($_SESSION['email'])) {
             width: 100%;
             margin-top: 100px;
         }
+        .history_order {
+            margin: 6px 0 0 90px;
+            width: 200px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .history_order:hover {
+            background-color: #6868de;
+        }
+
+        .history_order:hover .link{
+            color: white;
+        }
     </style>
     <title> Profile </title>
 </head>
@@ -50,11 +66,11 @@ if (!isset($_SESSION['email'])) {
         Phone: <?= $customer['phone']; ?><br>
         Address: <?= $customer['address']; ?><br>
     </div>
-    <button class="button add">
-        <a style="color:white" class="link" href="history_order.php?id=<?= $customer['id']; ?>">
+    <div class="history_order">
+        <a style="font-weight: bold" class="link" href="history_order.php?id=<?= $customer['id']; ?>">
             History orders
         </a>
-    </button>
+    </div>
             <?php
         }
     ?>
