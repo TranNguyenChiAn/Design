@@ -79,12 +79,12 @@ include_once '../connect/close.php';
         foreach ($clothes as $clothe){
             ?>
             <input type="hidden" name="id" value="<?= $clothe['id'] ?>">
-            Name: <input type="text" name="clothe_name" value="<?= $clothe['name'] ?>"><br>
-            Material: <input type="text" name="material" value="<?= $clothe['material'] ?>"><br>
-            Size: <input type="text" name="size" value="<?= $clothe['size'] ?>"><br>
-            Color: <input type="text" name="color" value="<?= $clothe['color'] ?>"><br>
-            Description: <input type="text" name="description" value="<?= $clothe['description'] ?>"><br>
-            Category Name: <select name="category_id" id="category_id" onchange="checkForBlank()">
+            Name: <input style="margin-bottom: 18px; width: 300px" type="text" name="clothe_name" value="<?= $clothe['name'] ?>"><br>
+            Material: <input style="margin-bottom: 18px" type="text" name="material" value="<?= $clothe['material'] ?>"><br>
+            Size: <input style="margin-bottom: 18px" type="text" name="size" value="<?= $clothe['size'] ?>"><br>
+            Color: <input style="margin-bottom: 18px" type="text" name="color" value="<?= $clothe['color'] ?>"><br>
+            Description: <input style="margin-bottom: 18px; width: 300px" type="text" name="description" value="<?= $clothe['description'] ?>"><br>
+            Category Name: <select style="margin-bottom: 18px" name="category_id" id="category_id" onchange="checkForBlank()">
                 <option> - Choose - </option>
                 <?php
                 foreach ($categories as $category){
@@ -102,8 +102,8 @@ include_once '../connect/close.php';
                     <?php
                 }
                 ?>
-            </select></span><br>
-            Producer Name: <select name="producer_id" id="producer_id" onchange="checkForBlank()">
+            </select><br>
+            Producer Name: <select style="margin-bottom: 18px" name="producer_id" id="producer_id" onchange="checkForBlank()">
                 <option> - Choose - </option>
                 <?php
                 foreach ($producers as $producer){
@@ -122,8 +122,8 @@ include_once '../connect/close.php';
                 }
                 ?>
             </select><br>
-            Quantity: <input type="text" name="quantity" value="<?= $clothe['quantity'] ?>"><br>
-            Price: <input type="text" name="price" value="<?= $clothe['price'] ?>"><br>
+            Quantity: <input style="margin-bottom: 18px" type="text" name="quantity" value="<?= $clothe['quantity'] ?>"><br>
+            Price: <input style="margin-bottom: 18px" type="text" name="price" value="<?= $clothe['price'] ?>">$<br>
             Image: <input type="file" name="image" value="<?= $clothe['image'] ?>">
                     <img width="200px" src="../../image/<?= $clothe['image'] ?>"><br>
 

@@ -32,45 +32,42 @@ include_once "../connect/close.php";
 <div class="form_change">
     <figure align="center" style="font-weight: bold; font-size: 30px;color: #4d4b4b;"> Add an item </figure>
     <form method="post" action="store.php" enctype="multipart/form-data">
-        <input type="hidden" name="id">
-        Name: <input type="text" name="clothe_name"><br>
-        Material: <input type="text" name="material"><br>
-        Size: <input type="text" name="size"><br>
-        Color: <input type="text" name="color"><br>
-        Description: <input type="text" name="description"><br>
-        Category ID: <select name="category_id">
-            <option> - Choose - </option>
-            <?php
-            foreach ($categories as $category){
-                ?>
-                <option value="<?= $category['id'] ?>">
-                    <?= $category['name'] ?>
-                </option>
+       <input type="hidden" name="id">
+       Name: <input style="margin-bottom: 18px" type="text" name="clothe_name"><br>
+       Material: <input style="margin-bottom: 18px" type="text" name="material"><br>
+       Size: <input style="margin-bottom: 18px; width: 300px" name="size"><br>
+       Color: <input style="margin-bottom: 18px" type="text" name="color"><br>
+       Description: <input style="margin-bottom: 18px" type="text" name="description"><br>
+       Category ID: <select style="margin-bottom: 18px" name="category_id">
+           <option> - Choose - </option>
+           <?php
+                foreach ($categories as $category){
+           ?>
+               <option value="<?= $category['id'] ?>">
+                   <?= $category['name'] ?>
+               </option>
 
-                <?php
-            }
-            ?>
-        </select>
-        <br>
-        Producer ID: <select name="producer_id">
-            <option> - Choose - </option>
-            <?php
-            foreach ($producers as $producer){
-                ?>
+           <?php
+                }
+           ?>
+       </select>
+       <br>
+       Producer ID: <select style="margin-bottom: 18px" name="producer_id">
+           <option> - Choose - </option>
+           <?php
+               foreach ($producers as $producer){
+           ?>
                 <option value="<?= $producer['id'] ?>">
                     <?= $producer['name'] ?>
                 </option>
-                <?php
-            }
-            ?>
-        </select><br>
-        <br>
-        Quantity: <input type="text" name="quantity"><br>
-        <br>
-        Price: <input type="text" name="price"><br>
-        <br>
-        Image: <input type="file" name="image"><br>
-        <button class="btn add btn-primary" type="submit"> Add </button>
+           <?php
+                }
+           ?>
+       </select><br>
+       Quantity: <input style="margin-bottom: 18px" type="text" name="quantity"><br>
+       Price: <input style="margin-bottom: 18px" type="text" name="price"><br>
+       Image: <input type="file" name="image"><br>
+       <button class="btn add btn-primary" type="submit"> Add </button>
     </form>
 </div>
 </section>

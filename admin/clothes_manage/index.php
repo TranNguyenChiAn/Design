@@ -72,7 +72,9 @@ if(!isset($_SESSION['email_admin'])){
                OR clothes.color LIKE '%$search%'
                OR clothes.size LIKE '%$search%'
                OR categories.name LIKE '%$search%'
-               OR producers.name LIKE '%$search%'LIMIT $start, $recordOnePage";
+               OR producers.name LIKE '%$search%'
+            ORDER BY id DESC
+            LIMIT $start, $recordOnePage";
     //Chạy query
     $clothes = mysqli_query($connect, $sql);
     //Đóng kết nối
@@ -80,14 +82,13 @@ if(!isset($_SESSION['email_admin'])){
 ?>
 <section class="main_content">
     <!--SEARCH-->
-    <!--        Form để search
+    <!--Form để search
             action để trồng tức là khi click vào button sẽ load lại chính trang này-->
     <form style="margin: 20px 0 20px 0" method="get" action="">
         <input class="search" type="text" name="search" value="<?= $search; ?>" placeholder="Search">
     </form>
 
     <!-- LIST -->
-
     <p class="table_title"> MANAGE CLOTHES </p>
     <table class="table-admin" border="0" cellspacing="0" cellpadding="10" width="100%" style="font-size: 12px">
         <tr>

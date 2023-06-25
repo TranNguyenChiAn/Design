@@ -13,7 +13,7 @@
             color: #6868de;
         }
         .navbar {
-            position: absolute;
+            position: fixed;
             display: block;
             padding: 0;
         }

@@ -68,20 +68,30 @@ if (!isset($_SESSION['email'])) {
     </style>
 </head>
 <body>
-<h1 align="center" style="margin-top: 100px; color: black"> My Shopping Cart</h1>
+<h1 align="center" style="margin: 100px 0 50px 0; color: black"> My Shopping Cart</h1>
 <form method="post" action="update_cart.php">
     <table class="demo_bill" border="0" cellpadding="0" cellspacing="0" width="90%" align="center">
-        <tr style="height: 40px; border-bottom: 1px solid black">
+        <tr style="text-align: center; height: 40px; border-bottom: 1px solid black">
             <th style="width:94px"> Product ID </th>
             <th style="text-align: center; width: 130px"> Image</th>
             <th> Description </th>
-            <th width="100px"> Each Price </th>
+            <th width="160px"> Each Price </th>
             <th width="70px"> Quantity </th>
             <th style="text-align: center; width: 100px"> Count </th>
-            <th width="10px"> Remove </th>
+            <th style="text-align: center; width: 100px"> Remove </th>
+        </tr>
+        <tr>
+            <td>
+                <p></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p></p>
+            </td>
         </tr>
 
-    <?php
+<?php
     include_once "../layout/header.php";
     //Mở kết nối
     include_once '../connect/open.php';
@@ -93,12 +103,12 @@ if (!isset($_SESSION['email'])) {
         $carts = $_SESSION['carts'];
     }
     foreach ($carts as $id => $quantity){
-        //Sql lấy thông tin sp theo id
-        $sql = "SELECT * FROM clothes WHERE id = '$id'";
-        //Chạy query
-        $clothes = mysqli_query($connect, $sql);
-        foreach ($clothes as $clothe){
-            ?>
+    //Sql lấy thông tin sp theo id
+    $sql = "SELECT * FROM clothes WHERE id = '$id'";
+    //Chạy query
+    $clothes = mysqli_query($connect, $sql);
+    foreach ($clothes as $clothe){
+?>
 
     <tr>
         <td align="center">
@@ -149,6 +159,9 @@ if (!isset($_SESSION['email'])) {
             <p></p>
         </td>
     </tr>
+        <tr>
+            <td colspan="7"></td>
+        </tr>
     <?php
             }
         }

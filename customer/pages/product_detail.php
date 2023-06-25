@@ -24,28 +24,30 @@
     include_once '../connect/close.php';
     foreach ($clothes as $clothe){
         ?>
-        <table style="margin-top: 80px;" width="100%" border="0" cellspacing="0">
+        <table style="margin-top: 90px;" width="100%" border="0" cellspacing="0">
             <tr>
-                <td width="240px"></td>
-                <td width="400px">
-                    <img src="../../image/<?= $clothe['image']; ?>" width="350px" height="auto">
+                <td width="90px" rowspan="2"></td>
+                <td width="480px" rowspan="2">
+                    <img src="../../image/<?= $clothe['image']; ?>" width="420px" height="auto">
                 </td>
-                <td style="vertical-align: top">
+                <td style="vertical-align: top; color: black">
                     <p class="product_name_detail"><?= $clothe['name'] ?></p>
                     <p class="product_price_detail">$<?= $clothe['price'] ?></p>
-                    <p><?= $clothe['description']?></p>
+                    <p>Description:</p> <?= $clothe['description']?>
+                    <p>Size: <?= $clothe['size']?></p>
+                    <p>Color: <?= $clothe['color']?></p>
                 </td>
-                <td width="100px"></td>
+                <td width="100px" rowspan="2"></td>
             </tr>
             <tr>
-                <td colspan="2"></td>
-                <td>
+                <td style="vertical-align: middle">
                     <button class="button add-to-cart">
-                        <a style="color: white" class="link" href="../carts/add to cart.php?id=<?= $clothe['id']?>">Add to cart </a>
+                        <a style="color: white" class="link" href="../carts/add to cart.php?id=<?= $clothe['id']?>">
+                            Add to cart
+                        </a>
                     </button>
                     <button class="button buy"> BUY </button>
                 </td>
-                <td></td>
             </tr>
         </table>
         <?php

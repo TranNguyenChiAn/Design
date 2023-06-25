@@ -111,6 +111,7 @@ body{
 }
 
 .product_name_detail {
+    color: black;
     font-size: 32px;
     margin: 10px 0;
 }
@@ -173,7 +174,7 @@ body{
 }
 
 .demo_bill {
-    background-color: #F5F4F8
+    background-color: white;
 }
 
 .bill_row {
@@ -199,6 +200,14 @@ body{
     color: black;
 }
 
+.table-admin {
+    width: 1200px;
+    background-color: white;
+    border: none;
+    border-radius: 6px;
+    margin: 10px 0 0 30px;
+}
+
 .form_change {
     position: absolute;
     top: 80px;
@@ -222,6 +231,10 @@ body{
     border-radius: 20px;
     border: 2px solid #6C6D70;
     padding-left: 30px;
+}
+
+.record:hover {
+    background-color: #e5e5f3;
 }
 
 
