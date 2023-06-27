@@ -130,6 +130,11 @@ include_once '../connect/close.php';
                         ?>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <p></p>
+                    </td>
+                </tr>
                 <?php
             }
             ?>

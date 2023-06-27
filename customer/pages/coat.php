@@ -57,7 +57,7 @@ include_once '../layout/header.php';
 <div>
     <!-------------------- MAIN -------------------->
     <div class="headline">
-        <h2>BEST SELLER</h2>
+        <h2> COAT </h2>
         <div class="maincontent">
             <?php
             //Mở kết nối
