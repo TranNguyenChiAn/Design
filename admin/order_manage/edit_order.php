@@ -2,7 +2,7 @@
 //Cho phép làm việc với session
 session_start();
 //Kiểm tra đã tồn tại số đth trên session hay chưa, nếu chưa tồn tại thì cho quay về account
-if (!isset($_SESSION['email'])) {
+if (!isset($_SESSION['email_customer'])) {
     //Quay về trang account
     header("Location: ../account/login_admin.php");
 }
@@ -61,8 +61,9 @@ $sql = "SELECT order_details.clothes_id, order_details.order_id, order_details.p
 //Chạy query
 $order_details = mysqli_query($connect, $sql);
 //Query
-$sql = "SELECT * FROM orders
-        WHERE id = '$id'";
+$sql = "SELECT orders.*, customers.id AS customer_id, customers.name AS customer_name FROM orders
+         INNER JOIN customers ON orders.customer_id = customers.id
+        WHERE orders.id = '$id'";
 //Chạy query
 $orders = mysqli_query($connect, $sql);
 //Đóng kết nối
@@ -80,7 +81,9 @@ include_once '../connect/close.php';
                     <h3 style="margin: 0 0"> Delivery address </h3>
                     Receiver Name: <?= $order['receiver_name']; ?><br>
                     Receiver Phone: <?= $order['receiver_phone']; ?><br>
-                    Receiver Address:<?= $order['receiver_address']; ?>
+                    Receiver Address:<?= $order['receiver_address']; ?><br>
+                    Customer name: <?= $order['customer_name'];?><br>
+                    Customer ID: <?= $order['customer_id'];?><br>
                 </div>
                 <div>
                     <form method="post" action="process.php">
