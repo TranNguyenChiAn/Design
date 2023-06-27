@@ -2,7 +2,7 @@
 //Cho phép làm việc với section
 session_start();
 // Lấy dữ liệu từ form
-$email = $_POST['email'];
+$email = $_POST['email_customer'];
 $password = $_POST['password'];
 //Mở kết nối
 include_once '../connect/open.php';
@@ -23,7 +23,7 @@ if($count_account == 0) {
 }else {
     //Lưu id, số đth lên section
     $_SESSION['id'] = $id;
-    $_SESSION['email'] = $email;
+    $_SESSION['email_customer'] = $email;
     // Sang trang danh sách
     header("Location: ../pages/index.php");
 }
