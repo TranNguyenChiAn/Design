@@ -2,7 +2,7 @@
 //Cho phép làm việc với session
 session_start();
 //Kiểm tra đã tồn tại số đth trên session hay chưa, nếu chưa tồn tại thì cho quay về account
-if (!isset($_SESSION['email'])) {
+if (!isset($_SESSION['email_customer'])) {
     //Quay về trang account
     header("Location: ../account/login_customer.php");
 }
@@ -132,10 +132,9 @@ if (!isset($_SESSION['email'])) {
             $<?= $clothe['price']; ?>
         </td>
         <td align="center">
-            <form method="post" action="order.php">
                 <input type="hidden" name="id" value="<?= $clothe['id']; ?>">
                 <input style="width: 50px" type="number" value="<?= $quantity ?>" name="quantity[<?= $id; ?>]">
-            </form>
+
         </td>
         <td align="center">
             $<?php
