@@ -2,7 +2,7 @@
     //Cho phép làm việc với session
     session_start();
     //Kiểm tra tồn tại số đth trên session hay chưa, nếu đã tồn tại thì cho nhảy sang trang khác
-    if(isset($_SESSION['email'])){
+    if(isset($_SESSION['email_customer'])){
         //Sang trang danh sách lớp
         header("Location:../pages/index.php");
 
@@ -85,7 +85,7 @@
 <div class="form_login" >
     <figure align="center" style="font-weight: bold; font-size: 30px;color: #4d4b4b;"> LOGIN </figure>
     <form align="center" id="form" method="post" action="loginProcess.php">
-        <input id="email_customer" type="email" name="email" placeholder="Email" width="500px"><br>
+        <input id="email_customer" type="email" name="email_customer" placeholder="Email" width="500px"><br>
         <br>
         <input  id="password_customer"type="password" name="password" placeholder="Password"><br>
         <br>
