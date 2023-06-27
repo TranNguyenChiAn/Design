@@ -8,6 +8,6 @@ foreach ($quantities as $id => $quantity) {
         $_SESSION['carts'][$id] = $quantity;
 }
 //Quay về trang giỏ hàng
-header("Location:../carts/index.php");
+header("Location: index.php");
 
 ?>
