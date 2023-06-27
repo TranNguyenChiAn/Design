@@ -2,7 +2,7 @@
 //Cho phép làm việc với session
 session_start();
 //Kiểm tra đã tồn tại số đth trên session hay chưa, nếu chưa tồn tại thì cho quay về account
-if (!isset($_SESSION['email'])) {
+if (!isset($_SESSION['email_customer'])) {
     //Quay về trang account
     header("Location: ../account/login_customer.php");
 }
@@ -107,8 +107,8 @@ include_once '../connect/close.php';
         <h2> Product </h2>
         <table border="0" cellpadding="0" cellspacing="0" width="100%">
             <?php
-            foreach ($order_details as $order_detail){
-                ?>
+                foreach ($order_details as $order_detail){
+            ?>
                 <tr style="margin-top: 20px;">
                     <td width="200px">
                         <img width="180px" src="../../image/<?= $order_detail['image']?>">
@@ -131,6 +131,11 @@ include_once '../connect/close.php';
                         ?>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <p></p>
+                    </td>
+                </tr>
                 <?php
             }
             ?>
@@ -143,9 +148,11 @@ include_once '../connect/close.php';
             echo "$" . $count_money;
             ?>
         </h3>
-
     </div>
 </section>
+<?php
+    include_once "../layout/footer.php";
+?>
 </body>
 </html>
 
