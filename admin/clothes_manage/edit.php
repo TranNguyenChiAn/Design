@@ -124,9 +124,8 @@ include_once '../connect/close.php';
             </select><br>
             Quantity: <input style="margin-bottom: 18px" type="text" name="quantity" value="<?= $clothe['quantity'] ?>"><br>
             Price: <input style="margin-bottom: 18px" type="text" name="price" value="<?= $clothe['price'] ?>">$<br>
-            Image: <input type="file" name="image" value="<?= $clothe['image'] ?>">
+            Image: <input type="file" name="image" value="<?= $clothe['image'] ?>"><br><br>
                     <img width="200px" src="../../image/<?= $clothe['image'] ?>"><br>
-
             <?php
         }
         ?>
