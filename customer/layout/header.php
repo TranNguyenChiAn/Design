@@ -26,7 +26,7 @@
     }
 
     .sub-menu {
-        mtargin-lef: 0;
+        margin-left: 0;
         display:none;
         list-style-type: none;
     }
@@ -125,26 +125,15 @@
                 <a href="../profile/index.php">
                     <img width="30px" src="../../image/user.png">
                 </a>
-
-                <ul class="sub-menu">
-                    <?php
-                        if(!isset($_SESION['email'])){
-                    ?>
-                    <li style="margin-left:50px">
-                        <a class=" link" href="../account/login_customer.php">
-                            Login
-                        </a>
-                    <?php
-                        }else {
-                    ?>
-                        <a class="link" href="../account/logout_customer.php">
-                            Logout
-                        </a>
-                    </li>
-                    <?php
-                        }
-                    ?>
-                </ul>
+                <?php
+                    if(!isset($_SESSION['email_customer'])) {
+                    }else {
+                ?>
+                    <a class=" link" href="../account/login_customer.php">
+                    </a>
+                <?php
+                    }
+                ?>
             </li>
         </ul>
     </nav>
