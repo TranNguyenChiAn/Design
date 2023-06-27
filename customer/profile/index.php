@@ -2,7 +2,7 @@
 //Cho phép làm việc với session
 session_start();
 //Kiểm tra đã tồn tại số đth trên session hay chưa, nếu chưa tồn tại thì cho quay về account
-if (!isset($_SESSION['email'])) {
+if (!isset($_SESSION['email_customer'])) {
     //Quay về trang account
     header("Location: ../account/login_customer.php");
 }
@@ -23,15 +23,16 @@ if (!isset($_SESSION['email'])) {
             position: absolute;
             background-color: white;
             width: 100%;
-            margin-top: 100px;
+            margin-top: 6%;
         }
         .history_order {
-            margin: 6px 0 0 90px;
-            width: 200px;
+            margin: 6px 0 0 0;
+            width: 150px;
             height: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
+            background-color: #b8b8e3;
         }
 
         .history_order:hover {
@@ -43,22 +44,35 @@ if (!isset($_SESSION['email'])) {
         }
     </style>
     <title> Profile </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        function chooseFile(fileInput) {
+            if (fileInput.files && fileInput.files[0]) {
+                let reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#image').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+    </script>
 </head>
 <body>
 <?php
     include_once "../layout/header.php";
     include_once "../connect/open.php";
-    $email = $_SESSION['email'];
-    $sql = "SELECT * FROM customers WhERE email='$email'";
+    $email = $_SESSION['email_customer'];
+    $sql = "SELECT * FROM customers WHERE email='$email'";
     $customers = mysqli_query($connect, $sql);
-    include_once "../connect/close.php";
     foreach ($customers as $customer) {
 ?>
 <div class="user_customer">
-    <div style="color: black;width: 20%; display: flex; align-items: center; justify-content: space-around; margin-top: 30px">
-        <img width="64px" src="../../image/user-profile.png">
+    <div style="color: black; width: 300px; display: flex; align-items: center; margin: 30px 0 0 100px">
+        <img style="width:64px" src="../../image/user-profile.png">
         <!--ID: <?= $customer['id']; ?> <br>-->
-        <?= $customer['name']; ?><br>
+        <p style="margin-left: 10px"><?= $customer['name']; ?></p><br>
     </div>
 
     <div style="margin: 20px 0 0 100px; color: black">
@@ -66,15 +80,24 @@ if (!isset($_SESSION['email'])) {
         Phone: <?= $customer['phone']; ?><br>
         Address: <?= $customer['address']; ?><br>
     </div>
-    <div class="history_order">
-        <a style="font-weight: bold" class="link" href="history_order.php?id=<?= $customer['id']; ?>">
-            History orders
-        </a>
+    <div style="display:flex; width: 360px;margin: 18px 0 0 90px; justify-content: space-between">
+        <div class="history_order">
+            <a style="font-weight: bold" class="link" href="history_order.php?id=<?= $customer['id']; ?>">
+                History orders
+            </a>
+        </div>
+        <div class="history_order">
+            <a style="font-weight: bold" class="link" href="../account/logout_customer.php">
+                Logout
+            </a>
+        </div>
+                <?php
+            }
+        ?>
     </div>
-            <?php
-        }
-    ?>
 </div>
+
+
 </body>
 </html>
 
