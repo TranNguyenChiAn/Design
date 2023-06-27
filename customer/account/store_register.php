@@ -1,7 +1,7 @@
 <?php
 //Lấy dữ liệu ở ô input có name="name"
 $name = $_POST['name'];
-$email = $_POST['email'];
+$email = $_POST['email_customer'];
 $password = $_POST['password'];
 $phone = $_POST['phone'];
 $gender = $_POST['gender'];
