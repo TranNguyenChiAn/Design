@@ -2,7 +2,7 @@
 //Cho phép làm việc với session
 session_start();
 //Kiểm tra đã tồn tại số đth trên session hay chưa, nếu chưa tồn tại thì cho quay về account
-if (!isset($_SESSION['email'])) {
+if (!isset($_SESSION['email_customer'])) {
     //Quay về trang account
     header("Location: ../account/login_customer.php");
 }
@@ -88,7 +88,11 @@ include_once '../connect/close.php';
     ?>
         </tr>
 </table>
+    <div style="height: 60px"></div>
 </div>
+<?php
+include_once "../layout/footer.php";
+?>
 </body>
 </html>
 
