@@ -48,8 +48,6 @@
 
             //ADRESS
             let address = document.getElementById('receiver_address').value;
-            let regAddress = /^[a-zA-Z0-9\-\/àÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬđĐèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆìÌỉỈĩĨíÍịỊòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰỳỲỷỶỹỸýÝỵỴ,]*$/;
-
             // Kiểm tra họ tên có bị bỏ trống hay không
             if(address.length == 0) {
                 document.getElementById('error_receiver_address').innerHTML = " * Không được bỏ trống ô";
