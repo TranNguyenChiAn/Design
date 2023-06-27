@@ -2,7 +2,7 @@
 //Cho phép làm việc với session
 session_start();
 //Kiểm tra tồn tại số đth trên session hay chưa, nếu đã tồn tại thì cho nhảy sang trang khác
-if(isset($_SESSION['email'])){
+if(isset($_SESSION['email_customer'])){
     //Sang trang danh sách lớp
     header("Location:../pages/index.php");
 
@@ -55,7 +55,7 @@ if(isset($_SESSION['email'])){
         <form class="form_register_input" method="post" action="store_register.php">
             <!--ID: <input type="number" name="id"><br>-->
             Name: <input type="text" name="name"><br>
-            Email: <input type="email" name="email"><br>
+            Email: <input type="email" name="email_customer"><br>
             Password: <input type="password" name="password"><br>
             Phone: <input type="text" name="phone"><br>
             Gender: <input type="radio" name="gender" value="0"> Female
