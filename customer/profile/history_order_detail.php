@@ -37,12 +37,14 @@ if (!isset($_SESSION['email_customer'])) {
             margin: 2% 0 0 12%;
             display: flex;
             justify-content: center;
-            color: white;
             background-color: #c93939;
             font-weight: bold;
             border: none;
             border-radius: 6px;
             height: 30px;
+        }
+        .cancel .link {
+            color: white;
         }
 
         .cancel:hover {
@@ -169,7 +171,7 @@ include_once '../connect/close.php';
                 if($order['status'] == 0) {
         ?>
             <button class="cancel">
-                <a class="link_in_button" href="cancel.php?id=<?= $order['id']; ?>">
+                <a class="link" href="cancel.php?id=<?= $order['id']; ?>">
                     Cancel
                 </a>
             </button>
