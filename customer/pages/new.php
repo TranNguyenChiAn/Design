@@ -75,7 +75,7 @@ include_once '../layout/header.php';
             }
             //Tính bản ghi bắt đầu của trang
             $start = ($page - 1) * $recordOnePage;
-            $sql = "SELECT * FROM clothes
+            $sql = "SELECT clothes.* FROM clothes
                     INNER JOIN categories ON clothes.category_id = categories.id
                     WHERE clothes.name LIKE '%$search%'
                         OR clothes.color LIKE '%$search%'
