@@ -65,7 +65,8 @@ $sql = "SELECT * FROM customers
          WHERE name LIKE '%$search%' 
             OR id LIKE '%$search%' 
             OR phone LIKE '%$search%'
-            OR address LIKE '%$search%' LIMIT $start, $recordOnePage";
+            OR address LIKE '%$search%' 
+            LIMIT $start, $recordOnePage";
 //Chạy query
 $customers = mysqli_query($connect, $sql);
 //Đóng kết nối

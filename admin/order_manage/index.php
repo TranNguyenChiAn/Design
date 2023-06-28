@@ -39,21 +39,62 @@ if (!isset($_SESSION['email_admin'])) {
 include_once "../layout/navigation.php";
 //mo ket noi
 include_once "../connect/open.php";
-//Query
+//Khai báo biến search
+$search = "";
+//Lấy giá trị được search về với điều kiện $_GET['search'] tồn tại
+if(isset($_GET['search'])) {
+    $search = $_GET['search'];
+}
+
+//Khai báo số bản ghi 1 trang
+$recordOnePage = 9;
+//Query để lấy số bản ghi
+$sqlCountRecord = "SELECT COUNT(*) AS count_record, orders.id, orders.date_buy, orders.status,
+                    customers.name AS customer_name 
+                    FROM orders 
+                    INNER JOIN customers ON customers.id = orders.customer_id
+                    WHERE orders.id LIKE '%$search%' 
+                      OR customers.name LIKE '%$search%'
+                      OR orders.date_buy LIKE '%$search%'
+                      OR orders.status LIKE '%$search%'";
+//Chạy query lấy số bản ghi
+$countRecords = mysqli_query($connect, $sqlCountRecord);
+//foreach để lấy số bản ghi
+foreach ($countRecords as $countRecord){
+    $records = $countRecord['count_record'];
+}
+//Tính số trang
+$countPage = ceil($records / $recordOnePage);
+//Lấy trang hiện tại (nếu không tồn tại page hiện tại thì page hiện tại = 1)
+$page = 1;
+if(isset($_GET['page'])){
+    $page = $_GET['page'];
+}
+//Tính bản ghi bắt đầu của trang
+$start = ($page - 1) * $recordOnePage;
+//Query để lấy dữ liệu từ bảng classes trên db về
 $sql = "SELECT orders.id, orders.date_buy, orders.status, orders.customer_id,
                 customers.name AS customer_name
         FROM orders
         INNER JOIN customers ON customers.id = orders.customer_id
-        ORDER BY id DESC" ;
+        WHERE orders.id LIKE '%$search%' 
+             OR customers.name LIKE '%$search%'
+             OR orders.date_buy LIKE '%$search%'
+             OR orders.status LIKE '%$search%'
+        ORDER BY id DESC
+        LIMIT $start, $recordOnePage" ;
 //Chay query
 $orders = mysqli_query($connect, $sql);
-$customers = mysqli_query($connect, $sql);
 
 //Dong ket noi
 include_once '../connect/close.php';
 ?>
 <section class="main_content">
-<p style="margin-top: 50px" class="table_title"> ORDERS </p>
+    <!-- SEARCH -->
+    <form  style="margin: 20px 0 20px 0" method="get" action="">
+        <input class="search" width="30px" type="text" name="search" value="<?= $search; ?>" placeholder="Search">
+    </form>
+    <p style="margin-top: 30px" class="table_title"> ORDERS </p>
 <table class="table-admin" width="100%" border="0" cellspacing="0" cellpadding="5px">
     <tr>
         <th class="t-heading" align="center"> Order ID </th>
@@ -102,6 +143,13 @@ include_once '../connect/close.php';
     ?>
 </table>
 </section>
+<br>
+<!--FOOTER-->
+<?php
+//Nhúng footer
+include_once '../layout/footer.php';
+?>
+<br>
 </body>
 </html>
 

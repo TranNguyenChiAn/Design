@@ -196,7 +196,7 @@ body{
     margin-top: 100px;
     font-weight: bold;
     font-size: 30px;
-    margin-left:45%;
+    margin-left:44%;
     color: black;
 }
 
@@ -235,6 +235,16 @@ body{
 
 .record:hover {
     background-color: #e5e5f3;
+}
+
+.search_clothe {
+    width: 350px;
+    height: 35px;
+    border-radius: 20px;
+    border: 1px solid #9f9b9b;
+    right: 20px;
+    padding-left: 20px;
+    margin-left: 600px;
 }
 
 

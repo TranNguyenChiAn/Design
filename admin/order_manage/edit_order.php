@@ -61,8 +61,7 @@ $sql = "SELECT order_details.clothes_id, order_details.order_id, order_details.p
 //Chạy query
 $order_details = mysqli_query($connect, $sql);
 //Query
-$sql = "SELECT orders.*, customers.id AS customer_id, customers.name AS customer_name FROM orders
-         INNER JOIN customers ON orders.customer_id = customers.id
+$sql = "SELECT * FROM orders
         WHERE orders.id = '$id'";
 //Chạy query
 $orders = mysqli_query($connect, $sql);
@@ -82,8 +81,6 @@ include_once '../connect/close.php';
                     Receiver Name: <?= $order['receiver_name']; ?><br>
                     Receiver Phone: <?= $order['receiver_phone']; ?><br>
                     Receiver Address:<?= $order['receiver_address']; ?><br>
-                    Customer name: <?= $order['customer_name'];?><br>
-                    Customer ID: <?= $order['customer_id'];?><br>
                 </div>
                 <div>
                     <form method="post" action="process.php">

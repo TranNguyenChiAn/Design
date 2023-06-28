@@ -53,32 +53,32 @@ include_once '../connect/close.php';
     foreach ($orders as $order){
         ?>
         <tr class="record">
-            <td align="center"> <?= $order['id']?> </td>
-            <td align="center"> <?= $order['date_buy']?> </td>
+            <td> <?= $order['id']?> </td>
+            <td> <?= $order['date_buy']?> </td>
             <td align="center">
                 <?= $order['customer_id']?>
             </td>
-            <td align="center">
+            <td>
                 <?= $order['customer_name']?>
             </td>
-            <td style="display: flex; justify-content: space-evenly" align="center">
+            <td>
                 <?php
                 if($order['status'] == 0) { ?>
-                    <button style="width: 100px;background-color: #bd9718" class="button"> Pending </button>
+                    <button style="width: 120px;background-color: #bd9718" class="button"> Pending </button>
                     <?php
                 }elseif ($order['status'] == 1) { ?>
-                    <button style="width: 100px;background-color: #231ec2" class="button"> Delivery </button>
+                    <button style="width: 120px;background-color: #231ec2" class="button"> Delivery </button>
                     <?php
                 }elseif ($order['status'] == 2) { ?>
-                    <button style="width: 100px;background-color: #14934b" class="button"> Completed </button>
+                    <button style="width: 120px;background-color: #14934b" class="button"> Completed </button>
                     <?php
                 }elseif ($order['status'] == 3) { ?>
-                    <button style="width: 100px;background-color: #eb1f27" class="button"> Canceled </button>
+                    <button style="width: 120px;background-color: #eb1f27" class="button"> Canceled </button>
                     <?php
                 }
                 ?>
             </td>
-            <td  align="center">
+            <td>
                 <a href="history_order_detail.php?id=<?= $order['id']; ?>">
                     <img width="32px" src="../../image/add.png">
                 </a>

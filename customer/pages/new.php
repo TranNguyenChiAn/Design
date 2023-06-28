@@ -5,6 +5,15 @@
         body{
             background-color: #F5F4F8;
         }
+        .search_clothe {
+            width: 350px;
+            height: 35px;
+            border-radius: 20px;
+            border: 1px solid #9f9b9b;
+            right: 20px;
+            padding-left: 20px;
+            margin-left: 600px;
+        }
     </style>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <meta charset="UTF-8">
@@ -23,6 +32,14 @@
 <!-------------------- HEADER -------------------->
 <?php
 include_once '../layout/header.php';
+    //Mở kết nối
+    include_once '../connect/open.php';
+    //Khai báo biến search
+    $search = "";
+    //Lấy giá trị được search về với điều kiện $_GET['search'] tồn tại
+    if(isset($_GET['search'])) {
+        $search = $_GET['search'];
+    }
 ?>
 <!-------------------- END HEADER -------------------->
 
@@ -30,11 +47,15 @@ include_once '../layout/header.php';
 <div>
     <!-------------------- MAIN -------------------->
     <div class="headline">
+        <!--SEARCH-->
+        <!--Form để search
+                action để trồng tức là khi click vào button sẽ load lại chính trang này-->
+        <form style="margin: 20px 0 20px 0" method="get" action="">
+            <input class="search_clothe" type="text" name="search" value="<?= $search; ?>" placeholder="Search">
+        </form>
         <p class="trend"> new arrivals</p>
         <div class="maincontent">
             <?php
-            //Mở kết nối
-            include_once '../connect/open.php';
             //Khai báo số bản ghi 1 trang
             $recordOnePage = 8;
             //Query để lấy số bản ghi
@@ -55,7 +76,12 @@ include_once '../layout/header.php';
             //Tính bản ghi bắt đầu của trang
             $start = ($page - 1) * $recordOnePage;
             $sql = "SELECT * FROM clothes
-                    ORDER BY id DESC
+                    INNER JOIN categories ON clothes.category_id = categories.id
+                    WHERE clothes.name LIKE '%$search%'
+                        OR clothes.color LIKE '%$search%'
+                        OR clothes.size LIKE '%$search%'
+                        OR categories.name LIKE '%$search%'
+                    ORDER BY clothes.id DESC
                     LIMIT $start, $recordOnePage";
             $clothes = mysqli_query($connect, $sql);
             include_once '../connect/close.php';
@@ -83,7 +109,7 @@ include_once '../layout/header.php';
         <?php
         for($i = 1; $i <= $countPage; $i++){
             ?>
-            <a style="text-decoration: none; text-decoration-line: none; font-weight: bold; font-family: '#9Slide03 BoosterNextFYBlack'" class="page_number" href="?page=<?= $i ?>">
+            <a style="color: black;text-decoration: none; font-weight: bold; font-family: '#9Slide03 BoosterNextFYBlack'" class="page_number" href="?page=<?= $i ?>">
                 &nbsp &nbsp <?= $i ?>  &nbsp;
             </a>
 

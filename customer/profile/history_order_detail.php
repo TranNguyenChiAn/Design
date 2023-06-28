@@ -23,8 +23,8 @@ if (!isset($_SESSION['email_customer'])) {
             background-color: #F5F4F8;
         }
         .order_detail {
-            margin: 20px 0 0 180px;
-            width: 960px;
+            margin: 2% 0 0 12%;
+            width: 80%;
             border: 1px solid #d7d2d2;
             border-radius: 10px;
             background-color: white;
@@ -32,12 +32,26 @@ if (!isset($_SESSION['email_customer'])) {
             color: black;
         }
 
-        .status {
-            position: center;
+        .cancel {
+            width: 80%;
+            margin: 2% 0 0 12%;
+            display: flex;
+            justify-content: center;
+            color: white;
+            background-color: #c93939;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
             height: 30px;
-            width: 200px;
-            border-radius: 4px;
-            padding-left: 20px;
+        }
+
+        .cancel:hover {
+            cursor: pointer;
+            background-color: firebrick;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            height: 30px;
         }
     </style>
     <title> Order Detail </title>
@@ -84,16 +98,16 @@ include_once '../connect/close.php';
                 <div>
                     <?php
                     if($order['status'] == 0) { ?>
-                        <button style="width: 100px;background-color: #d5b33f" class="button"> Pending </button>
+                        <button style="width: 120px;background-color: #d5b33f" class="button"> Pending </button>
                         <?php
                     }elseif ($order['status'] == 1) { ?>
-                        <button style="width: 100px;background-color: #231ec2" class="button"> Delivery </button>
+                        <button style="width: 120px;background-color: #231ec2" class="button"> Delivery </button>
                         <?php
                     }elseif ($order['status'] == 2) { ?>
-                        <button style="width: 100px;background-color: #14934b" class="button"> Completed </button>
+                        <button style="width: 120px;background-color: #14934b" class="button"> Completed </button>
                         <?php
                     }elseif ($order['status'] == 3) { ?>
-                        <button style="width: 100px;background-color: #eb1f27" class="button"> Canceled </button>
+                        <button style="width: 120px;background-color: #eb1f27" class="button"> Canceled </button>
                         <?php
                     }
                     ?>
@@ -148,6 +162,21 @@ include_once '../connect/close.php';
             echo "$" . $count_money;
             ?>
         </h3>
+    </div>
+    <div>
+        <?php
+            foreach ($orders as $order){
+                if($order['status'] == 0) {
+        ?>
+            <button class="cancel">
+                <a class="link_in_button" href="cancel.php?id=<?= $order['id']; ?>">
+                    Cancel
+                </a>
+            </button>
+        <?php
+                }
+            }
+        ?>
     </div>
 </section>
 <?php
