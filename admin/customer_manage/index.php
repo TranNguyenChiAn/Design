@@ -85,7 +85,6 @@ include_once '../connect/close.php';
             <th class="t-heading" align="left"> ID </th>
             <th class="t-heading" align="left"> Name </th>
             <th class="t-heading" align="left"> Email </th>
-            <th class="t-heading" align="left"> Password </th>
             <th class="t-heading" align="left"> Phone </th>
             <th class="t-heading" align="left"> Gender </th>
             <th class="t-heading" align="left"> Address </th>
@@ -103,9 +102,6 @@ include_once '../connect/close.php';
                     </td>
                     <td>
                         <?= $customer['email']?>
-                    </td>
-                    <td>
-                        <?= $customer['password']?>
                     </td>
                     <td>
                         <?= $customer['phone']?>
