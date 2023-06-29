@@ -74,7 +74,7 @@ if (!isset($_SESSION['email_customer'])) {
         <tr style="text-align: center; height: 40px; border-bottom: 1px solid black">
             <th style="width:94px"> Product ID </th>
             <th style="text-align: center; width: 130px"> Image</th>
-            <th> Description </th>
+            <th style="text-align: left;"> Description </th>
             <th width="160px"> Each Price </th>
             <th width="70px"> Quantity </th>
             <th style="text-align: center; width: 100px"> Count </th>
@@ -123,18 +123,13 @@ if (!isset($_SESSION['email_customer'])) {
             <span>
                 <?= $clothe['name']; ?>
             </span>
-            <br>
-            <span style="font-size: 14px;">
-                <?= $clothe['description']; ?>
-            </span>
         </td>
         <td align="center">
             $<?= $clothe['price']; ?>
         </td>
         <td align="center">
-                <input type="hidden" name="id" value="<?= $clothe['id']; ?>">
-                <input style="width: 50px" type="number" value="<?= $quantity ?>" name="quantity[<?= $id; ?>]">
-
+            <input type="hidden" name="id" value="<?= $clothe['id']; ?>">
+            <input style="width: 50px" type="number" min="1" value="<?= $quantity ?>" name="quantity[<?= $id; ?>]">
         </td>
         <td align="center">
             $<?php
@@ -154,19 +149,19 @@ if (!isset($_SESSION['email_customer'])) {
         </td>
     </tr>
     <tr>
-        <td colspan="7">
+        <td colspan="6">
             <p></p>
         </td>
     </tr>
         <tr>
-            <td colspan="7"></td>
+            <td colspan="6"></td>
         </tr>
     <?php
             }
         }
     ?>
     <tr>
-        <td class="total_cost" colspan="7" align="end">
+        <td class="total_cost" colspan="6" align="end">
             Total:
             <?php
                 //Hiển thị tổng tiền của các sp có trong carts
@@ -175,7 +170,7 @@ if (!isset($_SESSION['email_customer'])) {
         </td>
     </tr>
     <tr>
-        <td class="total_cost" colspan="7" align="center">
+        <td class="total_cost" colspan="6" align="center">
             <button style="border-radius: 0px" class="button" type="submit">
                 <a style="color: white;" class="link" href="update_cart.php">Update cart</a>
             </button>
