@@ -15,6 +15,20 @@
         }
     </style>
     <title>Update clothe</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        function chooseFile(fileInput) {
+            if (fileInput.files && fileInput.files[0]) {
+                let reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#image').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+    </script>
     <script>
         function checkForBlank() {
             let categoryId = document.getElementById('category_id');
@@ -124,8 +138,10 @@ include_once '../connect/close.php';
             </select><br>
             Quantity: <input style="margin-bottom: 18px" type="text" name="quantity" value="<?= $clothe['quantity'] ?>"><br>
             Price: <input style="margin-bottom: 18px" type="text" name="price" value="<?= $clothe['price'] ?>">$<br>
-            Image: <input type="file" name="image" value="<?= $clothe['image'] ?>"><br><br>
-                    <img width="200px" src="../../image/<?= $clothe['image'] ?>"><br>
+            Image: <input type="file" name="image" id="imageFile"  onchange="chooseFile(this)"
+                          value="<?= $clothe['image'] ?>"
+                          accept="image/gif, image/png, image/jpeg">
+                    <img src="../../image/<?= $clothe['image']; ?>" alt="" id="image" width="200px">
             <?php
         }
         ?>
