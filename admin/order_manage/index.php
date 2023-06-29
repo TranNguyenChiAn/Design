@@ -101,7 +101,7 @@ include_once '../connect/close.php';
         <th class="t-heading" align="center"> Date buy</th>
         <th class="t-heading" align="center"> Customer Name </th>
         <th class="t-heading" align="center"> Status </th>
-        <th class="t-heading" align="center"> Action </th>
+        <th class="t-heading" style="text-align: center"> Action </th>
     </tr>
     <?php
     foreach ($orders as $order){
@@ -129,12 +129,9 @@ include_once '../connect/close.php';
                     }
                ?>
             </td>
-            <td>
+            <td align="center">
                 <a class="edit" href="edit_order.php?id=<?= $order['id']?>">
                     <img width="30px" src="../../image/edit.png">
-                </a>
-                <a class="delete" href="delete.php?id=<?= $order['id']?>">
-                    <img width="30px" src="../../image/delete.png">
                 </a>
             </td>
         </tr>
