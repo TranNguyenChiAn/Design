@@ -56,6 +56,16 @@ if (!isset($_SESSION['email_customer'])) {
             height: 30px;
         }
     </style>
+    <script>
+        function cancel() {
+            let result_1 = "Cancel".link("history_order.php?id=12");
+            if(confirm("Bạn có chắc chắn muốn hủy đơn hàng?") == true){
+                document.getElementById("demo1").innerHTML = result_1;
+            }else{
+                document.getElementById("demo1").innerHTML = result_1;
+            }
+        }
+    </script>
     <title> Order Detail </title>
 </head>
 <body>
@@ -170,7 +180,7 @@ include_once '../connect/close.php';
             foreach ($orders as $order){
                 if($order['status'] == 0) {
         ?>
-            <button class="cancel">
+            <button class="cancel" onclick="cancel()">
                 <a class="link" href="cancel.php?id=<?= $order['id']; ?>">
                     Cancel
                 </a>
