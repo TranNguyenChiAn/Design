@@ -4,7 +4,7 @@
     //Kiểm tra tồn tại số đth trên session hay chưa, nếu đã tồn tại thì cho nhảy sang trang khác
     if(isset($_SESSION['email_admin'])){
         //Sang trang danh sách lớp
-        header("Location:../start/index.php");
+        header("Location:../order_manage/index.php");
 }
 ?>
 <!doctype html>
