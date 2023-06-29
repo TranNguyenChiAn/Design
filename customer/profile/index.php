@@ -44,20 +44,6 @@ if (!isset($_SESSION['email_customer'])) {
         }
     </style>
     <title> Profile </title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-    <script>
-        function chooseFile(fileInput) {
-            if (fileInput.files && fileInput.files[0]) {
-                let reader = new FileReader();
-
-                reader.onload = function(e) {
-                    $('#image').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(fileInput.files[0]);
-            }
-        }
-    </script>
 </head>
 <body>
 <?php
