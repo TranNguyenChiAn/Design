@@ -40,7 +40,7 @@ include_once '../connect/close.php';
 ?>
 <div style="position: relative; top: 24px">
 <h2 style="color: black;margin-left: 40%" class="table_title"> ALL ORDERS </h2>
-<table style="margin-left: 6%" class="table-admin" width="100%" border="0" cellspacing="0" cellpadding="5px">
+<table style="margin-left: 6%; width: 93%" class="table-admin"  border="0" cellspacing="0" cellpadding="5px">
     <tr>
         <th class="t-heading"> Order ID </th>
         <th class="t-heading"> Date buy</th>
