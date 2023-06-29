@@ -38,13 +38,12 @@ $customers = mysqli_query($connect, $sql);
 //Dong ket noi
 include_once '../connect/close.php';
 ?>
-<div style="position: relative; top: 48px">
+<div style="position: relative; top: 24px">
 <h2 style="color: black;margin-left: 40%" class="table_title"> ALL ORDERS </h2>
-<table class="table-admin" width="100%" border="0" cellspacing="0" cellpadding="5px">
+<table style="margin-left: 6%" class="table-admin" width="100%" border="0" cellspacing="0" cellpadding="5px">
     <tr>
         <th class="t-heading"> Order ID </th>
         <th class="t-heading"> Date buy</th>
-        <th class="t-heading"> Customer ID </th>
         <th class="t-heading"> Customer Name </th>
         <th class="t-heading"> Status </th>
         <th class="t-heading"> Detail </th>
@@ -55,9 +54,6 @@ include_once '../connect/close.php';
         <tr class="record">
             <td> <?= $order['id']?> </td>
             <td> <?= $order['date_buy']?> </td>
-            <td align="center">
-                <?= $order['customer_id']?>
-            </td>
             <td>
                 <?= $order['customer_name']?>
             </td>
