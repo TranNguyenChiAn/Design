@@ -63,7 +63,7 @@ if(!isset($_SESSION['email_admin'])){
     //Tính bản ghi bắt đầu của trang
     $start = ($page - 1) * $recordOnePage;
     //Query để lấy dữ liệu từ bảng classes trên db về
-    $sql = "SELECT clothes.*,categories.id AS category_id, producers.id AS producer_id FROM clothes 
+    $sql = "SELECT clothes.*,categories.name AS category_name, producers.name AS producer_name FROM clothes 
             INNER JOIN categories ON clothes.category_id = categories.id
             INNER JOIN producers ON clothes.producer_id = producers.id 
             WHERE clothes.name LIKE '%$search%' 
@@ -99,8 +99,8 @@ if(!isset($_SESSION['email_admin'])){
             <th class="t-heading" align="left"> Size </th>
             <th class="t-heading" align="left"> Color </th>
             <th class="t-heading" align="left"> Description </th>
-            <th class="t-heading" align="left"> Category ID </th>
-            <th class="t-heading" align="left"> Producer ID </th>
+            <th class="t-heading" align="left"> Category Name </th>
+            <th class="t-heading" align="left"> Producer NAme </th>
             <th class="t-heading" align="left"> Quantity </th>
             <th class="t-heading" align="left"> Price </th>
             <th class="t-heading" align="center"> Action </th>
@@ -131,10 +131,10 @@ if(!isset($_SESSION['email_admin'])){
                     <?= $clothe['description']?>
                 </td>
                 <td  width="70px" align="center">
-                    <?= $clothe['category_id']?>
+                    <?= $clothe['category_name']?>
                 </td>
                 <td  width="70px" align="center">
-                    <?= $clothe['producer_id']?>
+                    <?= $clothe['producer_name']?>
                 </td>
                 <td>
                     <?= $clothe['quantity']?>
