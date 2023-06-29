@@ -48,10 +48,10 @@ include_once '../connect/close.php';
                 Name: <input type="text" name="name" value="<?= $customer['name'] ?>"><br>
                 Email: <input type="email" name="email" value="<?= $customer['email'] ?>"><br>
                 Password: <input type="password" name="password" value="<?= $customer['password'] ?>"><br>
-                Phone: <input type="number" name="phone"> <br>
-                Gender: <input type="radio" name="gender" value="0"> Female
+                Phone: <input type="number" name="phone" value="<?= $customer['phone'] ?>"> <br>
+                Gender: <input type="radio" name="gender" value="0" checked> Female
                         <input type="radio" name="gender" value="1"> Male <br>
-                Address:  <input type="text" name="address"><br>
+                Address:  <input type="text" name="address" value="<?= $customer['address'] ?>"><br>
                 <?php
             }
             ?>
