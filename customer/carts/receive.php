@@ -1,3 +1,12 @@
+<?php
+//Cho phép làm việc với session
+session_start();
+//Kiểm tra đã tồn tại số đth trên session hay chưa, nếu chưa tồn tại thì cho quay về account
+if (!isset($_SESSION['email_customer'])) {
+    //Quay về trang account
+    header("Location: ../account/login_customer.php");
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,7 +33,7 @@
             margin: 30px 0 0 33%;
         }
     </style>
-    <script>
+    <!--<script>
         function validate() {
             let count = 0;  // khai báo số count để đếm số ô input không được bỏ trống
 
@@ -86,27 +95,34 @@
             }
             return true;
         }
-    </script>
+    </script>-->
     <title> Receiver </title>
 </head>
 <body>
 <?php
-include_once "../layout/header.php";
+    include_once "../layout/header.php";
+    include_once "../connect/open.php";
+    $email = $_SESSION['email_customer'];
+    $sql = "SELECT * FROM customers WHERE email='$email'";
+    $customers = mysqli_query($connect, $sql);
+    foreach ($customers as $customer) {
 ?>
 <h2 style="margin: 100px 0 0 36%; color: black; font-weight: bold"> Receiver's Information </h2>
 <form class="form_receiver" method="post" action="order.php">
     <br>
-    Receiver Name <input type="text" id="receiver_name" name="receiver_name" ><br>
+    Receiver Name <input type="text" id="receiver_name" name="receiver_name" value="<?= $customer['name']; ?>" ><br>
     <span id="error_receiver_name"></span><br>
-    Receiver Phone <input type="number" id="receiver_phone" name="receiver_phone" ><br>
+    Receiver Phone <input type="number" id="receiver_phone" name="receiver_phone" value="<?= $customer['phone']; ?>"><br>
     <span id="error_receiver_phone"></span><br>
-    Receiver Address <input type="text" id="receiver_address" name="receiver_address"><br>
+    Receiver Address <input type="text" id="receiver_address" name="receiver_address" value="<?= $customer['address']; ?>"><br>
     <span id="error_receiver_address"></span><br>
     <button class="button add" onclick="return validate()" type="submit">
         Submit
     </button>
 </form>
 <br>
-
+<?php
+    }
+?>
 </body>
 </html>
