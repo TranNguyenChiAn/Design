@@ -24,13 +24,19 @@ if (!isset($_SESSION['email_customer'])) {
         }
 
         .form_receiver {
-            background-color: #ffffff;
+            padding: top: 40px;
             width:500px;
             height: auto;
-            border:1px solid black;
-            padding: 10px;
-            border-radius: 10px;
-            margin: 30px 0 0 33%;
+            margin: 30px 0 0 6%;
+        }
+
+        .infor {
+            height: 48px;
+            width: 300px;
+            border-radius: 0;
+            border: 2px solid #9a9898;
+            margin-bottom: 10px;
+            padding-left: 9px;
         }
     </style>
     <!--<script>
@@ -99,30 +105,45 @@ if (!isset($_SESSION['email_customer'])) {
     <title> Receiver </title>
 </head>
 <body>
-<?php
-    include_once "../layout/header.php";
-    include_once "../connect/open.php";
-    $email = $_SESSION['email_customer'];
-    $sql = "SELECT * FROM customers WHERE email='$email'";
-    $customers = mysqli_query($connect, $sql);
-    foreach ($customers as $customer) {
-?>
-<h2 style="margin: 100px 0 0 36%; color: black; font-weight: bold"> Receiver's Information </h2>
-<form class="form_receiver" method="post" action="order.php">
-    <br>
-    Receiver Name <input type="text" id="receiver_name" name="receiver_name" value="<?= $customer['name']; ?>" ><br>
-    <span id="error_receiver_name"></span><br>
-    Receiver Phone <input type="number" id="receiver_phone" name="receiver_phone" value="<?= $customer['phone']; ?>"><br>
-    <span id="error_receiver_phone"></span><br>
-    Receiver Address <input type="text" id="receiver_address" name="receiver_address" value="<?= $customer['address']; ?>"><br>
-    <span id="error_receiver_address"></span><br>
-    <button class="button add" onclick="return validate()" type="submit">
-        Submit
-    </button>
-</form>
-<br>
-<?php
-    }
-?>
+<div style="left: 0; background-color: white">
+    <div>
+        <?php
+            include_once "../layout/header.php";
+            include_once "../connect/open.php";
+        //Lấy id của sp
+        $id = $_GET['id'];
+        //Mo ket noi
+        include_once "../connect/open.php";
+        $count_money = 0;
+        //Query
+        $sql = "SELECT * FROM orders
+        WHERE id = '$id'";
+        //Chạy query
+        $orders = mysqli_query($connect, $sql);
+            $email = $_SESSION['email_customer'];
+            $sql = "SELECT * FROM customers WHERE email='$email'";
+            $customers = mysqli_query($connect, $sql);
+            include_once "../connect/close.php";
+            // Do du lieu
+            foreach ($customers as $customer) {
+        ?>
+        <h4 style="margin: 100px 0 0 9%; color: black; font-weight: bold"> Receiver's Information </h4>
+        <form class="form_receiver" method="post" action="order.php">
+            <input class="infor" type="text" id="receiver_name" placeholder="Name" name="receiver_name" value="<?= $customer['name']; ?>" ><br>
+            <span id="error_receiver_name"></span>
+            <input class="infor" type="number" id="receiver_phone" placeholder="Phone" name="receiver_phone" value="<?= $customer['phone']; ?>"><br>
+            <span id="error_receiver_phone"></span>
+            <input class="infor" type="text" id="receiver_address" placeholder="Phone" name="receiver_address" value="<?= $customer['address']; ?>"><br>
+            <span id="error_receiver_address"></span>
+            <button class="button add" onclick="return validate()" type="submit">
+                Submit
+            </button>
+        </form>
+        <br>
+        <?php
+            }
+        ?>
+    </div>
+</div>
 </body>
 </html>
