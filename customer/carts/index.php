@@ -196,6 +196,7 @@ if (!isset($_SESSION['email_customer'])) {
     </button>
 </div>
 
+
 <!-------------------- FOOTER -------------------->
 <?php
     include_once '../layout/footer.php';
