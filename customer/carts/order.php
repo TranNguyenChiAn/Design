@@ -26,14 +26,6 @@ if(isset($_SESSION['id'])){
     //foreach để lấy max_order_id
     foreach ($maxOrderIds as $maxOrderId){
     $order_id = $maxOrderId['max_order_id'];
-    /*$receiver_name = $_POST['receiver_name'];
-    $receiver_phone = $_POST['receiver_phone'];
-    $receiver_address = $_POST['receiver_address'];
-    $sqlInsertOrderDetails = "INSERT INTO order_details(receiver_name, receiver_phone, receiver_address ) 
-                                 VALUES ('$receiver_name', '$receiver_phone', '$receiver_address')";
-    //Chạy query insert order_detail
-    mysqli_query($connect, $sqlInsertOrderDetails);*/
-
     //Lấy giỏ hàng về
     $cart = $_SESSION['carts'];
 
@@ -62,6 +54,6 @@ if(isset($_SESSION['id'])){
 
 } else {
     //Quay về trang account
-    header("Location:../account/account.php");
+    header("Location:../account/login_customer.php");
 }
 ?>
