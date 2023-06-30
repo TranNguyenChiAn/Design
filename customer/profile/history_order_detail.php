@@ -56,15 +56,18 @@ if (!isset($_SESSION['email_customer'])) {
             height: 30px;
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
-        function cancel() {
-            let result_1 = "Cancel".link("history_order.php?id=12");
-            if(confirm("Bạn có chắc chắn muốn hủy đơn hàng?") == true){
-                document.getElementById("demo1").innerHTML = result_1;
-            }else{
-                document.getElementById("demo1").innerHTML = result_1;
-            }
-        }
+        $(document).ready(function(){
+            $("button").click(function(){
+                $("#main_content").load("cancel.php", function(statusTxt){
+                    if(statusTxt == "success")
+                        alert("External content loaded successfully!");
+                    if(statusTxt == "error")
+                        alert("Error");
+                });
+            });
+        });
     </script>
     <title> Order Detail </title>
 </head>
@@ -95,7 +98,7 @@ $orders = mysqli_query($connect, $sql);
 include_once '../connect/close.php';
 ?>
 <p class="table_title"> ORDER DETAIL </p>
-<section class="main_content">
+<section id="main_content" class="main_content">
     <div class="order_detail">
         <?php
         foreach ($orders as $order){
@@ -181,7 +184,7 @@ include_once '../connect/close.php';
                 if($order['status'] == 0) {
         ?>
             <button class="cancel" onclick="cancel()">
-                <a class="link" href="cancel.php?id=<?= $order['id']; ?>">
+                <a class="link">
                     Cancel
                 </a>
             </button>
