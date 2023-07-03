@@ -68,7 +68,7 @@ if (!isset($_SESSION['email_customer'])) {
     </div>
     <div style="display:flex; width: 360px;margin: 18px 0 0 90px; justify-content: space-between">
         <div class="history_order">
-            <a style="font-weight: bold" class="link" href="history_order.php?id=<?= $customer['id']; ?>">
+            <a style="font-weight: bold" class="link" href="history_order.php">
                 History orders
             </a>
         </div>
