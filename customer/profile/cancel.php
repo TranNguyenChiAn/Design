@@ -13,6 +13,6 @@ foreach($orders as $order) {
         header("location.reload()");
     }
 }
-header("Location: ../pages/index.php");
 
+header("Location: history_order.php");
 ?>
