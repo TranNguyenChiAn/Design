@@ -7,7 +7,6 @@ if (!isset($_SESSION['email_customer'])) {
     header("Location: ../account/login_customer.php");
 }
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -23,13 +22,13 @@ if (!isset($_SESSION['email_customer'])) {
 include_once "../layout/header.php";
 //mo ket noi
 include_once "../connect/open.php";
-$id = $_GET['id'];
+$email = $_SESSION['email_customer'];
 //Query
 $sql = "SELECT orders.id, orders.date_buy, orders.status, orders.customer_id,
                 customers.name AS customer_name
         FROM orders
         INNER JOIN customers ON customers.id = orders.customer_id
-        WHERE orders.customer_id = '$id'
+        WHERE  customers.email = '$email'
         ORDER BY id DESC" ;
 //Chay query
 $orders = mysqli_query($connect, $sql);
