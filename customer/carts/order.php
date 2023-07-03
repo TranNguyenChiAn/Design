@@ -43,9 +43,11 @@ if(isset($_SESSION['id'])){
                                  VALUES ('$order_id', '$clothes_id', '$price', '$quantity')";
             //Chạy query insert order_detail
             mysqli_query($connect, $sqlInsertOrderDetail);
+            $sqlUpdateQuantity = "UPDATE clothes SET quantity = quantity - '$quantity'";
+            //Chạy query insert order_detail
+            mysqli_query($connect, $sqlUpdateQuantity);
         }
         }
-
     }
     //Xóa carts
     unset($_SESSION['carts']);
