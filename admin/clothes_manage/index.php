@@ -167,6 +167,7 @@ if(!isset($_SESSION['email_admin'])){
     include_once '../layout/footer.php';
     ?>
 <section class="main_content">
+    <br>
 </body>
 </html>
 
