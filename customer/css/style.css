@@ -188,6 +188,14 @@ body{
     justify-content: space-between;
 }
 
+.out_of_stock {
+    width: 60px;
+    height: auto;
+    position: absolute;
+    margin: -24px 0 0 -50px;
+    rotate: 30deg;
+}
+
 .t-heading {
     color: #5252e7;
 }
