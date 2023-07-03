@@ -25,6 +25,6 @@ if($count_account == 0) {
     $_SESSION['id'] = $id;
     $_SESSION['email_admin'] = $email;
     // Sang trang danh sách
-    header("Location: ../order_manage/index.php");
+    header("Location: ../homepage/index.php");
 }
 ?>
