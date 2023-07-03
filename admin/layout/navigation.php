@@ -62,6 +62,9 @@
                 <img width="100px" src="../../image/celement cat.png">
             </li>
             <li class="choice">
+                <a class="link_in_menu" href="../homepage/index.php"> Overview </a>
+            </li>
+            <li class="choice">
                 <a class="link_in_menu" href="../category_manager/index.php"> Category </a>
             </li>
             <li  class="choice">
