@@ -55,20 +55,36 @@ if (!isset($_SESSION['email_customer'])) {
             border-radius: 6px;
             height: 30px;
         }
+
+        .link_cancel {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        .confirm_cancel {
+            z-index: 3;
+            position: absolute;
+            border: 1px solid #e1e1e1;
+            width: 500px;
+            height: 300px;
+            padding-top: 60px;
+            background-color: white;
+            margin: -180px 0 0 30%;
+            display: none;
+        }
+        #over {
+            display: none;
+            background: #000;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+            z-index: 999;
+        }
     </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $("button").click(function(){
-                $("#main_content").load("cancel.php", function(statusTxt){
-                    if(statusTxt == "success")
-                        alert("External content loaded successfully!");
-                    if(statusTxt == "error")
-                        alert("Error");
-                });
-            });
-        });
-    </script>
     <title> Order Detail </title>
 </head>
 <body>
@@ -178,22 +194,56 @@ include_once '../connect/close.php';
             ?>
         </h3>
     </div>
+    <?php
+    foreach ($orders as $order){
+        if($order['status']==0) {
+    ?>
     <div>
-        <?php
-            foreach ($orders as $order){
-                if($order['status'] == 0) {
-        ?>
-            <button class="cancel" onclick="cancel()">
-                <a class="link">
-                    Cancel
+        <button id="cancel" class="cancel">
+            <a class="link_cancel">
+                Cancel
+            </a>
+        </button>
+        <div id="confirm_cancel" class="confirm_cancel">
+            <span style="margin: 60px 0 0 48px;font-size: 24px; font-weight: bold"> Are you sure you want to cancel?</span><br>
+            <br>
+            <button id="no" style="margin:60px 0 0 90px;" class="btn btn-success">
+                <a style="color: white" class="link">
+                    No
                 </a>
             </button>
-        <?php
+
+            <?php
+                foreach ($orders as $order){
+                if($order['status'] == 0) {
+            ?>
+                <button style="margin:60px 0 0 160px;" class="btn btn-danger">
+                   <a style="color: white" class="link" href="cancel.php?id=<?= $order['id']; ?>">
+                       Sure
+                   </a>
+               </button>
+            <?php
+                    }
                 }
-            }
-        ?>
+            ?>
+           </div>
+        <script language="javascript">
+            document.getElementById("cancel").onclick = function() {
+                document.getElementById("confirm_cancel").style.display = "block"
+                document.body.style.filter = 'blur'
+
+            };
+            document.getElementById("no").onclick = function() {
+                document.getElementById("confirm_cancel").style.display = "none"
+            };
+        </script>
     </div>
+    <?php
+            }
+        }
+    ?>
 </section>
+
 <?php
     include_once "../layout/footer.php";
 ?>
