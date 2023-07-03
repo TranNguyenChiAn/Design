@@ -1,3 +1,12 @@
+<?php
+//Cho phép làm việc với session
+session_start();
+//Kiểm tra đã tồn tại số đth trên session hay chưa, nếu chưa tồn tại thì cho quay về account
+if(!isset($_SESSION['email_admin'])){
+    //Quay về trang account
+    header("Location: ../account/login_admin.php");
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
