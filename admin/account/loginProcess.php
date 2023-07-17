@@ -22,7 +22,7 @@ if($count_account == 0) {
     header("Location: login_admin.php");
 }else {
     //Lưu id, số đth lên section
-    $_SESSION['id'] = $id;
+    $_SESSION['id_admin'] = $id;
     $_SESSION['email_admin'] = $email;
     // Sang trang danh sách
     header("Location: ../homepage/index.php");
