@@ -10,6 +10,19 @@
         body {
             background-color: white;
         }
+        .out_of_stock {
+            width: 60px;
+            height: auto;
+            position: absolute;
+            margin: -24px 0 0 -50px;
+            rotate: 30deg;
+        }
+        .sold_out {
+            width: 90px;
+            height: auto;
+            position: absolute;
+            margin: 0 0 0 -90px;
+        }
     </style>
     <title> Product's Detail</title>
 </head>
@@ -34,6 +47,17 @@
                 <td width="90px" rowspan="2"></td>
                 <td width="480px" rowspan="2">
                     <img src="../../image/<?= $clothe['image']; ?>" width="420px" height="auto">
+                    <?php
+                    if($clothe['quantity'] < 9 and $clothe['quantity'] > 0){
+                        ?>
+                        <img class="out_of_stock" src="../../image/out_of_stock.png">
+                        <?php
+                    }elseif ($clothe['quantity'] == 0){
+                        ?>
+                        <img class="sold_out" src="../../image/sold_out.png">
+                    <?php
+                    }
+                    ?>
                 </td>
                 <td style="vertical-align: top; color: black">
                     <p class="product_name_detail"><?= $clothe['name'] ?></p>
@@ -46,12 +70,17 @@
             </tr>
             <tr>
                 <td style="vertical-align: middle">
+                    <?php
+                        if ($clothe['quantity'] > 0 ){
+                    ?>
                     <button class="button add-to-cart">
                         <a style="color: white" class="link" href="../carts/add to cart.php?id=<?= $clothe['id']?>">
                             Add to cart
                         </a>
                     </button>
-                    <button class="button buy"> BUY </button>
+                    <?php
+                        }
+                    ?>
                 </td>
             </tr>
         </table>
