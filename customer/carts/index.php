@@ -70,9 +70,8 @@ if (!isset($_SESSION['email_customer'])) {
 <body>
 <h1 align="center" style="margin: 100px 0 50px 0; color: black"> My Shopping Cart</h1>
 <form method="post" action="update_cart.php">
-    <table class="demo_bill" border="0" cellpadding="0" cellspacing="0" width="90%" align="center">
+    <table class="demo_bill" border="0" cellpadding="1" cellspacing="0" width="80%" align="center">
         <tr style="text-align: center; height: 40px; border-bottom: 1px solid black">
-            <th style="width:94px"> Product ID </th>
             <th style="text-align: center; width: 130px"> Image</th>
             <th style="text-align: left;"> Description </th>
             <th width="160px"> Each Price </th>
@@ -111,9 +110,6 @@ if (!isset($_SESSION['email_customer'])) {
 ?>
 
     <tr>
-        <td align="center">
-            <?= $id ?>
-        </td>
         <td align="center" style="vertical-align: center; height: 140px;">
             <a href="../pages/product_detail.php?id=<?= $clothe['id']; ?>">
                 <img src="../../image/<?= $clothe['image']; ?>" width="90px" height="auto">
@@ -129,7 +125,7 @@ if (!isset($_SESSION['email_customer'])) {
         </td>
         <td align="center">
             <input type="hidden" name="id" value="<?= $clothe['id']; ?>">
-            <input style="width: 50px" type="number" min="1" value="<?= $quantity ?>" name="quantity[<?= $id; ?>]">
+            <input style="width: 50px" type="number" min="1" max="<?= $clothe['quantity']?>" value="<?= $quantity ?>" name="quantity[<?= $id; ?>]">
         </td>
         <td align="center">
             $<?php
@@ -159,6 +155,7 @@ if (!isset($_SESSION['email_customer'])) {
     <?php
             }
         }
+    if($count_money != 0){
     ?>
     <tr>
         <td class="total_cost" colspan="6" align="end">
@@ -176,6 +173,17 @@ if (!isset($_SESSION['email_customer'])) {
             </button>
         </td>
     </tr>
+        <?php
+            }else{
+        ?>
+           <tr>
+               <td style="text-align: center" colspan="7">
+                   <h3> You don't have anything in your cart. </h3>
+               </td>
+           </tr>
+        <?php
+            }
+        ?>
 </table>
 </form>
 <div class="cart_action">
@@ -184,7 +192,9 @@ if (!isset($_SESSION['email_customer'])) {
         <a style="color: white;" class="link" href="../pages/index.php">Product List</a>
     </button>
 
-
+    <?php
+    if($count_money != 0){
+    ?>
     <button style="border-radius: 0px" class="delete_cart">
         <a class="delete" href="delete_cart.php"> Delete cart </a>
     </button>
@@ -194,6 +204,9 @@ if (!isset($_SESSION['email_customer'])) {
     <button class="order_button">
         <a style="color: white" class="link" href="receive.php"> ORDER </a>
     </button>
+    <?php
+        }
+    ?>
 </div>
 
 
