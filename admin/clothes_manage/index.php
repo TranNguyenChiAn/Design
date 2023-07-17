@@ -22,6 +22,14 @@ if(!isset($_SESSION['email_admin'])){
             body{
                 background-color: #F5F4F8;
             }
+            .button_project{
+                font-weight: bold;
+                width: 240px;
+                height: 60px;
+                border: none;
+                border-radius: 10px;
+                background: linear-gradient(135deg, #3a34e8, #5445cb, #cebde7);
+            }
         </style>
         <title> Manage Clothes </title>
 </head>
@@ -38,15 +46,13 @@ if(!isset($_SESSION['email_admin'])){
     }
 
     //Khai báo số bản ghi 1 trang
-    $recordOnePage = 3;
+    $recordOnePage = 6;
     //Query để lấy số bản ghi
     $sqlCountRecord = "SELECT COUNT(*) AS count_record FROM clothes 
                        WHERE name LIKE '%$search%'
                           OR material LIKE '%$search%'
                           OR color LIKE '%$search%'
-                          OR size LIKE '%$search%'
-                          OR category_id LIKE '%$search%'
-                          OR producer_id LIKE '%$search%'";
+                          OR size LIKE '%$search%'";
     //Chạy query lấy số bản ghi
     $countRecords = mysqli_query($connect, $sqlCountRecord);
     //foreach để lấy số bản ghi
@@ -98,9 +104,8 @@ if(!isset($_SESSION['email_admin'])){
             <th class="t-heading" align="left"> Material </th>
             <th class="t-heading" align="left"> Size </th>
             <th class="t-heading" align="left"> Color </th>
-            <th class="t-heading" align="left"> Description </th>
-            <th class="t-heading" align="left"> Category Name </th>
-            <th class="t-heading" align="left"> Producer NAme </th>
+            <th class="t-heading" align="left" width="118px"> Category Name </th>
+            <th class="t-heading" align="left" width="118px"> Producer Name </th>
             <th class="t-heading" align="left"> Quantity </th>
             <th class="t-heading" align="left"> Price </th>
             <th class="t-heading" align="center"> Action </th>
@@ -126,9 +131,6 @@ if(!isset($_SESSION['email_admin'])){
                 </td>
                 <td>
                     <?= $clothe['color']?>
-                </td>
-                <td>
-                    <?= $clothe['description']?>
                 </td>
                 <td  width="70px" align="center">
                     <?= $clothe['category_name']?>
@@ -157,17 +159,20 @@ if(!isset($_SESSION['email_admin'])){
     </table>
 
     <button  class="btn add btn-primary">
-        <a class="link_in_button" href="create.php"> Add a record </a> <br>
+        <a class="link_in_button" href="create.php"> + Add a record </a> <br>
     </button>
     <br>
-
     <!--FOOTER-->
     <?php
-    //Nhúng footer
-    include_once '../layout/footer.php';
+        //Nhúng footer
+        include_once '../layout/footer.php';
     ?>
+    <button class="button_project">
+        <a class="link_in_button" href="../discount/index.php"> + Add a discount project </a> <br>
+    </button>
 <section class="main_content">
-    <br>
+<br>
+
 </body>
 </html>
 
