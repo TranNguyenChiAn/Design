@@ -34,10 +34,16 @@ if(isset($_SESSION['email_customer'])){
                 padding: 10px;
                 backdrop-filter: blur(20px);
                 font-size: 20px;
+                color: black;
             }
 
             .form_register_input {
                 margin-left: 30px;
+            }
+            .input_register {
+                width: 300px;
+                height: 36px;
+                margin: 10px 0 0 0;
             }
 
             .add {
@@ -54,15 +60,15 @@ if(isset($_SESSION['email_customer'])){
         <figure align="center" style="font-weight: bold; font-size: 30px;color: #4d4b4b;"> REGISTER </figure>
         <form class="form_register_input" method="post" action="store_register.php">
             <!--ID: <input type="number" name="id"><br>-->
-            Name: <input type="text" name="name"><br>
-            Email: <input type="email" name="email_customer"><br>
-            Password: <input type="password" name="password"><br>
-            Phone: <input type="text" name="phone"><br>
+            Name: <input class="input_register" type="text" name="name" placeholder="Name"><br>
+            Email: <input class="input_register" type="email" name="email_customer" placeholder="Email"><br>
+            Password: <input class="input_register" type="password" name="password" placeholder="Password"><br>
+            Phone: <input class="input_register" type="text" name="phone" placeholder="Phone"><br>
             Gender: <input type="radio" name="gender" value="0"> Female
-            <input type="radio" name="gender" value="1"> Male <br>
-            Address:  <input type="text" name="address"><br>
+                    <input type="radio" name="gender" value="1"> Male <br>
+            Address:  <input class="input_register" type="text" name="address" placeholder="Address"><br>
             <br>
-            <button class="button add" type="submit"> Add </button>
+            <button class="button add" type="submit"> Register </button>
         </form>
     </div>
 </body>
