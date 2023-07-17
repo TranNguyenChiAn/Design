@@ -38,6 +38,11 @@ if (!isset($_SESSION['email_customer'])) {
             margin-bottom: 10px;
             padding-left: 9px;
         }
+        .payment {
+            margin: 30px 0 0 300px;
+            width: 400px;
+            background-color: #6868de;
+        }
     </style>
     <!--<script>
         function validate() {
@@ -121,7 +126,9 @@ if (!isset($_SESSION['email_customer'])) {
         //Chạy query
         $orders = mysqli_query($connect, $sql);
             $email = $_SESSION['email_customer'];
-            $sql = "SELECT * FROM customers WHERE email='$email'";
+            $sql = "SELECT * FROM customers
+                    WHERE email='$email'
+                    LIMIT 1";
             $customers = mysqli_query($connect, $sql);
             include_once "../connect/close.php";
             // Do du lieu
@@ -136,7 +143,7 @@ if (!isset($_SESSION['email_customer'])) {
             <input class="infor" type="text" id="receiver_address" placeholder="Phone" name="receiver_address" value="<?= $customer['address']; ?>"><br>
             <span id="error_receiver_address"></span>
             <button class="button add" onclick="return validate()" type="submit">
-                Submit
+                    Submit
             </button>
         </form>
         <br>
