@@ -37,6 +37,22 @@ $customers = mysqli_query($connect, $sql);
 //Dong ket noi
 include_once '../connect/close.php';
 ?>
+<!--<script>
+<?php
+    foreach ($orders as $order){
+        if($order['status'] == 3){
+?>
+    alert('Cancel successful');
+
+<?php
+    }else{
+?>
+    alert('Cancel failed');
+<?php
+        }
+    }
+?>
+</script>-->
 <div style="position: relative; top: 24px">
 <h2 style="color: black;margin-left: 40%" class="table_title"> ALL ORDERS </h2>
 <table style="margin-left: 6%; width: 93%" class="table-admin"  border="0" cellspacing="0" cellpadding="5px">
