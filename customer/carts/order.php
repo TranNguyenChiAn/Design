@@ -43,7 +43,7 @@ if(isset($_SESSION['id'])){
                                  VALUES ('$order_id', '$clothes_id', '$price', '$quantity')";
             //Chạy query insert order_detail
             mysqli_query($connect, $sqlInsertOrderDetail);
-            $sqlUpdateQuantity = "UPDATE clothes SET quantity = quantity - '$quantity'";
+            $sqlUpdateQuantity = "UPDATE clothes SET quantity = quantity - '$quantity' WHERE id = '$clothes_id'";
             //Chạy query insert order_detail
             mysqli_query($connect, $sqlUpdateQuantity);
         }
