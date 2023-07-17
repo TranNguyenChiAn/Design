@@ -74,6 +74,7 @@
 <div class="form_login" >
     <figure align="center" style="font-weight: bold; font-size: 30px;color: #4d4b4b;"> ADMIN LOGIN </figure>
     <form align="center" id="form" method="post" action="loginProcess.php">
+        <id type="hidden" name="id_admin"></id>
         <input id="email_admin" type="email" name="email_admin" placeholder="Email" width="500px"><br>
         <br>
         <input  id="password_admin"type="password" name="password" placeholder="Password"><br>
