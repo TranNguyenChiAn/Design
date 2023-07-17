@@ -106,7 +106,7 @@ if(!isset($_SESSION['email_admin'])){
         ?>
     </table>
     <button class="btn add btn-primary">
-        <a class="link_in_button" href="create.php"> Add a record </a>
+        <a class="link_in_button" href="create.php"> + Add a record </a>
     </button>
 
     <br>
