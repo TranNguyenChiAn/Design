@@ -10,7 +10,7 @@ if (!isset($_SESSION['email_admin'])) {
 <!doctype html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -25,9 +25,11 @@ if (!isset($_SESSION['email_admin'])) {
             background-color: #F5F4F8;
         }
 
-        #chart-container {
-            width:100%;
-            max-width:600px;
+        #notice {
+            position: absolute;
+            margin: 18px 0 0 82%;
+            width: 180px;
+            height: 120px;
         }
     </style>
     <title> Homepage </title>
@@ -35,70 +37,14 @@ if (!isset($_SESSION['email_admin'])) {
 <body>
 <?php
 include_once "../layout/navigation.php";
-//mo ket noi
-include_once "../connect/open.php";
-//Query để lấy dữ liệu từ bảng classes trên db về
-$sql = "SELECT sum(order_details.quantity) as quantity, orders.date_buy
-        FROM order_details
-        INNER JOIN orders ON order_details.order_id = orders.id
-        GROUP BY orders.date_buy
-        LIMIT 7";
-//Chay query
-$result = mysqli_query($connect, $sql);
-//
-foreach ($result as $data) {
-    $amount[] = $data['quantity'];
-    $date_buy[] = $data['date_buy'];
-}
+
 ?>
-<section style="margin: 0 0 0 300px" class="main_content">
-    <div id="chart-container">
-        <canvas id="myChart" style="width:100%;max-width:600px; margin: 100px 0 0 0;"></canvas>
-    </div>
-
-    <script>
-    let barColors = ["rgba(255, 99, 132, 0.2)",
-                     "rgba(255, 159, 64, 0.2)",
-                     "rgba(255, 205, 86, 0.2)",
-                     "rgba(75, 192, 192, 0.2)",
-                     "rgba(54, 162, 235, 0.2)",
-                     "rgba(153, 102, 255, 0.2)",
-                     "rgba(201, 203, 207, 0.2)"];
-        new Chart("myChart", {
-            type: "bar",
-            data: {
-                labels: <?php echo json_encode($date_buy)?>,
-                datasets: [{
-                    label: 'Number of sales',
-                    fill: false,
-                    lineTension: 0,
-                    backgroundColor: barColors,
-                    borderColor: "rgba(0,0,255,0.1)",
-                    data: <?php echo json_encode($amount)?>,
-                }]
-            },
-            options: {
-                legend:{
-                    display:true,
-                    position:'right',
-                    labels:{
-                        fontColor:'#000000'
-                    }
-                },
-                title: {
-                    display: true,
-                    text: 'Daily Income',
-                    fontSize:25
-                }
-            }
-        });
-    </script>
-
+<section style="margin: 0 0 0 210px" class="main_content">
+    <!--<iframe id="notice" src="statistic/today.php" ></iframe>-->
+    <iframe style="margin: 0 0 0 0; width: 81%; height: 460px" src="statistic/sales.php" ></iframe>
+    <iframe style="margin: 6px 0 0 0; width: 81%; height: 460px" src="statistic/status.php" ></iframe>
+    <iframe style="margin: 6px 0 0 0; width: 81%; height: 460px" src="statistic/product.php" ></iframe>
 </section>
-<section>
-    <iframe style="margin: 0 0 0 0; width: 100%; height: 480px" src="statistic_status/chart_status.php" ></iframe>
-</section>
-<br>
 
 </body>
 </html>
