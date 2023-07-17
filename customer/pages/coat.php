@@ -65,7 +65,7 @@ include_once '../layout/header.php';
             $sql = "SELECT clothes.*,categories.id AS category_id, producers.id AS producer_id FROM clothes 
                             INNER JOIN categories ON clothes.category_id = categories.id
                             INNER JOIN producers ON clothes.producer_id = producers.id
-                            WHERE categories.name = 'coat'
+                            WHERE categories.name LIKE '%coat%'
                             ORDER BY id ASC";
             $clothes = mysqli_query($connect, $sql);
             foreach ($clothes as $clothe){
