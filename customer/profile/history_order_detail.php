@@ -73,17 +73,6 @@ if (!isset($_SESSION['email_customer'])) {
             margin: -180px 0 0 30%;
             display: none;
         }
-        #over {
-            display: none;
-            background: #000;
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.8;
-            z-index: 999;
-        }
     </style>
     <title> Order Detail </title>
 </head>
