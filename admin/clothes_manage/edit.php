@@ -150,7 +150,8 @@ include_once '../connect/close.php';
             Image: <input type="file" name="image" id="imageFile"  onchange="chooseFile(this)"
                           value="<?= $clothe['image'] ?>"
                           accept="image/gif, image/png, image/jpeg">
-                    <img src="../../image/<?= $clothe['image']; ?>" alt="" id="image" width="200px">
+            <img src="../../image/<?= $clothe['image']; ?>" alt="" id="image" width="200px">
+
             <?php
         }
         ?>
