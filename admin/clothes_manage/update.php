@@ -10,7 +10,9 @@ $category_id = $_POST['category_id'];
 $producer_id = $_POST['producer_id'];
 $quantity = $_POST['quantity'];
 $price = $_POST['price'];
-$image = $_FILES['image']['name'];
+if(!empty($_FILES['image']['name'])){
+    $image = $_FILES['image']['name'];
+}
 
 //Mở kết nối
 include_once '../connect/open.php';
@@ -26,7 +28,9 @@ if(!file_exists('../../../image/' . $image)) {
     $path = $_FILES['image']['tmp_name'];
     //Luu anh
     move_uploaded_file($path, "../../image/" . $image);
+    echo $path;
 }
 //Quay về trang danh sách
 header('Location:../clothes_manage/index.php');
+
 ?>
