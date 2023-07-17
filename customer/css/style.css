@@ -256,5 +256,58 @@ body{
 }
 
 
+.order_detail {
+    margin: 2% 0 0 12%;
+    width: 80%;
+    border: 1px solid #d7d2d2;
+    border-radius: 10px;
+    background-color: white;
+    padding: 20px 40px;
+    color: black;
+}
+
+.cancel {
+    width: 80%;
+    margin: 2% 0 0 12%;
+    display: flex;
+    justify-content: center;
+    background-color: #c93939;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    height: 30px;
+}
+.cancel .link {
+    color: white;
+}
+
+.cancel:hover {
+    cursor: pointer;
+    background-color: firebrick;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    height: 30px;
+}
+
+.link_cancel {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.confirm_cancel {
+    z-index: 3;
+    position: absolute;
+    border: 1px solid #e1e1e1;
+    width: 500px;
+    height: 300px;
+    padding-top: 60px;
+    background-color: white;
+    margin: -180px 0 0 30%;
+    display: none;
+}
+
+
 
 
