@@ -44,6 +44,7 @@ include_once "../layout/navigation.php";
     <iframe style="margin: 0 0 0 0; width: 81%; height: 460px" src="statistic/sales.php" ></iframe>
     <iframe style="margin: 6px 0 0 0; width: 81%; height: 460px" src="statistic/status.php" ></iframe>
     <iframe style="margin: 6px 0 0 0; width: 81%; height: 460px" src="statistic/product.php" ></iframe>
+    <iframe style="margin: 6px 0 0 0; width: 81%; height: 460px" src="statistic/today.php" ></iframe>
 </section>
 
 </body>
