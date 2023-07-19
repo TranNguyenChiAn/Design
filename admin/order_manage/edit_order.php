@@ -102,32 +102,28 @@ include_once '../connect/close.php';
         ?>
     </div>
     <div class="edit_order">
-        <h2> Product </h2>
+        <h3> Product </h3><br>
         <table border="0" cellpadding="0" cellspacing="0" width="100%">
             <?php
             foreach ($order_details as $order_detail){
                 ?>
                 <tr style="margin-top: 20px;">
                     <td width="280px">
-                        <img width="180px" src="../../image/<?= $order_detail['image']?>">
+                        <img style="object-fit:cover;width:180px;height: 180px;"  src="../../image/<?= $order_detail['image']?>">
                     </td>
                     <td>
                         <h3><?= $order_detail['clothe_name']?></h3>
-                        <p style="font-size: 13px; width: 75%"><?= $order_detail['description'] ?></p>
-                    </td>
-                    <td width="20%" >
                         Amount: <?= $order_detail['quantity'] ?><br>
                         Price $<?= $order_detail['price'] ?>
                     </td>
                     <td>
-                        Cost:
-                        $<?php
+                        <strong>Cost: $<?php
                         //Tính thành tiền của từng sp có trong trong carts
                         $money = $order_detail['price'] * $order_detail['quantity'];
                         //Tính tổng tiền của các sp có trong trong carts
                         $count_money += $money;
                         echo $money;
-                        ?>
+                        ?></strong>
                     </td>
                 </tr>
                 <tr>
