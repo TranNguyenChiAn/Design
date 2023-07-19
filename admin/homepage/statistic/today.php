@@ -36,7 +36,7 @@ $total = 0;
 $sql = "SELECT sum(order_details.quantity) as quantity, orders.date_buy
         FROM order_details
         INNER JOIN orders ON order_details.order_id = orders.id
-        WHERE orders.date_buy = '2023-07-03'
+        WHERE orders.date_buy = '2023-07-05'
         GROUP BY order_details.order_id
         LIMIT 7";
 //Chay query
@@ -49,10 +49,15 @@ include_once "../../connect/close.php";
 
 ?>
     <div id="chart-container">
+        <div>
             <h4 style="margin: 18px 0 0 60px">Today</h4>
-           <p style="margin: 9px 0 0 18px;font-weight: bold; font-size: 30px; color: green">
-               +<?= $total ?> order
-           </p>
+            <p style="margin: 9px 0 0 18px;font-weight: bold; font-size: 30px; color: green">
+                +<?= $total ?> order
+            </p>
+            <p style="margin: 9px 0 0 18px;font-weight: bold; font-size: 30px; color: green">
+                +<?= $total ?> order
+            </p>
+        </div>
 
     </div>
 </body>
