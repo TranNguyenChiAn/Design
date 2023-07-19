@@ -113,7 +113,7 @@ include_once '../connect/close.php';
                     <h3 style="margin: 0 0"> Delivery address </h3>
                     Receiver Name: <?= $order['receiver_name']; ?><br>
                     Receiver Phone: <?= $order['receiver_phone']; ?><br>
-                    Receiver Address:<?= $order['receiver_address']; ?>
+                    Receiver Address: <?= $order['receiver_address']; ?>
                 </div>
                 <div>
                     <?php
@@ -138,31 +138,29 @@ include_once '../connect/close.php';
         ?>
     </div>
     <div class="order_detail">
-        <h2> Product </h2>
+        <h3> Product </h3><br>
         <table border="0" cellpadding="0" cellspacing="0" width="100%">
             <?php
                 foreach ($order_details as $order_detail){
             ?>
                 <tr style="margin-top: 20px;">
                     <td width="200px">
-                        <img width="180px" src="../../image/<?= $order_detail['image']?>">
+                        <img style="object-fit: cover; height: 180px; width:180px"  src="../../image/<?= $order_detail['image']?>">
                     </td>
                     <td>
-                        <h3><?= $order_detail['clothe_name']?></h3>
-                        <p style="font-size: 13px; width: 75%"><?= $order_detail['description'] ?></p>
-                    </td>
-                    <td width="120px" >
+                        <h4><?= $order_detail['clothe_name']?></h4>
                         Amount: <?= $order_detail['quantity'] ?><br>
                         Price: $<?= $order_detail['price'] ?><br>
-                        <br><br><br>
-                        Cost:
-                        $<?php
+                    </td>
+                    <td width="180px" >
+                        <br>
+                        <h5>Cost: $<?php
                         //Tính thành tiền của từng sp có trong trong carts
                         $money = $order_detail['price'] * $order_detail['quantity'];
                         //Tính tổng tiền của các sp có trong trong carts
                         $count_money += $money;
                         echo $money;
-                        ?>
+                            ?></h5>
                     </td>
                 </tr>
                 <tr>
