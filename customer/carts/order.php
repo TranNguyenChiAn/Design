@@ -25,34 +25,34 @@ if(isset($_SESSION['id'])){
     $maxOrderIds = mysqli_query($connect, $sqlMaxOrderId);
     //foreach để lấy max_order_id
     foreach ($maxOrderIds as $maxOrderId){
-    $order_id = $maxOrderId['max_order_id'];
-    //Lấy giỏ hàng về
-    $cart = $_SESSION['carts'];
+        $order_id = $maxOrderId['max_order_id'];
+        //Lấy giỏ hàng về
+        $cart = $_SESSION['carts'];
 
-    foreach ($cart as $clothes_id => $quantity){
-        //Lấy dữ liệu để insert lên bảng order_details
-        //Query để lấy price của product
-        $sqlSelectPrice = "SELECT price FROM clothes WHERE id = '$clothes_id'";
-        //Chạy query lấy price của product
-        $clothePrices = mysqli_query($connect, $sqlSelectPrice);
-        //foreach để lấy price
-        foreach ($clothePrices as $clothePrice) {
-            $price = $clothePrice['price'];
-            //Query insert dữ liệu lên bảng order_details
-            $sqlInsertOrderDetail = "INSERT INTO order_details(order_id, clothes_id, price, quantity ) 
-                                 VALUES ('$order_id', '$clothes_id', '$price', '$quantity')";
-            //Chạy query insert order_detail
-            mysqli_query($connect, $sqlInsertOrderDetail);
-            $sqlUpdateQuantity = "UPDATE clothes SET quantity = quantity - '$quantity' WHERE id = '$clothes_id'";
-            //Chạy query insert order_detail
-            mysqli_query($connect, $sqlUpdateQuantity);
-        }
+        foreach ($cart as $clothes_id => $quantity){
+            //Lấy dữ liệu để insert lên bảng order_details
+            //Query để lấy price của product
+            $sqlSelectPrice = "SELECT price FROM clothes WHERE id = '$clothes_id'";
+            //Chạy query lấy price của product
+            $clothePrices = mysqli_query($connect, $sqlSelectPrice);
+            //foreach để lấy price
+            foreach ($clothePrices as $clothePrice) {
+                $price = $clothePrice['price'];
+                //Query insert dữ liệu lên bảng order_details
+                $sqlInsertOrderDetail = "INSERT INTO order_details(order_id, clothes_id, price, quantity ) 
+                                     VALUES ('$order_id', '$clothes_id', '$price', '$quantity')";
+                //Chạy query insert order_detail
+                mysqli_query($connect, $sqlInsertOrderDetail);
+                $sqlUpdateQuantity = "UPDATE clothes SET quantity = quantity - '$quantity' WHERE id = '$clothes_id'";
+                //Chạy query insert order_detail
+                mysqli_query($connect, $sqlUpdateQuantity);
+            }
         }
     }
     //Xóa carts
     unset($_SESSION['carts']);
     //Quay về trang giỏ hàng
-    header("Location: ../pages/index.php");
+    header("Location: ../payment/index.php");
 
 } else {
     //Quay về trang account
