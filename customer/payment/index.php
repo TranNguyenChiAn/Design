@@ -11,6 +11,7 @@ if (!isset($_SESSION['email_customer'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="../css/style.css">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -18,12 +19,12 @@ if (!isset($_SESSION['email_customer'])) {
     <style>
         .payment {
             height: 100%;
-            width: 30%;
+            width: 28%;
             border: 2px solid #d7d2d2;
             background-color: white;
             padding: 20px 40px;
             color: black;
-            margin: 11px 0 0 -10px;
+            margin: 10px 0 0 -10px;
         }
 
          body {
@@ -31,41 +32,59 @@ if (!isset($_SESSION['email_customer'])) {
          }
         .order_detail {
             margin: 2% 0 0 3%;
-            width: 100%;
+            width: 99%;
             border: 2px solid #d7d2d2;
+            border-radius: 0;
             background-color: white;
             padding: 20px 40px;
             color: black;
         }
+        .payment_button {
+            width: 100%;
+            height: 36px;
+            background-color: black;
+            color: white;
+            border: none;
+            margin-top: 18px;
+        }
+
+        .payment_button:hover {
+            cursor: pointer;
+        }
     </style>
+    <?php
+        //Mo ket noi
+        include_once "../connect/open.php";
+        $count_money = 0;
+        $customer_id = $_SESSION['id'];
+        //query lấy max_order_id
+        $sqlMaxOrderId = "SELECT MAX(id) AS max_order_id FROM orders WHERE customer_id = '$customer_id'";
+        //Chạy query lấy max_order_id
+        $maxOrderIds = mysqli_query($connect, $sqlMaxOrderId);
+        foreach ($maxOrderIds as $maxOrderId) {
+            $order_id = $maxOrderId['max_order_id'];
+            //Query
+            $sql = "SELECT order_details.clothes_id, order_details.order_id, order_details.price, order_details.quantity,
+                            clothes.image AS image, clothes.name AS clothe_name, clothes.description,
+                            orders.receiver_name, orders.receiver_phone,orders.receiver_address, orders.status
+                    FROM order_details
+                    INNER JOIN clothes ON clothes.id = order_details.clothes_id
+                    INNER JOIN orders ON orders.id = order_details.order_id
+                    WHERE order_details.order_id = '$order_id'";
+            //Chạy query
+            $order_details = mysqli_query($connect, $sql);
+            //Query
+            $sql = "SELECT * FROM orders WHERE id = '$order_id'";
+            //Chạy query
+            $orders = mysqli_query($connect, $sql);
+
+        //Đóng kết nối
+        include_once '../connect/close.php';
+    ?>
 </head>
 <body>
-<?php
-$id = $_GET['id'];
-include_once "../layout/header.php";
-//Mo ket noi
-include_once "../connect/open.php";
-$count_money = 0;
-//Query
-$sql = "SELECT order_details.clothes_id, order_details.order_id, order_details.price, order_details.quantity,
-		        clothes.image AS image, clothes.name AS clothe_name, clothes.description,
-		        orders.receiver_name, orders.receiver_phone,orders.receiver_address, orders.status
-        FROM order_details
-        INNER JOIN clothes ON clothes.id = order_details.clothes_id
-        INNER JOIN orders ON orders.id = order_details.order_id
-        WHERE order_details.order_id = '$id'";
-//Chạy query
-$order_details = mysqli_query($connect, $sql);
-//Query
-$sql = "SELECT * FROM orders
-        WHERE id = '$id'";
-//Chạy query
-$orders = mysqli_query($connect, $sql);
-//Đóng kết nối
-include_once '../connect/close.php';
-?>
-<p class="table_title"> Temporary Bill </p>
-<section id="main_content" class="main_content" style="display: flex; justify-content: space-around">
+<h3 style="margin-top: 30px;" class="table_title"> Temporary Bill </h3 class="table_title">
+<section id="main_content" style="width: 100%; display: flex; justify-content: space-evenly" >
     <div>
         <div class="order_detail">
             <?php
@@ -84,31 +103,29 @@ include_once '../connect/close.php';
             ?>
         </div>
         <div class="order_detail">
-            <h2> Product </h2>
+            <h3 style="margin: 0 0 18px 0"> Product </h3>
             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                 <?php
                 foreach ($order_details as $order_detail){
                     ?>
                     <tr style="margin-top: 20px;">
-                        <td width="200px">
+                        <td width="120px">
                             <img width="90px" src="../../image/<?= $order_detail['image']?>">
                         </td>
                         <td>
                             <h3><?= $order_detail['clothe_name']?></h3>
-                        </td>
-                        <td width="120px" >
                             Amount: <?= $order_detail['quantity'] ?><br>
                             Price: $<?= $order_detail['price'] ?><br>
-                            <p style="color: #231ec2">
-                            Cost:
-                            $<?php
-                            //Tính thành tiền của từng sp có trong trong carts
-                            $money = $order_detail['price'] * $order_detail['quantity'];
-                            //Tính tổng tiền của các sp có trong trong carts
-                            $count_money += $money;
-                            echo $money;
-                            ?>
-                            </p>
+                        </td>
+                        <td width="120px" >
+                            <h4>Cost: $<?php
+                                //Tính thành tiền của từng sp có trong trong carts
+                                $money = $order_detail['price'] * $order_detail['quantity'];
+                                //Tính tổng tiền của các sp có trong trong carts
+                                $count_money += $money;
+                                echo $money;
+                                ?>
+                            </h4>
                         </td>
                     </tr>
                     <tr>
@@ -119,10 +136,13 @@ include_once '../connect/close.php';
                     <?php
                 }
                 ?>
-                <tr>
-                    <td colspan="3" style="display: flex; justify-content: space-between;color: firebrick; font-weight: bold">
+                <tr style="color: firebrick; font-weight: bold; font-size: 18px">
+                    <td colspan="2">
                         <span> Total </span>
-                        <span>
+
+                    </td>
+                    <td style="text-align: center">
+                        <span">
                             <?php
                             echo "$" . $count_money;
                             ?>
@@ -132,13 +152,15 @@ include_once '../connect/close.php';
             </table>
         </div>
     </div>
-
+    <?php
+    }
+    ?>
     <div class="payment">
         <form>
         <table border="0" cellspacing="0" cellpadding="0" width="100%">
             <tr>
                 <td>
-                    <input type="radio" name="payment" value="0" required> COD </input><br>
+                    <input type="radio" name="payment" value="0" checked> COD </input><br>
                     <span style="color: grey; margin: 0 0 0 24px"> Thanh toán bằng tiền mặt </span>
                 </td>
                 <td>
@@ -164,16 +186,14 @@ include_once '../connect/close.php';
                 </td>
             </tr>
         </table>
-            <button style="width: 60px" type="submit" class="button add">
-                <a style="color: white" class="link" href="../carts/order.php">
-                    Next
+            <button type="submit" class="payment_button">
+                <a style="color: white" class="link" href="../pages/index.php">
+                    Pay
                 </a>
             </button>
     </form>
-        <br>
-
+    <br>
     </div>
-
 </section>
 
 </body>
