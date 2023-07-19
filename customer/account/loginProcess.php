@@ -4,10 +4,12 @@ session_start();
 // Lấy dữ liệu từ form
 $email = $_POST['email_customer'];
 $password = $_POST['password'];
-//Mở kết nối
+$password_md5 = md5($password);
+$hash_password = md5($password_md5);
+////Mở kết nối
 include_once '../connect/open.php';
 //viết query
-$sql = "SELECT *, COUNT(id) AS count_account FROM customers WHERE email='$email' AND password='$password'";
+$sql = "SELECT *, COUNT(id) AS count_account FROM customers WHERE email='$email' AND password='$hash_password'";
 //chạy query
 $accounts = mysqli_query($connect, $sql);
 //Đóng kết nối
