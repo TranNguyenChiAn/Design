@@ -25,7 +25,7 @@ if (!isset($_SESSION['email_customer'])) {
 
         .form_receiver {
             padding: top: 40px;
-            width:500px;
+            width:100%;
             height: auto;
             margin: 30px 0 0 6%;
         }
@@ -38,13 +38,8 @@ if (!isset($_SESSION['email_customer'])) {
             margin-bottom: 10px;
             padding-left: 9px;
         }
-        .payment {
-            margin: 30px 0 0 300px;
-            width: 400px;
-            background-color: #6868de;
-        }
     </style>
-    <!--<script>
+    <script>
         function validate() {
             let count = 0;  // khai báo số count để đếm số ô input không được bỏ trống
 
@@ -106,29 +101,20 @@ if (!isset($_SESSION['email_customer'])) {
             }
             return true;
         }
-    </script>-->
+    </script>
     <title> Receiver </title>
 </head>
 <body>
-<div style="left: 0; background-color: white">
-    <div>
+<div style="left: 0; background-color: white; display: flex; justify-content: space-between; width: 100%">
+    <div style="width: 40%">
         <?php
             include_once "../layout/header.php";
+            //Mo ket noi
             include_once "../connect/open.php";
-        //Lấy id của sp
-        $id = $_GET['id'];
-        //Mo ket noi
-        include_once "../connect/open.php";
-        $count_money = 0;
-        //Query
-        $sql = "SELECT * FROM orders
-        WHERE id = '$id'";
-        //Chạy query
-        $orders = mysqli_query($connect, $sql);
+            $count_money = 0;
             $email = $_SESSION['email_customer'];
-            $sql = "SELECT * FROM customers
-                    WHERE email='$email'
-                    LIMIT 1";
+            //Query
+            $sql = "SELECT * FROM customers WHERE email='$email' LIMIT 1";
             $customers = mysqli_query($connect, $sql);
             include_once "../connect/close.php";
             // Do du lieu
@@ -142,7 +128,7 @@ if (!isset($_SESSION['email_customer'])) {
             <span id="error_receiver_phone"></span>
             <input class="infor" type="text" id="receiver_address" placeholder="Phone" name="receiver_address" value="<?= $customer['address']; ?>"><br>
             <span id="error_receiver_address"></span>
-            <button class="button add" onclick="return validate()" type="submit">
+            <button style="margin-left: 10%" class="button add" onclick="return validate()" type="submit">
                     Submit
             </button>
         </form>
@@ -151,6 +137,7 @@ if (!isset($_SESSION['email_customer'])) {
             }
         ?>
     </div>
+
 </div>
 </body>
 </html>
