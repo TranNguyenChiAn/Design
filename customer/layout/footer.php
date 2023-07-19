@@ -50,7 +50,7 @@
             5. 21B Phố Lò Đúc, Phường Ngô Thì Nhậm, Quận Hai Bà Trưng, Hà Nội<br>
             CẦN THƠ<br>
             6. 7 Trần Văn Hoài, Phường Xuân Khánh, Quận Ninh Kiều, Cần Thơ<br>
-            © 2023 BAD HABITS OFFICIAL STORE ALL RIGHT RESERVED.<br>
+            © OFFICIAL STORE ALL RIGHT RESERVED.<br>
         </p>
     </div>
     <div class="col-3">
