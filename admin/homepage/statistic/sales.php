@@ -10,16 +10,13 @@ if (!isset($_SESSION['email_admin'])) {
 <!doctype html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="../../css/style.css">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-          crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
     <style>
         body {
             background-color: white;
@@ -40,53 +37,98 @@ include_once "../../connect/open.php";
 $sql = "SELECT sum(order_details.quantity) as quantity, orders.date_buy
         FROM order_details
         INNER JOIN orders ON order_details.order_id = orders.id
-        GROUP BY orders.date_buy
-        LIMIT 7";
+        GROUP BY orders.date_buy";
 //Chay query
 $result = mysqli_query($connect, $sql);
-//
+
 foreach ($result as $data) {
     $amount[] = $data['quantity'];
     $date_buy[] = $data['date_buy'];
 }
+//print_r($date_buy);
 ?>
 <section style="margin: 0 0 0 90px" class="main_content">
     <div id="chart-container">
-        <h4 style="margin: 30px 0 0 40%;"> Daily Order </h4>
-        <canvas id="myChart" style="width:100%;max-width:600px; margin: 30px 0 0 0;"></canvas>
+        <h4 style="margin: 30px 0 18px 40%;"> Daily Order </h4>
+        From <input type="date" style="margin-right: 30px" onchange="startDateFilter(this)" value="2023-07-01" min="2023-07-01">
+        To <input type="date" onchange="endDateFilter(this)" value="2023-07-01" min="2023-07-01">
+        <canvas id="myChart" style="display: block;width:100%;max-width:600px; margin: 30px 0 0 0;"></canvas>
     </div>
     <script>
-    let barColors = ["rgb(116,116,227)"];
-        new Chart("myChart", {
-            type: "bar",
-            data: {
-                labels: <?php echo json_encode($date_buy)?>,
-                datasets: [{
-                    label: 'Number of sales',
-                    fill: false,
-                    lineTension: 0,
-                    backgroundColor: barColors,
-                    borderColor: "rgba(0,0,255,0.1)",
-                    data: <?php echo json_encode($amount)?>,
-                }]
-            },
+        const dateArrayJS = <?php echo json_encode($date_buy)?>;
+        //console.log(dateArrayJS);
+
+        const dateChartJS = dateArrayJS.map((day, index) => {
+            let dayjs = new Date(day);
+            return dayjs.setHours(0, 0, 0, 0);
+        });
+
+        console.log(dateChartJS);
+
+        const data = {
+            labels: dateArrayJS,
+            datasets: [{
+                label: 'Number of sales',
+                fill: false,
+                lineTension: 0,
+                backgroundColor: ['rgb(116,116,227)'],
+                borderColor: ['rgba(0,0,255,0.1)'],
+                data: <?php echo json_encode($amount)?>,
+            }]
+        };
+
+        const config = {
+            type: 'bar',
+            data,
             options: {
-                legend:{
-                    display:true,
-                    position:'right',
-                    labels:{
-                        fontColor:'#000000'
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'day'
+                        }
+                    }
+                },
+                legend: {
+                    display: true,
+                    position: 'right',
+                    labels: {
+                        fontColor: '#000000'
                     }
                 },
                 title: {
                     display: true,
-                    text: 'Order Status',
-                    fontSize:25
+                    text: 'Sales',
+                    fontSize: 25
                 }
             }
-        });
+        };
+
+        //render chart
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+
+        function endDateFilter(date){
+            const endDate = new Date(date.value);
+            console.log(endDate)
+            myChart.config.options.scales.x.max = endDate.setHours(0, 0, 0, 0);
+            myChart.update();
+        }
+
+
+        function startDateFilter(date){
+            const startDate = new Date(date.value);
+            console.log(startDate)
+            myChart.config.options.scales.x.min = startDate.setHours(0, 0, 0, 0);
+            myChart.update();
+        }
+
+
+
     </script>
 </section>
+
 </body>
 </html>
-
