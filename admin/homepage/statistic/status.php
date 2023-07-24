@@ -46,15 +46,31 @@ $result = mysqli_query($connect, $sql);
 foreach ($result as $data) {
     $amount[] = $data['quantity'];
     $status[] = $data['status'];
-    if($status[0] == 0 ){
+    if($status[0] == 0){
         $status[0] = 'Pending';
-    }elseif($status[1] == 1) {
+    }
+
+    elseif($status[0] == 1){
+        $status[0] = 'Delivery';
+    }
+    elseif($status[1] == 1){
         $status[1] = 'Delivery';
-    }elseif($status[2] == 2 ){
+    }
+
+    elseif($status[1] == 2){
+        $status[1] = 'Delivery';
+    }
+    elseif($status[2] == 2){
         $status[2] = 'Completed';
-    }elseif($status[3] == 3) {
+    }
+
+    elseif($status[2] == 3){
+        $status[2] = 'Canceled';
+    }
+    elseif($status[3] == 3){
         $status[3] = 'Canceled';
     }
+
 }
 ?>
 <section style="margin: 0 0 0 90px" class="main_content">
@@ -64,38 +80,43 @@ foreach ($result as $data) {
     </div>
 
     <script>
-        let barColors = ["rgba(255, 159, 64, 0.5)",
-                         "rgba(5,56,232,0.5)",
-                         "rgba(54,161,51,0.5)",
-                         "rgba(255, 99, 132, 0.5)"];
-        new Chart("myChart", {
-            type: "bar",
-            data: {
-                labels: <?php echo json_encode($status)?>,
-                datasets: [{
-                    label: 'Number of satus',
-                    fill: false,
-                    lineTension: 0,
-                    backgroundColor: barColors,
-                    borderColor: "rgba(0,0,255,0.1)",
-                    data: <?php echo json_encode($amount)?>,
-                }]
-            },
+        let barColors = ["rgba(255, 99, 132, 0.5)"];
+
+        const data = {
+            labels: <?php echo json_encode($status)?>,
+            datasets: [{
+                label: 'Number of status',
+                fill: false,
+                lineTension: 0,
+                backgroundColor: barColors,
+                borderColor: ['rgba(0,0,255,0.1)'],
+                data: <?php echo json_encode($amount)?>,
+            }]
+        };
+
+        const config = {
+            type: 'bar',
+            data,
             options: {
-                legend:{
-                    display:true,
-                    position:'right',
-                    labels:{
-                        fontColor:'#000000'
+                legend: {
+                    display: true,
+                    position: 'right',
+                    labels: {
+                        fontColor: '#000000'
                     }
                 },
                 title: {
                     display: true,
-                    text: 'Daily Income',
-                    fontSize:25
+                    text: 'Order Status',
+                    fontSize: 25
                 }
             }
-        });
+        };
+
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
     </script>
 
 </section>
