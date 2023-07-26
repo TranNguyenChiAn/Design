@@ -19,18 +19,17 @@ if(isset($_SESSION['email_customer'])){
         <title> Login Admin </title>
         <style>
             body {
-                background-image: url(https://th.bing.com/th/id/R.f520ddbe809906ae310b89a0549128f4?rik=3KYSKU8YeR9deg&riu=http%3a%2f%2fimages.wisegeek.com%2fsky.jpg&ehk=k%2fISf4oS00sJNOQIZp6ThaOTECIHp3p1vSxXwAuSCqA%3d&risl=&pid=ImgRaw&r=0);
+                background-image: url("../../image/banner.png");
                 background-repeat:no-repeat;
                 background-size: cover;
+                /*background-color: rgba(239, 239, 243, 0.91);*/
             }
 
             .form_register {
-                background-color: transparent;
-                box-shadow: 0 18px 200px -60px black;
-                border-radius: 30px;
+                background-color: #faf7f7;
+                border-radius: 9px;
                 width: 500px;
-                margin: 100px 100px 0px 380px;
-                border: none;
+                margin: 10px 100px 0 380px;
                 padding: 10px;
                 backdrop-filter: blur(20px);
                 font-size: 20px;
@@ -43,13 +42,15 @@ if(isset($_SESSION['email_customer'])){
             .input_register {
                 width: 300px;
                 height: 36px;
-                margin: 10px 0 0 0;
+                margin: 12px 0 12px 0;
             }
 
-            .add {
-                margin-top: 20px;
-                margin-left: 78%;
+            .register_button {
+                width: 90%;
                 background-color: #6868de;
+                height: 33px;
+                border: none;
+                border-radius: 6px;
                 color: white;
             }
 
@@ -68,7 +69,8 @@ if(isset($_SESSION['email_customer'])){
                     <input type="radio" name="gender" value="1"> Male <br>
             Address:  <input class="input_register" type="text" name="address" placeholder="Address"><br>
             <br>
-            <button class="button add" type="submit"> Register </button>
+            <button class="register_button" type="submit"> Register </button>
+            <p></p>
         </form>
     </div>
 </body>
