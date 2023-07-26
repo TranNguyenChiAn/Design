@@ -26,13 +26,17 @@ if (!isset($_SESSION['email_customer'])) {
             margin-top: 6%;
         }
         .history_order {
-            margin: 6px 0 0 0;
             width: 150px;
+            margin: 6px 30px 0 0;
             height: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #b8b8e3;
+            border: 1px solid #d2c7fd;
+            background-color: transparent;
+            border-top-right-radius: 9px;
+            border-top-left-radius: 9px;
+            border-bottom: none;
         }
 
         .history_order:hover {
@@ -65,8 +69,11 @@ if (!isset($_SESSION['email_customer'])) {
         Email: <?= $customer['email']; ?><br>
         Phone: <?= $customer['phone']; ?><br>
         Address: <?= $customer['address']; ?><br>
+        <?php
+            }
+        ?>
     </div>
-    <div style="display:flex; width: 360px;margin: 18px 0 0 90px; justify-content: space-between">
+    <div style="display:flex;margin: 18px 0 0 90px; justify-content: flex-start">
         <div class="history_order">
             <a style="font-weight: bold" class="link" href="history_order.php">
                 History orders
@@ -77,9 +84,11 @@ if (!isset($_SESSION['email_customer'])) {
                 Logout
             </a>
         </div>
-                <?php
-            }
-        ?>
+        <div class="history_order">
+            <a style="font-weight: bold" class="link" href="change_password.php">
+                Change password
+            </a>
+        </div>
     </div>
 </div>
 
