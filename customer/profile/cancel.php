@@ -9,12 +9,21 @@ foreach($orders as $order) {
         header("location.reload()");
         $sql = "UPDATE orders SET status = 3 WHERE id = '$id'";
         mysqli_query($connect, $sql);
-    } else {
+?>
+        <script>
+            alert('Cancellation successful');
+            window.location="history_order.php";
+        </script>
+<?php
+    }else {
         header("location.reload()");
     }
 }
-header("Location: history_order.php");
 ?>
 <script>
-    alert('Cancel successful');
+    alert('Cancellation failed because your order has just been shipped!');
+    window.location="history_order.php";
 </script>
+<?php
+//header("Location: history_order.php");
+?>
