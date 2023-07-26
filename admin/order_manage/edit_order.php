@@ -143,8 +143,8 @@ include_once '../connect/close.php';
             echo "$" . $count_money;
             ?>
         </h3>
-
     </div>
+    <br>
 </section>
 </body>
 </html>
