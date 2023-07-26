@@ -10,7 +10,7 @@ if (!isset($_SESSION['email_admin'])) {
 <!doctype html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="../../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -25,11 +25,18 @@ if (!isset($_SESSION['email_admin'])) {
             background-color: #F5F4F8;
         }
 
-        #notice {
-            position: absolute;
-            margin: 18px 0 0 82%;
-            width: 180px;
-            height: 120px;
+        .menu_button {
+            text-decoration: none;
+            border: none;
+            margin: 18px 0 0 0;
+            background-color: white;
+            width: 108px;
+            border-top-right-radius: 9px;
+            border-top-left-radius: 9px;
+        }
+        .menu_button:hover {
+            cursor: pointer;
+            background-color: #cbc9c9;
         }
     </style>
     <title> Homepage </title>
@@ -39,9 +46,23 @@ if (!isset($_SESSION['email_admin'])) {
 include_once "../layout/navigation.php";
 
 ?>
+
 <section style="margin: 0 0 0 210px" class="main_content">
     <!--<iframe id="notice" src="statistic/today.php" ></iframe>-->
-    <iframe style="margin: 0 0 0 0; width: 81%; height: 460px" src="statistic/sales.php" ></iframe>
+    <div>
+        <button class="menu_button">
+            <a class="link_in_button" style="color:#6868de;" target="display" href="statistic/sales.php">
+                Daily
+            </a>
+        </button>
+        <button class="menu_button">
+            <a class="link_in_button" style="color:#6868de;" target="display" href="../test.php">
+                Monthly
+            </a>
+        </button>
+
+    </div>
+    <iframe name = "display" style="margin: 0 0 0 0; width: 81%; height: 460px" src="statistic/sales.php" ></iframe>
     <iframe style="margin: 6px 0 0 0; width: 81%; height: 460px" src="statistic/status.php" ></iframe>
     <iframe style="margin: 6px 0 0 0; width: 81%; height: 460px" src="statistic/product.php" ></iframe>
     <iframe style="margin: 6px 0 0 0; width: 81%; height: 460px" src="statistic/today.php" ></iframe>
