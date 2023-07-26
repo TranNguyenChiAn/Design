@@ -34,44 +34,53 @@ if (!isset($_SESSION['email_admin'])) {
 </head>
 <body>
 <?php
-//mo ket noi
-include_once "../../connect/open.php";
-//Query để lấy dữ liệu từ bảng classes trên db về
-$sql = "SELECT COUNT(id) as quantity, status
-        FROM orders WHERE status IS NOT NULL
-        GROUP BY status";
-//Chay query
-$result = mysqli_query($connect, $sql);
+    //mo ket noi
+    include_once "../../connect/open.php";
+    //Query để lấy dữ liệu từ bảng classes trên db về
+    $sql = "SELECT COUNT(id) as quantity, status
+            FROM orders WHERE status IS NOT NULL
+            GROUP BY status";
+    //Chay query
+    $result = mysqli_query($connect, $sql);
+    //đổ dữ liệu
+    foreach ($result as $data) {
+        //lấy dữ liệu từ db
+        $amount[] = $data['quantity'];
+        $status[] = $data['status'];
+        //bỏ cảnh báo
+        error_reporting(E_ALL ^ E_WARNING);
+        //loop
+        if($status[0] == 0){
+            $status[0] = 'Pending';
+        }
 
-foreach ($result as $data) {
-    $amount[] = $data['quantity'];
-    $status[] = $data['status'];
-    if($status[0] == 0){
-        $status[0] = 'Pending';
-    }
+        elseif($status[0] == 1){
+            $status[0] = 'Delivery';
+        }
+        elseif($status[1] == 1){
+            $status[1] = 'Delivery';
+        }
 
-    elseif($status[0] == 1){
-        $status[0] = 'Delivery';
-    }
-    elseif($status[1] == 1){
-        $status[1] = 'Delivery';
-    }
+        elseif ($status[0] == 2){
+            $status[0] = 'Completed';//check
+        }
+        elseif($status[1] == 2){
+            $status[1] = 'Completed';
+        }
+        elseif($status[2] == 2){
+            $status[2] = 'Completed';
+        }
 
-    elseif($status[1] == 2){
-        $status[1] = 'Delivery';
+        elseif ($status[1] == 3){
+            $status[1] = 'Canceled';//check
+        }
+        elseif($status[2] == 3){
+            $status[2] = 'Canceled';
+        }
+        elseif($status[3] == 3){
+            $status[3] = 'Canceled';
+        }
     }
-    elseif($status[2] == 2){
-        $status[2] = 'Completed';
-    }
-
-    elseif($status[2] == 3){
-        $status[2] = 'Canceled';
-    }
-    elseif($status[3] == 3){
-        $status[3] = 'Canceled';
-    }
-
-}
 ?>
 <section style="margin: 0 0 0 90px" class="main_content">
     <h4 style="margin: 30px 0 0 33%"> Order Status </h4>
