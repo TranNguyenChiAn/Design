@@ -95,7 +95,8 @@ include_once '../connect/close.php';
         <input class="search" width="30px" type="text" name="search" value="<?= $search; ?>" placeholder="Search">
     </form>
     <p style="margin-top: 30px" class="table_title"> ORDERS </p>
-<table class="table-admin" width="100%" border="0" cellspacing="0" cellpadding="5px">
+
+<table class="table-admin" width="100%" border="1" cellspacing="0" cellpadding="5px">
     <tr>
         <th class="t-heading" align="center"> Order ID </th>
         <th class="t-heading" align="center"> Date buy</th>
@@ -107,7 +108,7 @@ include_once '../connect/close.php';
     foreach ($orders as $order){
         ?>
         <tr class="record">
-            <td> <?= $order['id']?> </td>
+            <td style="padding-left: 30px"> <?= $order['id']?> </td>
             <td> <?= $order['date_buy']?> </td>
             <td>
                     <?= $order['customer_name']?>
