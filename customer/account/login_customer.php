@@ -19,7 +19,7 @@
     <title> Login Customer </title>
     <style>
         body {
-            background-image: url("../../image/sky.jpg");
+            background-image: url("../../image/banner.png");
             background-repeat:no-repeat;
             background-size: cover;
         }
@@ -38,31 +38,32 @@
 
 
         #email_customer {
-            background-color: transparent;
             border: none;
             border-bottom: 1px solid #cbc9c9;
             width: 300px;
-            height: 40px;
+            height: 40px;border-radius: 6px;
+            padding-left: 9px;
         }
 
         #password_customer {
-            background-color: transparent;
             border: none;
             border-bottom: 1px solid #cbc9c9;
             width: 300px;
-            height: 40px;
+            height: 40px;border-radius: 6px;
+            padding-left: 9px;
         }
 
         #login_button {
-            width: 180px;
-            height: 50px;
-            border-radius: 10px;
+            width: 62%;
+            height: 33px;
+            border-radius: 6px;
             border:none;
             background-color: #2060be;
             font-weight: bold;
             color: white;
             display: block;
-            margin-left: 160px;
+            margin-left: 94px;
+            font-size: 14px;
         }
 
         #login_button:hover {
@@ -73,17 +74,17 @@
             margin-top: 10px;
             text-decoration: none;
             display: flex;
-            justify-content: center;
+            justify-content: flex-end;
             font-style: italic;
             font-weight: bold;
-            color: #231ec2;
+            color: white;
         }
 
     </style>
 </head>
 <body>
 <div class="form_login" >
-    <figure align="center" style="font-weight: bold; font-size: 30px;color: #4d4b4b;"> LOGIN </figure>
+    <figure align="center" style="font-weight: bold; font-size: 30px;color: #e0dddd;"> LOGIN </figure>
     <form align="center" id="form" method="post" action="loginProcess.php">
         <input id="email_customer" type="email" name="email_customer" placeholder="Email" width="500px"><br>
         <br>
@@ -93,7 +94,7 @@
 
     </form>
 </div>
-<div>
+<div style="width: 500px">
     <a class="register" href="register.php"> Register </a>
 </div>
 </body>
