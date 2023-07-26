@@ -18,7 +18,7 @@
     <title> Login Admin </title>
     <style>
         body {
-            background-image: url(../../image/sky.jpg);
+            background-image: url("../../image/banner.png");
             background-repeat:no-repeat;
             background-size: cover;
         }
@@ -37,31 +37,34 @@
 
 
         #email_admin {
-            background-color: transparent;
             border: none;
             border-bottom: 1px solid #cbc9c9;
             width: 300px;
             height: 40px;
+            border-radius: 6px;
+            padding-left: 9px;
         }
 
         #password_admin {
-            background-color: transparent;
             border: none;
             border-bottom: 1px solid #cbc9c9;
             width: 300px;
             height: 40px;
+            border-radius: 6px;
+            padding-left: 9px;
         }
 
         #login_button {
-            width: 180px;
-            height: 50px;
-            border-radius: 10px;
+            width: 62%;
+            height: 33px;
+            border-radius: 6px;
             border:none;
             background-color: #2060be;
             font-weight: bold;
             color: white;
             display: block;
-            margin-left: 160px;
+            margin-left: 94px;
+            font-size: 14px;
         }
 
         #login_button:hover {
@@ -72,7 +75,7 @@
 </head>
 <body>
 <div class="form_login" >
-    <figure align="center" style="font-weight: bold; font-size: 30px;color: #4d4b4b;"> ADMIN LOGIN </figure>
+    <figure align="center" style="font-weight: bold; font-size: 30px;color: rgba(239,239,243,0.91);"> ADMIN LOGIN </figure>
     <form align="center" id="form" method="post" action="loginProcess.php">
         <id type="hidden" name="id_admin"></id>
         <input id="email_admin" type="email" name="email_admin" placeholder="Email" width="500px"><br>
@@ -80,6 +83,7 @@
         <input  id="password_admin"type="password" name="password" placeholder="Password"><br>
         <br>
         <button  id="login_button" type="submit"> LOGIN </button>
+        <br>
     </form>
 </div>
 </body>
