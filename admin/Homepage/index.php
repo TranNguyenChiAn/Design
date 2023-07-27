@@ -38,6 +38,12 @@ if (!isset($_SESSION['email_admin'])) {
             cursor: pointer;
             background-color: #cbc9c9;
         }
+        .notification {
+            margin: 0 0 0 1%;
+            width: 17%;
+            height: 120px;
+            border-radius: 6px;
+        }
     </style>
     <title> Homepage </title>
 </head>
@@ -56,16 +62,20 @@ include_once "../layout/navigation.php";
             </a>
         </button>
         <button class="menu_button">
-            <a class="link_in_button" style="color:#6868de;" target="display" href="../test.php">
+            <a class="link_in_button" style="color:#6868de;" target="display" href="statistic/sale_monthly.php">
                 Monthly
             </a>
         </button>
 
     </div>
-    <iframe name = "display" style="margin: 0 0 0 0; width: 81%; height: 460px" src="statistic/sales.php" ></iframe>
+    <div style="display: flex; justify-content: start">
+        <iframe name = "display" style="margin: 0 0 0 0; width: 81%; height: 460px" src="statistic/sales.php" ></iframe>
+        <iframe class="notification" src="statistic/today.php" ></iframe>
+    </div>
+
     <iframe style="margin: 6px 0 0 0; width: 81%; height: 460px" src="statistic/status.php" ></iframe>
     <iframe style="margin: 6px 0 0 0; width: 81%; height: 460px" src="statistic/product.php" ></iframe>
-    <iframe style="margin: 6px 0 0 0; width: 81%; height: 460px" src="statistic/today.php" ></iframe>
+
 </section>
 
 </body>
