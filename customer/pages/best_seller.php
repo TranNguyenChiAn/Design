@@ -69,6 +69,9 @@ if(isset($_GET['search'])) {
         <p class="trend"> best seller </p>
         <div class="maincontent">
             <?php
+                //Take this month
+                $tm = strtotime("today");
+                $this_month =  date("m", $tm);
                 //Khai báo số bản ghi 1 trang
                 $recordOnePage = 8;
                 //Query để lấy số bản ghi
@@ -88,25 +91,38 @@ if(isset($_GET['search'])) {
                 }
                 //Tính bản ghi bắt đầu của trang
                 $start = ($page - 1) * $recordOnePage;
-                $sql = "SELECT clothes.*, sum(order_details.quantity) FROM clothes 
-                        INNER JOIN order_details ON order_details.clothes_id = clothes.id
-                        INNER JOIN categories ON clothes.category_id = categories.id
-                        WHERE clothes.name LIKE '%$search%'
-                            OR clothes.color LIKE '%$search%'
-                            OR clothes.size LIKE '%$search%'
-                            OR categories.name LIKE '%$search%'
-                        GROUP BY order_details.clothes_id
-                        ORDER BY SUM(order_details.quantity) DESC
-                        LIMIT $start, $recordOnePage";
-                $clothes = mysqli_query($connect, $sql);
+//                $sql = "SELECT clothes.*, sum(order_details.quantity) FROM clothes
+//                        INNER JOIN order_details ON order_details.clothes_id = clothes.id
+//                        INNER JOIN categories ON clothes.category_id = categories.id
+//                        WHERE clothes.name LIKE '%$search%'
+//                            OR clothes.color LIKE '%$search%'
+//                            OR clothes.size LIKE '%$search%'
+//                            OR categories.name LIKE '%$search%'
+//                            AND
+//                        GROUP BY order_details.clothes_id
+//                        ORDER BY SUM(order_details.quantity) DESC
+//                        LIMIT $start, $recordOnePage";
+            $sql = "SELECT order_details.*, clothes.*, sum(order_details.quantity), orders.date_buy 
+                    FROM order_details 
+                    INNER JOIN clothes ON order_details.clothes_id = clothes.id
+                    INNER JOIN orders ON order_details.order_id = orders.id
+                    WHERE MONTH(orders.date_buy) = '$this_month'
+                        OR clothes.name LIKE '%$search%'
+                        OR clothes.color LIKE '%$search%'
+                        OR clothes.size LIKE '%$search%'
+                    GROUP BY order_details.clothes_id
+                    ORDER BY SUM(order_details.quantity) DESC 
+                    LIMIT $start, $recordOnePage";
+                $order_details = mysqli_query($connect, $sql);
+
                 include_once '../connect/close.php';
-                foreach ($clothes as $clothe){
+                foreach ($order_details as $order_detail){
             ?>
                 <div class="col-3" style="">
-                    <a  href="product_detail.php?id=<?= $clothe['id'] ?>">
-                        <img style="width:278px; height: 278px; object-fit: cover" src="../../image/<?= $clothe['image'] ?>" alt="BEST SELLER" >
+                    <a  href="product_detail.php?id=<?= $order_detail['clothes_id'] ?>">
+                        <img style="width:278px; height: 278px; object-fit: cover" src="../../image/<?= $order_detail['image'] ?>" alt="BEST SELLER" >
                         <?php
-                        if($clothe['quantity'] < 9 and $clothe['quantity'] > 0){
+                        if($order_detail['quantity'] < 9 and $order_detail['quantity'] > 0){
                             ?>
                             <img class="out_of_stock" src="../../image/out_of_stock.png">
                             <?php
@@ -114,9 +130,9 @@ if(isset($_GET['search'])) {
                         ?>
                     </a>
                     <?php
-                        if($clothe['quantity'] > 0){
+                        if($order_detail['quantity'] > 0){
                     ?>
-                      <a href="../carts/add to cart.php?id=<?= $clothe['id']; ?>">
+                      <a href="../carts/add to cart.php?id=<?= $order_detail['clothes_id']; ?>">
                           <img class="cart_symbol" src="../../image/shopping-cart.png">
                       </a>
                     <?php
@@ -127,9 +143,9 @@ if(isset($_GET['search'])) {
                         }
                     ?>
                     <br>
-                    <span class="product_name"><?= $clothe['name'] ?></span>
+                    <span class="product_name"><?= $order_detail['name'] ?></span>
                     <hr style="width:200px;margin:6px 0">
-                    <span class="price">$<?= $clothe['price'] ?></span>
+                    <span class="price">$<?= $order_detail['price'] ?></span>
                 </div>
             <?php
                 }
