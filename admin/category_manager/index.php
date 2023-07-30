@@ -71,7 +71,7 @@ if(!isset($_SESSION['email_admin'])){
     <!--        Form để search
             action để trồng tức là khi click vào button sẽ load lại chính trang này-->
         <form style="margin: 20px 0 20px 0" method="get" action="">
-            <input class="search"  type="text" name="search" value="<?= $search; ?>" placeholder="Search">
+            <input class="search" type="text" name="search" value="<?= $search; ?>" placeholder="Search">
         </form>
     <!--CATEGORY LIST-->
 
