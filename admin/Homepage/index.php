@@ -36,7 +36,7 @@ if (!isset($_SESSION['email_admin'])) {
         }
         .menu_button:hover {
             cursor: pointer;
-            background-color: #cbc9c9;
+            background-color: #f8f6f6;
         }
         .notification {
             margin: 0 0 0 1%;
@@ -54,6 +54,7 @@ include_once "../layout/navigation.php";
 ?>
 
 <section style="margin: 0 0 0 210px" class="main_content">
+    <p style="margin-top: 18px" class="table_title"> STATISTICS </p>
     <!--<iframe id="notice" src="statistic/today.php" ></iframe>-->
     <div>
         <button class="menu_button">
@@ -62,22 +63,28 @@ include_once "../layout/navigation.php";
             </a>
         </button>
         <button class="menu_button">
-            <a class="link_in_button" style="color:#6868de;" target="display" href="statistic/sale_monthly.php">
+            <a class="link_in_button" style="color:#6868de;" target="display" href="statistic/sales_monthly.php">
                 Monthly
             </a>
         </button>
-
+        <button class="menu_button">
+            <a class="link_in_button" style="color:#6868de;" target="display" href="statistic/sales_yearly.php">
+                Yearly
+            </a>
+        </button>
     </div>
     <div style="display: flex; justify-content: start">
         <iframe name = "display" style="margin: 0 0 0 0; width: 81%; height: 460px" src="statistic/sales.php" ></iframe>
         <iframe class="notification" src="statistic/today.php" ></iframe>
     </div>
+    <div>
 
+    </div>
     <iframe style="margin: 6px 0 0 0; width: 81%; height: 460px" src="statistic/status.php" ></iframe>
-    <iframe style="margin: 6px 0 0 0; width: 81%; height: 460px" src="statistic/product.php" ></iframe>
+    <iframe style="margin: 0 0 0 0; width: 81%; height: 486px" src="statistic/product.php" ></iframe>
 
 </section>
-
+<br>
 </body>
 </html>
 
