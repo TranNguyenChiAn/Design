@@ -25,6 +25,21 @@ if (!isset($_SESSION['email_admin'])) {
             background-color: white;
         }
 
+        #month {
+            font-size: 16px;
+            font-family: "#9Slide04 Rokkitt Light";
+        }
+
+        #submit_button {
+            margin: 0 0 0 3px;
+            width: 70px;
+            height: 36px;
+            border: none;
+            border-radius: 3px;
+            background-color: #6868de;
+            color: white;
+        }
+
         #chart-container {
             width:100%;
             max-width:600px;
@@ -34,31 +49,50 @@ if (!isset($_SESSION['email_admin'])) {
 </head>
 <body>
 <?php
-//mo ket noi
-include_once "../../connect/open.php";
-//Query để lấy dữ liệu từ bảng classes trên db về
-$sql = "SELECT sum(order_details.quantity) as quantity, clothes.name as clothes_name, order_details.clothes_id
-        FROM order_details
-        INNER JOIN orders ON order_details.order_id = orders.id
-        INNER JOIN clothes ON clothes.id = order_details.clothes_id
-        WHERE orders.status = 2
-        GROUP BY order_details.clothes_id
-        ORDER BY quantity DESC
-        LIMIT 6";
-//Chay query
-$result = mysqli_query($connect, $sql);
-//
-foreach ($result as $data) {
-    $amount[] = $data['quantity'];
-    $clothe_name[] = $data['clothes_name'];
-}
+    //mo ket noi
+    include_once "../../connect/open.php";
+    $tm = strtotime("today");
+    $this_month =  date("Y-m", $tm);
+    //Khai báo biến search
+    $month = "";
+    //Lấy giá trị được search về với điều kiện $_GET['search'] tồn tại
+    if(isset($_POST['month'])) {
+        $month = $_POST['month'];
+    }
+//    else {
+//        echo " Khong nhan duoc ngay thang";
+//    }
+    //Query để lấy dữ liệu từ bảng classes trên db về
+    $sql = "SELECT sum(order_details.quantity) as quantity, MONTH(orders.date_buy),
+           clothes.name as clothes_name, order_details.clothes_id
+            FROM order_details
+            INNER JOIN orders ON order_details.order_id = orders.id
+            INNER JOIN clothes ON clothes.id = order_details.clothes_id
+            WHERE orders.status = 2 
+                AND MONTH(orders.date_buy) LIKE '%$this_month%' 
+                OR orders.date_buy LIKE '%$month%' 
+            GROUP BY order_details.clothes_id
+            ORDER BY quantity DESC
+            LIMIT 6";
+    //Chay query
+    $result = mysqli_query($connect, $sql);
+    foreach ($result as $data) {
+        $amount[] = $data['quantity'];
+        $clothe_name[] = $data['clothes_name'];
+    }
 ?>
 <section style="margin: 0 0 0 66px" class="main_content">
     <div id="chart-container">
-        <h4 style="margin: 30px 0 0 48%"> Best Seller </h4>
+        <h4 style="margin: 30px 0 0 48%"> Best Seller </h4><br>
+        <form method="post" action="">
+           Month <input id="month" type="month" name="month" value="<?= $month; ?>" min="2023-05" max="<?= $this_month ?>">
+            <input id="submit_button" type="submit">
+        </form>
         <canvas id="myChart" style="width:100%;max-width:600px; margin: 30px 0 0 0;"></canvas>
+        <br>
     </div>
     <script>
+
         let barColors = ["rgba(8,142,232,0.6)"];
         new Chart("myChart", {
             type: "bar",
@@ -90,6 +124,7 @@ foreach ($result as $data) {
                 }
             }
         });
+
     </script>
 </section>
 
