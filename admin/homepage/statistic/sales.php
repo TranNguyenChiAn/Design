@@ -33,13 +33,31 @@ if (!isset($_SESSION['email_admin'])) {
 <?php
 //mo ket noi
 include_once "../../connect/open.php";
-//Query để lấy dữ liệu từ bảng classes trên db về
-$sql = "SELECT sum(order_details.quantity) as quantity, orders.date_buy
-        FROM order_details
-        INNER JOIN orders ON order_details.order_id = orders.id
-        GROUP BY orders.date_buy";
+$tm = strtotime("today");
+$this_month =  date("Y-m", $tm);
+//Khai báo biến search
+$month = "";
+//Lấy giá trị được search về với điều kiện $_GET['search'] tồn tại
+if(isset($_POST['month'])) {
+    $month = $_POST['month'];
+    //Query để lấy dữ liệu từ bảng classes trên db về
+    $sql = "SELECT sum(order_details.quantity) as quantity, orders.date_buy
+            FROM order_details
+            INNER JOIN orders ON order_details.order_id = orders.id
+            WHERE orders.status = 2 AND orders.date_buy LIKE '%$month%' 
+            GROUP BY orders.date_buy";
+    $result = mysqli_query($connect, $sql);
+}else{
+    //Query để lấy dữ liệu từ bảng classes trên db về
+    $sql = "SELECT sum(order_details.quantity) as quantity, orders.date_buy
+            FROM order_details
+            INNER JOIN orders ON order_details.order_id = orders.id
+            WHERE orders.status = 2 AND orders.date_buy LIKE '%$this_month%'  
+            GROUP BY orders.date_buy";
+    $result = mysqli_query($connect, $sql);
+}
 //Chay query
-$result = mysqli_query($connect, $sql);
+
 
 foreach ($result as $data) {
     $amount[] = $data['quantity'];
@@ -49,26 +67,21 @@ foreach ($result as $data) {
 ?>
 <section style="margin: 0 0 0 90px" class="main_content">
     <div id="chart-container">
-        <h4 style="margin: 30px 0 18px 40%;"> Daily Order </h4>
-        From <input type="date" style="margin-right: 30px" onchange="startDateFilter(this)" value="2023-07-01" min="2023-07-01">
-        To <input type="date" onchange="endDateFilter(this)" value="2023-07-01" min="2023-07-01">
+        <h4 style="margin: 30px 0 18px 40%;"> SOLD PRODUCTS </h4>
+        <form method="post" action="">
+            Month <input type="month" name="month" value="<?= $month ?>" min="2022-07" max="<?= $this_month ?>">
+            <input type="submit">
+        </form>
         <canvas id="myChart" style="display: block;width:100%;max-width:600px; margin: 30px 0 0 0;"></canvas>
     </div>
     <script>
         const dateArrayJS = <?php echo json_encode($date_buy)?>;
-        //console.log(dateArrayJS);
-
-        const dateChartJS = dateArrayJS.map((day, index) => {
-            let dayjs = new Date(day);
-            return dayjs.setHours(0, 0, 0, 0);
-        });
-
-        console.log(dateChartJS);
+        console.log(dateArrayJS);
 
         const data = {
             labels: dateArrayJS,
             datasets: [{
-                label: 'Number of sales',
+                label: 'Number of sold products',
                 fill: false,
                 lineTension: 0,
                 backgroundColor: ['rgb(116,116,227)'],
@@ -110,22 +123,21 @@ foreach ($result as $data) {
             config
         );
 
-        function endDateFilter(date){
-            const endDate = new Date(date.value);
-            console.log(endDate)
-            myChart.config.options.scales.x.max = endDate.setHours(0, 0, 0, 0);
-            myChart.update();
-        }
-
-
-        function startDateFilter(date){
-            const startDate = new Date(date.value);
-            console.log(startDate)
-            myChart.config.options.scales.x.min = startDate.setHours(0, 0, 0, 0);
-            myChart.update();
-        }
-
-
+        // function endDateFilter(date){
+        //     const endDate = new Date(date.value);
+        //     console.log(endDate)
+        //     myChart.config.options.scales.x.max = endDate;
+        //     myChart.update();
+        // }
+        //
+        //
+        // function startDateFilter(date){
+        //     const startDate = new Date(date.value);
+        //     console.log(startDate)
+        //
+        //     myChart.config.options.scales.x.min = startDate;
+        //     myChart.update();
+        // }
 
     </script>
 </section>
