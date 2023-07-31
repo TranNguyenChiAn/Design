@@ -42,13 +42,13 @@ include_once "../layout/header.php";
 ?>
 <div>
     <img style="margin-top: 80px;width:100%"  src="../../image/jisoo_in_dior.png">
-    <form class="form_contact">
+    <form class="form_contact" method="post" action="sendmail.php">
         <figure class="figure"> Contact Us </figure><br>
         <div  style="margin: 50px 0 0 110px;" >
-            Name<br><input class="input" type="text" placeholder="Name" alt="name"><br><br>
-            Email<br><input class="input" type="email" placeholder="Email" alt="email"><br><br>
-            Phone<br><input class="input" type="number" placeholder="Phone" alt="phone"><br><br>
-            <button type="submit" class="contact_submit_button"> CONTACT US</button>
+            Name<br><input class="input" type="text" name="name" placeholder="Name" alt="name"><br><br>
+            Email<br><input class="input" type="email" name="email" placeholder="Email" alt="email"><br><br>
+            Message<br><input class="input" type="textarea" name="message" placeholder="Message" alt="message"><br><br>
+            <button type="submit" name="send" class="contact_submit_button"> CONTACT US</button>
         </div>
         <div style="margin: 30px 0 0 90px">
             <span style="font-size: 22px; font-weight: bold"> Contact:</span> Design@gmail.com

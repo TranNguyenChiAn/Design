@@ -178,7 +178,7 @@ if (!isset($_SESSION['email_customer'])) {
         ?>
            <tr>
                <td style="text-align: center" colspan="7">
-                   <h3> You don't have anything in your cart. </h3>
+                   <h3> Your cart is empty. </h3>
                </td>
            </tr>
         <?php

@@ -112,7 +112,7 @@
                 </a>
             </li>
             <li class="menu">
-                <a class="menu link" href="../pages/contact.php">
+                <a class="menu link" href="../contact/form.php">
                     CONTACT
                 </a>
             </li>
