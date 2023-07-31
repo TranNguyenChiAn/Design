@@ -87,7 +87,7 @@
             </li>
             <li class="choice">
                 <img style="width:16px; margin-top: -3px" src="../../image/boxes.png">
-                <a class="link_in_menu" href="../category_manager/index.php"> Warehouse </a>
+                <a class="link_in_menu" href="../warehouse/index.php"> Warehouse </a>
             </li>
             <li class="choice">
                 <img style="width:16px; margin-top: -3px" src="../../image/menu.png">
