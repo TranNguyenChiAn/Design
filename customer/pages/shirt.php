@@ -49,7 +49,8 @@
 <body>
 <!-------------------- HEADER -------------------->
 <?php
-include_once '../layout/header.php';
+    session_start();
+    include_once '../layout/header.php';
 ?>
 <!-------------------- END HEADER -------------------->
 
@@ -60,16 +61,16 @@ include_once '../layout/header.php';
         <h2> SHIRT </h2>
         <div class="maincontent">
             <?php
-            //Mở kết nối
-            include_once '../connect/open.php';
-            $sql = "SELECT clothes.*,categories.id AS category_id, producers.id AS producer_id FROM clothes 
-                            INNER JOIN categories ON clothes.category_id = categories.id
-                            INNER JOIN producers ON clothes.producer_id = producers.id
-                            WHERE categories.name = 'shirts'
-                            ORDER BY id ASC";
-            $clothes = mysqli_query($connect, $sql);
-            foreach ($clothes as $clothe){
-                ?>
+                //Mở kết nối
+                include_once '../connect/open.php';
+                $sql = "SELECT clothes.*,categories.id AS category_id, producers.id AS producer_id FROM clothes 
+                                INNER JOIN categories ON clothes.category_id = categories.id
+                                INNER JOIN producers ON clothes.producer_id = producers.id
+                                WHERE categories.name = 'shirts'
+                                ORDER BY id ASC";
+                $clothes = mysqli_query($connect, $sql);
+                foreach ($clothes as $clothe){
+            ?>
                 <div class="col-3">
                     <a  href="product_detail.php?id=<?= $clothe['id'] ?>">
                         <img style="width:278px; height: 278px; object-fit: cover" src="../../image/<?= $clothe['image'] ?>" alt="BEST SELLER" >

@@ -31,8 +31,8 @@ if (!isset($_SESSION['email_customer'])) {
              background-color: #F5F4F8;
          }
         .order_detail {
-            margin: 2% 0 0 3%;
-            width: 99%;
+            margin: 10px 30px 0 3%;
+            width: 630px;
             border: 2px solid #d7d2d2;
             border-radius: 0;
             background-color: white;
@@ -53,6 +53,8 @@ if (!isset($_SESSION['email_customer'])) {
         }
     </style>
     <?php
+        session_start();
+        include_once "../layout/header.php";
         //Mo ket noi
         include_once "../connect/open.php";
         $count_money = 0;
@@ -110,9 +112,9 @@ if (!isset($_SESSION['email_customer'])) {
                     ?>
                     <tr style="margin-top: 20px;">
                         <td width="120px">
-                            <img width="90px" src="../../image/<?= $order_detail['image']?>">
+                            <img width="120px" src="../../image/<?= $order_detail['image']?>">
                         </td>
-                        <td>
+                        <td style="padding-left: 18px ">
                             <h3><?= $order_detail['clothe_name']?></h3>
                             Amount: <?= $order_detail['quantity'] ?><br>
                             Price: $<?= $order_detail['price'] ?><br>
@@ -187,7 +189,7 @@ if (!isset($_SESSION['email_customer'])) {
             </tr>
         </table>
             <button type="submit" class="payment_button">
-                <a style="color: white" class="link" href="../pages/index.php">
+                <a style="color: white" class="link" href="../mail/sendmail.php">
                     Pay
                 </a>
             </button>
@@ -195,6 +197,6 @@ if (!isset($_SESSION['email_customer'])) {
     <br>
     </div>
 </section>
-
+<br>
 </body>
 </html>

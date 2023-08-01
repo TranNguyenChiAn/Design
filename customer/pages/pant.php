@@ -49,7 +49,8 @@
 <body>
 <!-------------------- HEADER -------------------->
 <?php
-include_once '../layout/header.php';
+    session_start();
+    include_once '../layout/header.php';
 ?>
 <!-------------------- END HEADER -------------------->
 

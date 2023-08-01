@@ -16,32 +16,12 @@
         cursor: pointer;
     }
 
-    .menu:hover .sub-menu {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        position: absolute;
-        margin-top: 3px;
-        right: 40px;
-    }
-
-    .sub-menu {
-        margin-left: 0;
-        display:none;
-        list-style-type: none;
-    }
-
-    .sub-menu:hover {
-        list-style-type: none;
-    }
-
     .menu:hover .product_sub_menu {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         position: absolute;
     }
-
     .product_sub_menu {
         margin-left: 30px;
         display:none;
@@ -50,14 +30,12 @@
     .product_sub_menu:hover {
         list-style-type: none;
     }
-
     .product_list {
         border: 2px solid black;
         padding: 0 40px;
         border-radius: 3px;
         margin-left: 54px;
     }
-
     .product_list:hover {
         cursor: pointer;
         background-color: black;
@@ -66,12 +44,36 @@
         padding: 0 40px;
         border-radius: 3px;
     }
-
     .product_list:hover .link{
         cursor: pointer;
         color: white;
-
     }
+    #over {
+        display: none;
+        list-style-type: none;
+        position: absolute;
+        padding: 9px 0 0 0;
+    }
+    .user:hover #over{
+        display: block;
+    }
+    .user li a:hover {
+        color: #6868de;
+    }
+    #logout {
+        display: none;
+        list-style-type: none;
+        position: absolute;
+        top: 60px;
+        right: 30px;
+    }
+    .user:hover #logout{
+        display: block;
+    }
+    #logout:hover{
+        color: #6868de;
+    }
+
 </style>
 
 <header>
@@ -121,15 +123,30 @@
                     <img width="30px" src="../../image/shopping-cart.png">
                 </a>
             </li>
-            <li class="menu">
+            <li class="menu user">
                 <a href="../profile/index.php">
                     <img width="30px" src="../../image/user.png">
                 </a>
                 <?php
-                    if(!isset($_SESSION['email_customer'])) {
+                if(!isset($_SESSION['email_customer'])) {
+                ?>
+                    <ul id="over">
+                        <li>
+                            <a class="link" href="../account/register.php">
+                                Sign up
+                            </a>
+                        </li>
+                        <li>
+                            <a class=" link" href="../account/login_customer.php">
+                                Login
+                            </a>
+                        </li>
+                    </ul>
+                <?php
                     }else {
                 ?>
-                    <a class=" link" href="../account/login_customer.php">
+                    <a id="logout" class=" link" href="../account/logout_customer.php">
+                        Logout
                     </a>
                 <?php
                     }

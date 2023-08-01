@@ -38,6 +38,7 @@
 </head>
 <body>
 <?php
+session_start();
 include_once "../layout/header.php";
 ?>
 <div>

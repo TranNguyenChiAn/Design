@@ -28,7 +28,8 @@
 </head>
 <body>
 <div>
-    <?php
+<?php
+    session_start();
     include_once "../layout/header.php";
     //Lấy id của sp
     $id = $_GET['id'];
@@ -41,7 +42,7 @@
     //Đóng kết nối
     include_once '../connect/close.php';
     foreach ($clothes as $clothe){
-        ?>
+?>
         <table style="margin-top: 90px;" width="100%" border="0" cellspacing="0">
             <tr>
                 <td width="90px" rowspan="2"></td>
@@ -84,9 +85,9 @@
                 </td>
             </tr>
         </table>
-        <?php
+<?php
     }
-    ?>
+?>
 </div>
 
 </body>

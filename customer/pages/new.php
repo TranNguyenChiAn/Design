@@ -44,7 +44,8 @@
 <body>
 <!-------------------- HEADER -------------------->
 <?php
-include_once '../layout/header.php';
+    session_start();
+    include_once '../layout/header.php';
     //Mở kết nối
     include_once '../connect/open.php';
     //Khai báo biến search
