@@ -26,7 +26,7 @@ if (!isset($_SESSION['email_customer'])) {
             margin-top: 6%;
         }
         .history_order {
-            width: 150px;
+            width: 180px;
             margin: 6px 30px 0 0;
             height: 50px;
             display: flex;
@@ -77,11 +77,6 @@ if (!isset($_SESSION['email_customer'])) {
         <div class="history_order">
             <a style="font-weight: bold" class="link" href="history_order.php">
                 History orders
-            </a>
-        </div>
-        <div class="history_order">
-            <a style="font-weight: bold" class="link" href="../account/logout_customer.php">
-                Logout
             </a>
         </div>
         <div class="history_order">

@@ -1,4 +1,4 @@
-<?php
+a<?php
 //Cho phép làm việc với session
 session_start();
 //Kiểm tra đã tồn tại số đth trên session hay chưa, nếu chưa tồn tại thì cho quay về account
@@ -31,6 +31,7 @@ if(!isset($_SESSION['email_admin'])){
 include_once "../layout/navigation.php";
 //Mở kết nối
 include_once '../connect/open.php';
+$sale_discount = array();
 //Đóng kết nối
 
 ?>
@@ -38,6 +39,7 @@ include_once '../connect/open.php';
 <section class="main_content">
     <!-- LIST -->
     <p class="table_title"> DISCOUNT </p>
+    <form method="post" action="process.php">
     <table class="table-admin" border="0" cellspacing="0" cellpadding="10" width="100%" style="font-size: 12px">
         <tr>
             <th class="t-heading" align="left"> ID </th>
@@ -47,6 +49,7 @@ include_once '../connect/open.php';
             <th class="t-heading" align="left"> Color </th>
             <th class="t-heading" align="left"> Quantity </th>
             <th class="t-heading" align="left"> Price </th>
+            <th></th>
         </tr>
 <?php
     if($_SERVER['REQUEST_METHOD'] == "POST"){
@@ -59,6 +62,9 @@ include_once '../connect/open.php';
             foreach($clothes as $clothe) {
 ?>
             <tr class="record">
+                <td>
+                    <input type="checkbox" name="myCheckbox[]" value="<?= $clothe['id']?>" checked>
+                </td>
                 <td>
                     <?= $clothe['id']?>
                 </td>
@@ -89,15 +95,13 @@ include_once '../connect/open.php';
         ?>
     </table>
     <div class="form_discount">
-        <form method="post" action="process.php">
-            <p> Chọn % giảm</p>
-            <input type="number" name="discount" min="1" max="50">
-            <button type="submit" class="btn add btn-primary">
+        <p> Chọn % giảm</p>
+        <input type="number" name="discount" min="1" max="50">
+        <button type="submit" class="btn add btn-primary">
                 Discount
-            </button>
-        </form>
+        </button>
     </div>
-
+    </form>
     <br>
 <section class="main_content">
         <br>

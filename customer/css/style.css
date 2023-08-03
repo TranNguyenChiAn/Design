@@ -38,7 +38,6 @@ body{
 .maincontent{
     margin-left: 60px;
     border: none;
-    width: 1200px;
     display: flex;
     flex-wrap: wrap;/* để cho xuống hàng */
     justify-content: flex-start; /* để giàn khung ra */

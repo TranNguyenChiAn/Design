@@ -23,7 +23,7 @@ if(!isset($_SESSION['email_admin'])){
             background-color: #F5F4F8;
         }
     </style>
-    <title> Manage Clothes </title>
+    <title> Discount </title>
 </head>
 <body>
 <?php
@@ -88,7 +88,7 @@ if(!isset($_SESSION['email_admin'])){
 
     <!-- LIST -->
     <p class="table_title"> DISCOUNT </p>
-    <p style="color: black"> Chọn sản phẩm bạn muốn giảm giá </p>
+    <p style="color: black"> Chọn sản phẩm giảm giá </p>
     <form method="post" action="discount.php">
     <table class="table-admin" border="0" cellspacing="0" cellpadding="10" width="100%" style="font-size: 12px">
         <tr>
@@ -129,18 +129,17 @@ if(!isset($_SESSION['email_admin'])){
                 <td>
                     <?= $clothe['price']?>
                 </td>
+                <td>
+
+                </td>
             </tr>
             <?php
         }
         ?>
     </table>
        <button type="submit" class="btn add btn-primary">
-           <a class="link_in_button" href="discount.php">
-               Discount
-           </a>
+           Discount
        </button>
-        <input type="submit" id="btn" value="Xem kết quả"/>
-
     </form>
     <br>
     <!--FOOTER-->
