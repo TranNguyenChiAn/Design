@@ -89,10 +89,10 @@ include_once '../connect/close.php';
     <!-- LIST -->
     <p class="table_title"> DISCOUNT </p>
     <p style="color: black"> Chọn sản phẩm muốn nhập thêm </p>
-    <form method="post" action="store.php">
+    <form method="post" action="receipt.php">
         <table class="table-admin" border="0" cellspacing="0" cellpadding="10" width="100%" style="font-size: 12px">
             <tr>
-                <th class="t-heading" align="left"> Choose </th>
+<!--                <th class="t-heading" align="left"> Choose </th>-->
                 <th class="t-heading" align="left"> ID </th>
                 <th class="t-heading" align="left"> Name </th>
                 <th class="t-heading" align="left"> Image </th>
@@ -100,14 +100,15 @@ include_once '../connect/close.php';
                 <th class="t-heading" align="left"> Color </th>
                 <th class="t-heading" align="left"> Quantity </th>
                 <th class="t-heading" align="left"> Price </th>
+                <th class="t-heading" align="center"> Import </th>
             </tr>
             <?php
             foreach($clothes as $clothe) {
                 ?>
                 <tr class="record">
-                    <td>
-                        <input type="checkbox" name="myCheckbox[]" value="<?= $clothe['id']?>">
-                    </td>
+<!--                    <td>-->
+<!--                        <input type="checkbox" name="myCheckbox[]" value="--><?php //= $clothe['id']?><!--">-->
+<!--                    </td>-->
                     <td>
                         <?= $clothe['id']?>
                     </td>
@@ -130,7 +131,9 @@ include_once '../connect/close.php';
                         <?= $clothe['price']?>
                     </td>
                     <td>
-
+                        <a href="process.php?id=<?= $clothe['id']?>">
+                            Import
+                        </a>
                     </td>
                 </tr>
                 <?php

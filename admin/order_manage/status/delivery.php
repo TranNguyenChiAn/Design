@@ -10,7 +10,7 @@ if (!isset($_SESSION['email_admin'])) {
 <!doctype html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -36,9 +36,9 @@ if (!isset($_SESSION['email_admin'])) {
 </head>
 <body>
 <?php
-include_once "../layout/navigation.php";
+include_once "../../layout/navigation.php";
 //mo ket noi
-include_once "../connect/open.php";
+include_once "../../connect/open.php";
 //Khai báo biến search
 $search = "";
 //Lấy giá trị được search về với điều kiện $_GET['search'] tồn tại
@@ -73,25 +73,22 @@ if(isset($_GET['page'])){
 //Tính bản ghi bắt đầu của trang
 $start = ($page - 1) * $recordOnePage;
 //Query để lấy dữ liệu từ bảng classes trên db về
-$sql = "SELECT orders.id, orders.date_buy, orders.status, orders.customer_id, 
-                SUM(order_details.price * order_details.quantity) as cost,order_details.clothes_id,
+$sql = "SELECT orders.id, orders.date_buy, orders.status, orders.customer_id,
                 customers.name AS customer_name
         FROM orders
-        INNER JOIN order_details ON orders.id = order_details.order_id
         INNER JOIN customers ON customers.id = orders.customer_id
-        WHERE orders.id LIKE '%$search%' 
+        WHERE orders.status = 'Delivery'
+             OR orders.id LIKE '%$search%' 
              OR customers.name LIKE '%$search%'
              OR orders.date_buy LIKE '%$search%'
              OR orders.status LIKE '%$search%'
-        GROUP BY orders.id 
-        ORDER BY orders.id DESC
+        ORDER BY id DESC
         LIMIT $start, $recordOnePage" ;
 //Chay query
 $orders = mysqli_query($connect, $sql);
 
 //Dong ket noi
-include_once '../connect/close.php';
-
+include_once '../../connect/close.php';
 ?>
 <section class="main_content">
     <!-- SEARCH -->
@@ -99,64 +96,59 @@ include_once '../connect/close.php';
         <input class="search" width="30px" type="text" name="search" value="<?= $search; ?>" placeholder="Search">
     </form>
     <p style="margin-top: 30px" class="table_title"> ORDERS </p>
-
-<table class="table-admin" width="100%" border="1" cellspacing="0" cellpadding="5px">
-    <tr>
-        <th class="t-heading" align="center"> Order ID </th>
-        <th class="t-heading" align="center"> Date buy</th>
-        <th class="t-heading" align="center"> Customer Name </th>
-        <th class="t-heading" align="center"> Cost </th>
-        <th class="t-heading" align="center"> Status </th>
-        <th class="t-heading" style="text-align: center"> Action </th>
-    </tr>
-    <?php
+    <a href="delivery.php">
+        Delivery
+    </a>
+    <table class="table-admin" width="100%" border="1" cellspacing="0" cellpadding="5px">
+        <tr>
+            <th class="t-heading" align="center"> Order ID </th>
+            <th class="t-heading" align="center"> Date buy</th>
+            <th class="t-heading" align="center"> Customer Name </th>
+            <th class="t-heading" align="center"> Status </th>
+            <th class="t-heading" style="text-align: center"> Action </th>
+        </tr>
+        <?php
         foreach ($orders as $order){
-            $money = $order['cost'] ;
-            $cost = round($money, 2);
-    ?>
-        <tr class="record">
-            <td style="padding-left: 30px"> <?= $order['id']?> </td>
-            <td> <?= $order['date_buy']?> </td>
-            <td>
+            ?>
+            <tr class="record">
+                <td style="padding-left: 30px"> <?= $order['id']?> </td>
+                <td> <?= $order['date_buy']?> </td>
+                <td>
                     <?= $order['customer_name']?>
-            </td>
-            <td>
-                <?= $cost ?>
-            </td>
-            <td>
-               <?php
+                </td>
+                <td>
+                    <?php
                     if($order['status'] == 0) { ?>
                         <button style="background-color: #ecce5d" class="status"> Pending </button>
-               <?php
+                        <?php
                     }elseif ($order['status'] == 1) { ?>
                         <button style="background-color: #231ec2" class="status"> Delivery </button>
-               <?php
+                        <?php
                     }elseif ($order['status'] == 2) { ?>
                         <button style="background-color: #1a6e3e" class="status"> Completed </button>
-               <?php
+                        <?php
                     }elseif ($order['status'] == 3) { ?>
                         <button style="background-color: #eb1f27" class="status"> Canceled </button>
-               <?php
+                        <?php
                     }
-
-               ?>
-            </td>
-            <td align="center">
-                <a class="edit" href="edit_order.php?id=<?= $order['id']?>">
-                    <img width="30px" src="../../image/edit.png">
-                </a>
-            </td>
-        </tr>
-    <?php
+                    ?>
+                </td>
+                <td align="center">
+                    <a class="edit" href="../edit_order.php?id=<?= $order['id']?>">
+                        <img width="30px" src="../../../image/edit.png">
+                    </a>
+                </td>
+            </tr>
+            <?php
         }
-    ?>
-</table>
+        ?>
+    </table>
 </section>
 <br>
 <!--FOOTER-->
 <?php
-    //Nhúng footer
-    include_once '../layout/footer.php';
+//Nhúng footer
+include_once '../../layout/footer.php';
 ?>
 <br>
 </body>

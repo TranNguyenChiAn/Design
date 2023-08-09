@@ -104,6 +104,7 @@ include_once '../connect/close.php';
             <th class="t-heading" align="left"> Name </th>
             <th class="t-heading" align="left"> Image </th>
             <th class="t-heading" align="left" width="118px"> Producer Name </th>
+
             <th class="t-heading" align="left"> Sold </th>
             <th class="t-heading" align="left"> Rest </th>
             <th class="t-heading" align="left"> Price </th>
@@ -132,8 +133,8 @@ include_once '../connect/close.php';
                     <?= $clothe['price']?>
                 </td>
             </tr>
-        <?php
-            }
+            <?php
+        }
         ?>
     </table>
     <br>
@@ -147,5 +148,3 @@ include_once '../connect/close.php';
 
 </body>
 </html>
-
-

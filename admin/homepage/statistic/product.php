@@ -59,23 +59,35 @@ if (!isset($_SESSION['email_admin'])) {
     if(isset($_POST['month'])) {
         $month = $_POST['month'];
     }
-//    else {
-//        echo " Khong nhan duoc ngay thang";
-//    }
+if(isset($_POST['month'])) {
+    $month = $_POST['month'];
+    //Query để lấy dữ liệu từ bảng classes trên db về
+    $sql = "SELECT sum(order_details.quantity) as quantity, MONTH(orders.date_buy),
+                    clothes.name as clothes_name, order_details.clothes_id
+            FROM order_details
+            INNER JOIN orders ON order_details.order_id = orders.id
+            INNER JOIN clothes ON clothes.id = order_details.clothes_id
+            WHERE orders.status = 2 AND orders.date_buy LIKE '%$month%' 
+            GROUP BY order_details.clothes_id
+            ORDER BY quantity DESC
+            LIMIT 6";
+    //Chay query
+    $result = mysqli_query($connect, $sql);
+}else{
     //Query để lấy dữ liệu từ bảng classes trên db về
     $sql = "SELECT sum(order_details.quantity) as quantity, MONTH(orders.date_buy),
            clothes.name as clothes_name, order_details.clothes_id
             FROM order_details
             INNER JOIN orders ON order_details.order_id = orders.id
             INNER JOIN clothes ON clothes.id = order_details.clothes_id
-            WHERE orders.status = 2 
-                AND MONTH(orders.date_buy) LIKE '%$this_month%' 
-                OR orders.date_buy LIKE '%$month%' 
+            WHERE orders.status = 2 AND orders.date_buy LIKE '%$this_month%'
             GROUP BY order_details.clothes_id
             ORDER BY quantity DESC
             LIMIT 6";
     //Chay query
     $result = mysqli_query($connect, $sql);
+}
+
     foreach ($result as $data) {
         $amount[] = $data['quantity'];
         $clothe_name[] = $data['clothes_name'];

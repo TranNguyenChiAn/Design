@@ -41,7 +41,7 @@ if (!isset($_SESSION['email_admin'])) {
         .notification {
             margin: 0 0 0 1%;
             width: 17%;
-            height: 120px;
+            height: 240px;
             border-radius: 6px;
         }
     </style>

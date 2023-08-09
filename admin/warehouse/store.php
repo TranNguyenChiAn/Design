@@ -37,7 +37,7 @@ include_once '../connect/open.php';
     <!-- LIST -->
     <p class="table_title"> DISCOUNT </p>
     <form method="post" action="process.php">
-        <table class="table-admin" border="0" cellspacing="0" cellpadding="10" width="100%" style="font-size: 12px">
+        <table class="table-admin" border="1" cellspacing="0" cellpadding="10" width="100%" style="font-size: 12px">
             <tr>
                 <th></th>
                 <th class="t-heading" align="left"> ID </th>
@@ -79,7 +79,7 @@ include_once '../connect/open.php';
                                     <?= $clothe['color']?>
                                 </td>
                                 <td>
-                                    <input type="number" name="import" min="10">
+                                    <input type="number" name="import" min="1">
                                 </td>
                                 <td>
                                     <?= $clothe['price']?>
@@ -108,5 +108,5 @@ include_once '../connect/open.php';
 /*$discount = $_POST['discount'];
 $sql = "UPDATE clothes SET price = price - (price * ('$discount'/100))";
 $clothes = mysqli_query($connect, $sql);
-header("Locaction: index.php");
+header("Locaction: cart.php");
 */?>

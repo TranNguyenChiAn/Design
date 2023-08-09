@@ -25,10 +25,13 @@ include_once "../connect/open.php";
 $email = $_SESSION['email_customer'];
 //Query
 $sql = "SELECT orders.id, orders.date_buy, orders.status, orders.customer_id,
-                customers.name AS customer_name
+                customers.name AS customer_name,
+                SUM(order_details.price * order_details.quantity) as cost
         FROM orders
         INNER JOIN customers ON customers.id = orders.customer_id
+        INNER JOIN order_details ON orders.id = order_details.order_id
         WHERE  customers.email = '$email'
+        GROUP BY orders.id
         ORDER BY id DESC" ;
 //Chay query
 $orders = mysqli_query($connect, $sql);
@@ -60,17 +63,23 @@ include_once '../connect/close.php';
         <th class="t-heading"> Order ID </th>
         <th class="t-heading"> Date buy</th>
         <th class="t-heading"> Customer Name </th>
+        <th class="t-heading"> Cost </th>
         <th class="t-heading"> Status </th>
         <th class="t-heading"> Detail </th>
     </tr>
     <?php
-    foreach ($orders as $order){
-        ?>
+        foreach ($orders as $order){
+            $money = $order['cost'] ;
+            $cost = round($money, 2);
+    ?>
         <tr class="record">
             <td> <?= $order['id']?> </td>
             <td> <?= $order['date_buy']?> </td>
             <td>
                 <?= $order['customer_name']?>
+            </td>
+            <td>
+                <?= $cost ?>
             </td>
             <td>
                 <?php

@@ -97,7 +97,7 @@ if (!isset($_SESSION['email_customer'])) {
                         <h3 style="margin: 0 0"> Delivery address </h3>
                         Receiver Name: <?= $order['receiver_name']; ?><br>
                         Receiver Phone: <?= $order['receiver_phone']; ?><br>
-                        Receiver Address:<?= $order['receiver_address']; ?>
+                        Receiver Address: <?= $order['receiver_address']; ?>
                     </div>
                 </div>
                 <?php
@@ -158,11 +158,12 @@ if (!isset($_SESSION['email_customer'])) {
     }
     ?>
     <div class="payment">
-        <form>
-        <table border="0" cellspacing="0" cellpadding="0" width="100%">
+        <form class="" method="POST" enctype="application/x-www-form-urlencoded"
+              action="process.php">
+            <table border="0" cellspacing="0" cellpadding="0" width="100%">
             <tr>
                 <td>
-                    <input type="radio" name="payment" value="0" checked> COD </input><br>
+                    <input type="radio" name="cod" value="0"> COD </input><br>
                     <span style="color: grey; margin: 0 0 0 24px"> Thanh toán bằng tiền mặt </span>
                 </td>
                 <td>
@@ -171,29 +172,18 @@ if (!isset($_SESSION['email_customer'])) {
             </tr>
             <tr>
                 <td>
-                    <input type="radio" name="payment" value="1"> MOMO </input><br>
-                    <span style="color: grey; margin: 0 0 0 24px"> Thanh toán qua Momo </span>
+                    <input type="radio" name="momo" value="1"> Momo </input><br>
+                    <span style="color: grey; margin: 0 0 0 24px"> Thanh toán bằng Momo </span>
                 </td>
                 <td>
-                    <img width="32px" src="../../image/momo.png">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="radio" name="payment" value="2"> Chuyển khoản </input><br>
-                    <span style="color: grey; margin: 0 0 0 24px"> Thanh toán bằng Napas </span>
-                </td>
-                <td>
-                    <img width="36px" src="../../image/Napas.png">
+                    <img width="36px" src="../../image/momo.png">
                 </td>
             </tr>
         </table>
-            <button type="submit" class="payment_button">
-                <a style="color: white" class="link" href="../mail/sendmail.php">
+            <button type="submit" name="momo" class="payment_button">
                     Pay
-                </a>
             </button>
-    </form>
+        </form>
     <br>
     </div>
 </section>

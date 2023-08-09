@@ -56,8 +56,6 @@ if(isset($_POST['month'])) {
             GROUP BY orders.date_buy";
     $result = mysqli_query($connect, $sql);
 }
-//Chay query
-
 
 foreach ($result as $data) {
     $amount[] = $data['quantity'];
