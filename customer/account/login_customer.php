@@ -72,14 +72,30 @@
 
         .register {
             margin-top: 10px;
-            text-decoration: none;
             display: flex;
             justify-content: flex-end;
             font-style: italic;
             font-weight: bold;
             color: white;
         }
+        #showEye {
+            position: absolute;
+            margin: 11px 0 0 -40px;
+            width: 20px;
+        }
+        #showEye:hover {
+            cursor: pointer;
+        }
 
+        #hideEye {
+            display: none;
+            position: absolute;
+            margin: 11px 0 0 -40px;
+            width: 20px;
+        }
+        #hideEye:hover {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -88,7 +104,10 @@
     <form align="center" id="form" method="post" action="loginProcess.php">
         <input id="email_customer" type="email" name="email_customer" placeholder="Email" width="500px"><br>
         <br>
-        <input  id="password_customer"type="password" name="password" placeholder="Password"><br>
+        <input  id="password_customer"type="password" name="password" placeholder="Password">
+        <img id="showEye" src="../../image/view.png" onclick="passwordShow()">
+        <img id="hideEye" src="../../image/hidden.png" onclick="passwordHide()">
+        <br>
         <br>
         <button  id="login_button" type="submit"> LOGIN </button>
 
@@ -97,6 +116,35 @@
 <div style="width: 500px">
     <a class="register" href="register.php"> Register </a>
 </div>
+
+<script type="text/javascript">
+    let password = document.getElementById('password_customer');
+    let showEye = document.getElementById('showEye');
+    let hideEye = document.getElementById('hideEye');
+
+    function black(){
+        showEye.style.fill = "#000000";
+        hideEye.style.fill = "#000000";
+    }
+    function white(){
+        showEye.style.fill = "#fff";
+        hideEye.style.fill = "#fff";
+    }
+
+    function passwordShow(){
+        password.type = 'text';
+        showEye.style.display= "none";
+        hideEye.style.display= "inline";
+        password.focus();
+    }
+    function passwordHide(){
+        password.type = 'password';
+        showEye.style.display= "inline";
+        hideEye.style.display= "none";
+        password.focus();
+    }
+</script>
+
 </body>
 </html>
 

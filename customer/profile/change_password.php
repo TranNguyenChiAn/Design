@@ -18,12 +18,12 @@
         .form_login {
             background-color: transparent;
             box-shadow: 0 18px 200px -60px black;
-            border-radius: 9px;
+            border-radius: 18px;
             width: 496px;
             margin: 10% 0 0 30%;
-            border: none;
+            border: 1px solid #6e6d6d;
             padding: 10px;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(30px);
             font-size: 20px;
         }
 
@@ -36,8 +36,9 @@
             padding-left: 9px;
         }
 
-        #password_customer {
+        #old_password {
             border: none;
+            width: 500px;
             border-bottom: 1px solid #e0dddd;
             border-radius: 6px;
             padding-left: 9px;
@@ -61,21 +62,89 @@
         #login_button:hover {
             cursor: pointer;
         }
+
+        #showEye {
+            position: absolute;
+            margin: 11px 0 0 -40px;
+            width: 20px;
+        }
+        #showEye:hover {
+            cursor: pointer;
+        }
+
+        #hideEye {
+            display: none;
+            position: absolute;
+            margin: 11px 0 0 -40px;
+            width: 20px;
+        }
+        #hideEye:hover {
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
 <div class="form_login" >
     <figure align="center" style="font-weight: bold; font-size: 30px;color: #e0dddd;"> Change Password </figure>
     <form align="center" id="form" method="post" action="change_process.php">
-        <input  id="password_customer"type="password" name="old_password" placeholder="Old Password"><br>
+        <input id="old_password" type="password" name="old_password" placeholder="Old Password">
+        <img id="showEye" src="../../image/view.png" onclick="oldPasswordShow()">
+        <img id="hideEye" src="../../image/hidden.png" onclick="oldPasswordHide()">
+
         <br>
-        <input id="new_password" type="text" name="new_password" placeholder=" New Password" width="500px"><br>
+        <br>
+
+        <input id="new_password" type="password" name="new_password" placeholder="New Password">
+        <img id="showEye" src="../../image/view.png" onclick="newPasswordShow()">
+        <img id="hideEye" src="../../image/hidden.png" onclick="newPasswordHide()">
+        <br>
         <br>
         <button  id="login_button" type="submit"> Change </button>
         <br>
     </form>
 </div>
+<script type="text/javascript">
+    let oldPassword = document.getElementById('old_password');
+    let newPassword = document.getElementById('new_password');
+    let showEye = document.getElementById('showEye');
+    let hideEye = document.getElementById('hideEye');
 
+    function black(){
+        showEye.style.fill = "#000000";
+        hideEye.style.fill = "#000000";
+    }
+    function white(){
+        showEye.style.fill = "#fff";
+        hideEye.style.fill = "#fff";
+    }
+
+    function oldPasswordShow(){
+        oldPassword.type = 'text';
+        showEye.style.display= "none";
+        hideEye.style.display= "inline";
+        oldPassword.focus();
+    }
+    function oldPasswordHide(){
+        oldPassword.type = 'password';
+        showEye.style.display= "inline";
+        hideEye.style.display= "none";
+        oldPassword.focus();
+    }
+
+    function newPasswordShow(){
+        newPassword.type = 'text';
+        showEye.style.display= "none";
+        hideEye.style.display= "inline";
+        newPassword.focus();
+    }
+    function newPasswordHide(){
+        newPassword.type = 'password';
+        showEye.style.display= "inline";
+        hideEye.style.display= "none";
+        newPassword.focus();
+    }
+</script>
 </body>
 </html>
 

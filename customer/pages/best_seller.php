@@ -123,7 +123,7 @@ if(isset($_GET['search'])) {
                     <a  href="product_detail.php?id=<?= $order_detail['clothes_id'] ?>">
                         <img style="width:278px; height: 278px; object-fit: cover" src="../../image/<?= $order_detail['image'] ?>" alt="BEST SELLER" >
                         <?php
-                        if($order_detail['quantity'] < 9 and $order_detail['quantity'] > 0){
+                        if($order_detail['quantity'] <= 9 and $order_detail['quantity'] > 0){
                             ?>
                             <img class="out_of_stock" src="../../image/out_of_stock.png">
                             <?php

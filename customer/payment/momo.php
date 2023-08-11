@@ -2,9 +2,6 @@
 session_start();
 include_once "../connect/open.php";
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
 $customer_id = $_SESSION['id'];
 //query lấy max_order_id
 $sqlMaxOrderId = "SELECT MAX(id) AS max_order_id FROM orders WHERE customer_id = '$customer_id'";
@@ -13,13 +10,16 @@ $maxOrderIds = mysqli_query($connect, $sqlMaxOrderId);
 foreach ($maxOrderIds as $maxOrderId) {
     $order_id = $maxOrderId['max_order_id'];
     //Query
-    $sql = "SELECT clothes_id, order_id, SUM(price * quantity) as cost
-            FROM order_details
+    $sql = "SELECT order_details.order_id, SUM(order_details.price * order_details.quantity) as cost,
+                    customers.name as customer_name
+            FROM orders
+            INNER JOIN order_details ON order_details.order_id = orders.id
+            INNER JOIN customers ON orders.customer_id = customers.id
             WHERE order_id = '$order_id'";
     //Chạy query
-    $order_details = mysqli_query($connect, $sql);
-    foreach($order_details as $order_detail){
-        $count_money = round($order_detail['cost'], 2);
+    $orders = mysqli_query($connect, $sql);
+    foreach($orders as $order){
+        $count_money = round($order['cost'], 2);
 
         // start pay
         header('Content-type: text/html; charset=utf-8');
@@ -78,55 +78,11 @@ foreach ($maxOrderIds as $maxOrderId) {
         $result = execPostRequest($endpoint, json_encode($data));
         $jsonResult = json_decode($result, true);  // decode json
 
-        //Just a example, please check more in there
+        //Just an example, please check more in there
 
-        //send mail
-
-        require 'PHPMailer/src/Exception.php';
-        require 'PHPMailer/src/PHPMailer.php';
-        require 'PHPMailer/src/SMTP.php';
-
-
-        $name = $_SESSION['name'];
-        $email = $_SESSION['email_customer'];
-        $subject = "New order";
-        $message = "You have new order from ";
-        echo $name, $email, $subject, $message;
-
-        $mail = new PHPMailer(true);
-
-        $mail->SMTPOptions = array(
-            'ssl'=> array(
-                'verify_peer'=> false,
-                'verify_peer_name'=> false,
-                'allow_self_signed'=>true
-            )
-        );
-
-        $mail->isSMTP();
-        $mail->SMTPAuth = true;
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Username = 'trantranchian@gmail.com';
-        $mail->Password = 'jdkaueomxvkedeos';
-        $mail->Port = 465;
-        $mail->SMTPSecure = 'ssl';
-
-        $mail->setFrom($email, $name);
-
-        $mail->addAddress('trantranchian@gmail.com');
-
-        $mail->isHTML(true);
-
-        $mail->Subject = ("$email ($subject)");
-        $mail->Body = $message . $email;
-        $mail->send();
-
-        header('Location: ' . $jsonResult['payUrl']);
         // end pay
     }
 }
-
-
-
+header('Location: ' . $jsonResult['payUrl']);
 
 ?>

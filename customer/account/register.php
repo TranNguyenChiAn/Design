@@ -22,9 +22,7 @@ if(isset($_SESSION['email_customer'])){
                 background-image: url("../../image/banner.png");
                 background-repeat:no-repeat;
                 background-size: cover;
-                /*background-color: rgba(239, 239, 243, 0.91);*/
             }
-
             .form_register {
                 background-color: #faf7f7;
                 border-radius: 9px;
@@ -35,7 +33,6 @@ if(isset($_SESSION['email_customer'])){
                 font-size: 20px;
                 color: black;
             }
-
             .form_register_input {
                 margin-left: 30px;
             }
@@ -53,7 +50,24 @@ if(isset($_SESSION['email_customer'])){
                 border-radius: 6px;
                 color: white;
             }
+            #showEye {
+                position: absolute;
+                margin: 22px 0 0 -40px;
+                width: 20px;
+            }
+            #showEye:hover {
+                cursor: pointer;
+            }
 
+            #hideEye {
+                display: none;
+                position: absolute;
+                margin: 22px 0 0 -40px;
+                width: 20px;
+            }
+            #hideEye:hover {
+                cursor: pointer;
+            }
         </style>
     </head>
     <body>
@@ -63,7 +77,10 @@ if(isset($_SESSION['email_customer'])){
             <!--ID: <input type="number" name="id"><br>-->
             Name: <input class="input_register" type="text" name="name" placeholder="Name"><br>
             Email: <input class="input_register" type="email" name="email_customer" placeholder="Email"><br>
-            Password: <input class="input_register" type="password" name="password" placeholder="Password"><br>
+            Password: <input class="input_register" id="password" type="password" name="password" placeholder="Password">
+                        <img id="showEye" src="../../image/view.png" onclick="passwordShow()">
+                        <img id="hideEye" src="../../image/hidden.png" onclick="passwordHide()">
+            <br>
             Phone: <input class="input_register" type="text" name="phone" placeholder="Phone"><br>
             Gender: <input type="radio" name="gender" value="0"> Female
                     <input type="radio" name="gender" value="1"> Male <br>
@@ -73,5 +90,34 @@ if(isset($_SESSION['email_customer'])){
             <p></p>
         </form>
     </div>
+
+    <script type="text/javascript">
+        let password = document.getElementById('password');
+        let showEye = document.getElementById('showEye');
+        let hideEye = document.getElementById('hideEye');
+
+        function black(){
+            showEye.style.fill = "#000000";
+            hideEye.style.fill = "#000000";
+        }
+        function white(){
+            showEye.style.fill = "#fff";
+            hideEye.style.fill = "#fff";
+        }
+
+        function passwordShow(){
+            password.type = 'text';
+            showEye.style.display= "none";
+            hideEye.style.display= "inline";
+            password.focus();
+        }
+        function passwordHide(){
+            password.type = 'password';
+            showEye.style.display= "inline";
+            hideEye.style.display= "none";
+            password.focus();
+        }
+    </script>
+
 </body>
 </html>

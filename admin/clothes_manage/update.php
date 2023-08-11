@@ -10,7 +10,7 @@
     $producer_id = $_POST['producer_id'];
     $quantity = $_POST['quantity'];
     $price = $_POST['price'];
-    if(!empty($_FILES['image']['name'])){
+    if(isset($_FILES['image']['name'])){
         $image = $_FILES['image']['name'];
     }
 

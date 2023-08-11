@@ -318,6 +318,38 @@ body{
 .payment_button:hover {
     cursor: pointer;
 }
+.out_of_stock {
+    width: 60px;
+    height: auto;
+    position: absolute;
+    margin: -24px 0 0 -50px;
+    rotate: 30deg;
+}
+.sold_out {
+    width: 90px;
+    height: auto;
+    position: absolute;
+    margin: 90px 0 0 90px;
+}
+
+#showEye {
+    position: absolute;
+    margin: 11px 0 0 -40px;
+    width: 20px;
+}
+#showEye:hover {
+    cursor: pointer;
+}
+
+#hideEye {
+    display: none;
+    position: absolute;
+    margin: 11px 0 0 -40px;
+    width: 20px;
+}
+#hideEye:hover {
+    cursor: pointer;
+}
 
 
 

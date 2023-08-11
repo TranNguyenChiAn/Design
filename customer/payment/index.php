@@ -158,8 +158,7 @@ if (!isset($_SESSION['email_customer'])) {
     }
     ?>
     <div class="payment">
-        <form class="" method="POST" enctype="application/x-www-form-urlencoded"
-              action="process.php">
+
             <table border="0" cellspacing="0" cellpadding="0" width="100%">
             <tr>
                 <td>
@@ -172,18 +171,22 @@ if (!isset($_SESSION['email_customer'])) {
             </tr>
             <tr>
                 <td>
-                    <input type="radio" name="momo" value="1"> Momo </input><br>
-                    <span style="color: grey; margin: 0 0 0 24px"> Thanh toán bằng Momo </span>
-                </td>
-                <td>
-                    <img width="36px" src="../../image/momo.png">
+                    <form class="" method="POST" enctype="application/x-www-form-urlencoded"
+                           action="momo.php">
+                        <button type="submit" name="payUrl" class="payment_button">
+                            Momo
+                        </button>
+                    </form>
                 </td>
             </tr>
+                <tr>
+                    <td>
+                        <button id="paypal-button"> Pay with PayPal </button>
+                    </td>
+                </tr>
         </table>
-            <button type="submit" name="momo" class="payment_button">
-                    Pay
-            </button>
-        </form>
+
+
     <br>
     </div>
 </section>

@@ -32,6 +32,19 @@
             display: flex;
         }
 
+        .out_of_stock {
+            width: 60px;
+            height: auto;
+            position: absolute;
+            margin: -24px 0 0 -50px;
+            rotate: 30deg;
+        }
+        .sold_out {
+            width: 90px;
+            height: auto;
+            position: absolute;
+            margin: 90px 0 0 90px;
+        }
     </style>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <meta charset="UTF-8">
@@ -74,10 +87,27 @@
                 <div class="col-3">
                     <a  href="product_detail.php?id=<?= $clothe['id'] ?>">
                         <img style="width:278px; height: 278px; object-fit: cover" src="../../image/<?= $clothe['image'] ?>" alt="BEST SELLER">
+                        <?php
+                        if($clothe['quantity'] <= 9 and $clothe['quantity'] > 0){
+                            ?>
+                            <img class="out_of_stock" src="../../image/out_of_stock.png">
+                            <?php
+                        }
+                        ?>
                     </a>
-                    <a href="../carts/add to cart.php?id=<?= $clothe['id']; ?>">
-                        <img class="cart_symbol" src="../../image/shopping-cart.png">
-                    </a>
+                    <?php
+                    if($clothe['quantity'] > 0){
+                        ?>
+                        <a href="../carts/add to cart.php?id=<?= $clothe['id']; ?>">
+                            <img class="cart_symbol" src="../../image/shopping-cart.png">
+                        </a>
+                        <?php
+                    }else {
+                        ?>
+                        <img class="sold_out" src="../../image/sold_out.png">
+                        <?php
+                    }
+                    ?>
                     <br>
                     <span class="product_name"><?= $clothe['name'] ?></span>
                     <hr style="width:200px;margin:6px 0">

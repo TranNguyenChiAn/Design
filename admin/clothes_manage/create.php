@@ -106,7 +106,7 @@ include_once "../connect/close.php";
        Price: <input style="margin-bottom: 18px" type="text" name="price"><br>
        Image: <input type="file" name="image" id="imageFile" onchange="chooseFile(this)"
                      accept="image/gif, image/png, image/jpeg">
-                <img src="" alt="" id="image" width="200px">
+                <img src="" alt="" id="image" width="200px" name="image">
         <br><br><br><br><br><br><br>
        <button class="btn add btn-primary" type="submit"> Add </button>
     </form>
