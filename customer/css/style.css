@@ -295,6 +295,11 @@ body{
     font-weight: bold;
 }
 
+.link_in_button {
+    text-decoration: none;
+    color: white;
+}
+
 .confirm_cancel {
     z-index: 3;
     position: absolute;

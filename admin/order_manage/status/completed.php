@@ -44,7 +44,7 @@ if (!isset($_SESSION['email_admin'])) {
             cursor: pointer;
             background-color: #f8f6f6;
         }
-        #delivery {
+        #completed {
             background-color: white;
             cursor: pointer;
         }
@@ -74,8 +74,9 @@ $sqlCountRecord = "SELECT COUNT(*) AS count_record, orders.id, orders.date_buy, 
                     WHERE (orders.id LIKE '%$search%' 
                       OR customers.name LIKE '%$search%'
                       OR orders.date_buy LIKE '%$search%'
-                      OR orders.status LIKE '%$search%') 
-                      AND orders.status = 1";
+                      OR orders.status LIKE '%$search%')
+                      AND orders.status = 2
+                      ";
 //Chạy query lấy số bản ghi
 $countRecords = mysqli_query($connect, $sqlCountRecord);
 //foreach để lấy số bản ghi
@@ -96,12 +97,12 @@ $sql = "SELECT orders.id, orders.date_buy, orders.status, orders.customer_id,
                 customers.name AS customer_name
         FROM orders
         INNER JOIN customers ON customers.id = orders.customer_id
-        WHERE orders.status = 1 AND
+        WHERE orders.status = 2 AND
             (orders.id LIKE '%$search%' 
              OR customers.name LIKE '%$search%'
              OR orders.date_buy LIKE '%$search%'
              OR orders.status LIKE '%$search%')
-        ORDER BY orders.date_buy ASC
+        ORDER BY orders.date_buy DESC
         LIMIT $start, $recordOnePage" ;
 //Chay query
 $orders = mysqli_query($connect, $sql);

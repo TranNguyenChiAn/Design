@@ -86,10 +86,10 @@ include_once '../connect/close.php';
                     <form method="post" action="process.php">
                         <input type="hidden" name="id" value="<?= $order['id']; ?>">
                         <select class="edit_status" name="status">
-                            <option value="0"> Pending </option>
-                            <option value="1"> Delivery </option>
-                            <option value="2"> Completed </option>
-                            <option value="3"> Canceled </option>
+                            <option name="status" value="0"> Pending </option>
+                            <option name="status" value="1"> Delivery </option>
+                            <option name="status" value="2"> Completed </option>
+                            <option name="status" value="3"> Canceled </option>
                         </select>
                         <button type="submit" class="btn btn-primary">
                             OK

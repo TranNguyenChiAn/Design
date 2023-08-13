@@ -51,6 +51,10 @@ if (!isset($_SESSION['email_customer'])) {
         .payment_button:hover {
             cursor: pointer;
         }
+        .link_in_button {
+            text-decoration: none;
+            color: white;
+        }
     </style>
     <?php
         session_start();
@@ -67,6 +71,7 @@ if (!isset($_SESSION['email_customer'])) {
             $order_id = $maxOrderId['max_order_id'];
             //Query
             $sql = "SELECT order_details.clothes_id, order_details.order_id, order_details.price, order_details.quantity,
+                            SUM(order_details.price * order_details.quantity) as cost,
                             clothes.image AS image, clothes.name AS clothe_name, clothes.description,
                             orders.receiver_name, orders.receiver_phone,orders.receiver_address, orders.status
                     FROM order_details
@@ -79,6 +84,7 @@ if (!isset($_SESSION['email_customer'])) {
             $sql = "SELECT * FROM orders WHERE id = '$order_id'";
             //Chạy query
             $orders = mysqli_query($connect, $sql);
+
 
         //Đóng kết nối
         include_once '../connect/close.php';
@@ -108,13 +114,13 @@ if (!isset($_SESSION['email_customer'])) {
             <h3 style="margin: 0 0 18px 0"> Product </h3>
             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                 <?php
-                foreach ($order_details as $order_detail){
-                    ?>
+                    foreach ($order_details as $order_detail){
+                ?>
                     <tr style="margin-top: 20px;">
                         <td width="120px">
                             <img width="120px" src="../../image/<?= $order_detail['image']?>">
                         </td>
-                        <td style="padding-left: 18px ">
+                        <td style="padding-left: 18px; width: 300px ">
                             <h3><?= $order_detail['clothe_name']?></h3>
                             Amount: <?= $order_detail['quantity'] ?><br>
                             Price: $<?= $order_detail['price'] ?><br>
@@ -158,22 +164,28 @@ if (!isset($_SESSION['email_customer'])) {
     }
     ?>
     <div class="payment">
-
             <table border="0" cellspacing="0" cellpadding="0" width="100%">
             <tr>
                 <td>
-                    <input type="radio" name="cod" value="0"> COD </input><br>
-                    <span style="color: grey; margin: 0 0 0 24px"> Thanh toán bằng tiền mặt </span>
-                </td>
-                <td>
-                    <img width="32px" src="../../image/money-back-guarantee.png">
+                    <button type="submit" name="cash" style="background-color: #2c8c6b" class="payment_button">
+                        <a class="link_in_button" href="sendmail.php">
+                            Pay with cash
+                        </a>
+
+                    </button>
                 </td>
             </tr>
+                <?php
+                foreach($order_details as $order_detail) {
+                    $total_cost = round($order_detail['cost'], 2);
+                ?>
             <tr>
                 <td>
                     <form class="" method="POST" enctype="application/x-www-form-urlencoded"
                            action="momo.php">
-                        <button type="submit" name="payUrl" class="payment_button">
+                        <input type="hidden" name="total_cost" value="<?= $total_cost?>">
+                        <input type="hidden" name="order_id" value="<?= $order_detail['order_id'] ?>">
+                        <button type="submit" name="momo" style="background-color: #f3209f" class="payment_button">
                             Momo
                         </button>
                     </form>
@@ -181,9 +193,19 @@ if (!isset($_SESSION['email_customer'])) {
             </tr>
                 <tr>
                     <td>
-                        <button id="paypal-button"> Pay with PayPal </button>
+                        <form class="" method="POST" enctype="application/x-www-form-urlencoded"
+                              action="vnpay.php">
+                            <input type="hidden" name="total_cost" value="<?= $total_cost?>">
+                            <input type="hidden" name="order_id" value="<?= $order_detail['order_id'] ?>">
+                            <button type="submit" name="redirect" style="background-color: #0d3aea" class="payment_button">
+                                VnPay
+                            </button>
+                        </form>
                     </td>
                 </tr>
+                <?php
+                    }
+                ?>
         </table>
 
 
