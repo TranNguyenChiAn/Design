@@ -1,12 +1,4 @@
-<?php
-//Cho phép làm việc với session
-session_start();
-//Kiểm tra đã tồn tại số đth trên session hay chưa, nếu chưa tồn tại thì cho quay về account
-if (!isset($_SESSION['email_customer'])) {
-    //Quay về trang account
-    header("Location: ../account/login_customer.php");
-}
-?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -106,11 +98,14 @@ if (!isset($_SESSION['email_customer'])) {
         #hideEye2:hover {
             cursor: pointer;
         }
+
     </style>
 </head>
 <body>
 <div class="form_login" >
     <figure align="center" style="font-weight: bold; font-size: 30px;color: #e0dddd;"> Change Password </figure>
+    <p style="color: red; font-size: 12px; margin-left: 10%"> *Your new password was sent to your email.<br>
+                     &nbsp; Enter the 'Old Password' box.  </p>
     <form align="center" id="form" method="post" action="change_process.php">
         <input id="old_password" type="password" name="old_password" placeholder="Old Password">
         <img id="showEye" src="../../image/view.png" onclick="oldPasswordShow()">

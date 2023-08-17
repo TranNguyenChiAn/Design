@@ -28,7 +28,7 @@
             box-shadow: 0 18px 200px -60px black;
             border-radius: 30px;
             width: 500px;
-            margin: 100px 100px 0px 380px;
+            margin: 100px 100px 0 380px;
             border: none;
             padding: 10px;
             backdrop-filter: blur(20px);

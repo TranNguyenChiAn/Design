@@ -21,7 +21,7 @@ foreach($accounts AS $account){
 }
 if($count_account == 0) {
     // Quay lại trang account
-    header("Location: login_customer.php");
+    header('Location: login_customer.php');
 }else {
     //Lưu id, số đth lên section
     $_SESSION['id'] = $id;

@@ -10,18 +10,18 @@
         body {
             background-color: white;
         }
-        .out_of_stock {
-            width: 60px;
+        #out_of_stock {
+            width: 90px;
             height: auto;
             position: absolute;
             margin: -24px 0 0 -50px;
             rotate: 30deg;
         }
-        .sold_out {
-            width: 90px;
+        #sold_out {
+            width: 200px;
             height: auto;
             position: absolute;
-            margin: 0 0 0 -90px;
+            margin: 10% 0 0 -24%;
         }
     </style>
     <title> Product's Detail</title>
@@ -51,11 +51,11 @@
                     <?php
                     if($clothe['quantity'] < 9 and $clothe['quantity'] > 0){
                         ?>
-                        <img class="out_of_stock" src="../../image/out_of_stock.png">
+                        <img id="out_of_stock" src="../../image/out_of_stock.png">
                         <?php
                     }elseif ($clothe['quantity'] == 0){
                         ?>
-                        <img class="sold_out" src="../../image/sold_out.png">
+                        <img id="sold_out" src="../../image/sold_out.png">
                     <?php
                     }
                     ?>

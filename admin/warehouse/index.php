@@ -94,9 +94,9 @@ include_once '../connect/close.php';
 
     <!-- LIST -->
     <p class="table_title"> WAREHOUSE </p>
-    <button class="button_project">
-        <a class="link_in_button" href="import.php"> + Import </a> <br>
-    </button>
+<!--    <button class="button_project">-->
+<!--        <a class="link_in_button" href="import.php"> + Import </a> <br>-->
+<!--    </button>-->
     <br><br>
     <table class="table-admin" border="0" cellspacing="0" cellpadding="10" width="100%" style="font-size: 12px">
         <tr>

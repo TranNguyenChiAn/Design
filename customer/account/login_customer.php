@@ -23,7 +23,6 @@
             background-repeat:no-repeat;
             background-size: cover;
         }
-
         .form_login {
             background-color: transparent;
             box-shadow: 0 18px 200px -60px black;
@@ -35,8 +34,6 @@
             backdrop-filter: blur(20px);
             font-size: 20px;
         }
-
-
         #email_customer {
             border: none;
             border-bottom: 1px solid #cbc9c9;
@@ -105,19 +102,21 @@
         <input id="email_customer" type="email" name="email_customer" placeholder="Email" width="500px"><br>
         <br>
         <input  id="password_customer"type="password" name="password" placeholder="Password">
+        <span id="error_password"></span>
         <img id="showEye" src="../../image/view.png" onclick="passwordShow()">
         <img id="hideEye" src="../../image/hidden.png" onclick="passwordHide()">
         <br>
         <br>
-        <button  id="login_button" type="submit"> LOGIN </button>
-
+        <button  id="login_button" onclick="return validate()" type="submit" > LOGIN </button>
     </form>
 </div>
-<div style="width: 500px">
+<div style="width: 500px; display: flex; justify-content: space-between; margin-left: 30%">
     <a class="register" href="register.php"> Register </a>
+    <a class="register" href="../forgot_password/index.php"> Forgot password </a>
 </div>
 
 <script type="text/javascript">
+    let button = document.getElementById('login_button')
     let password = document.getElementById('password_customer');
     let showEye = document.getElementById('showEye');
     let hideEye = document.getElementById('hideEye');
@@ -142,6 +141,9 @@
         showEye.style.display= "inline";
         hideEye.style.display= "none";
         password.focus();
+    }
+    function validate() {
+
     }
 </script>
 

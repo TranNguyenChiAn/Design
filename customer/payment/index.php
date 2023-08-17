@@ -71,7 +71,6 @@ if (!isset($_SESSION['email_customer'])) {
             $order_id = $maxOrderId['max_order_id'];
             //Query
             $sql = "SELECT order_details.clothes_id, order_details.order_id, order_details.price, order_details.quantity,
-                            SUM(order_details.price * order_details.quantity) as cost,
                             clothes.image AS image, clothes.name AS clothe_name, clothes.description,
                             orders.receiver_name, orders.receiver_phone,orders.receiver_address, orders.status
                     FROM order_details
@@ -84,6 +83,16 @@ if (!isset($_SESSION['email_customer'])) {
             $sql = "SELECT * FROM orders WHERE id = '$order_id'";
             //Chạy query
             $orders = mysqli_query($connect, $sql);
+    $sql = "SELECT order_details.clothes_id, order_details.order_id, order_details.price, order_details.quantity,
+                            SUM(order_details.price * order_details.quantity) as cost,
+                            clothes.image AS image, clothes.name AS clothe_name, clothes.description,
+                            orders.receiver_name, orders.receiver_phone,orders.receiver_address, orders.status
+                    FROM order_details
+                    INNER JOIN clothes ON clothes.id = order_details.clothes_id
+                    INNER JOIN orders ON orders.id = order_details.order_id
+                    WHERE order_details.order_id = '$order_id'";
+    //Chạy query
+    $totals = mysqli_query($connect, $sql);
 
 
         //Đóng kết nối
@@ -176,29 +185,29 @@ if (!isset($_SESSION['email_customer'])) {
                 </td>
             </tr>
                 <?php
-                foreach($order_details as $order_detail) {
-                    $total_cost = round($order_detail['cost'], 2);
+                foreach($totals as $total) {
+                    $total_cost = round($total['cost'], 2);
                 ?>
             <tr>
                 <td>
                     <form class="" method="POST" enctype="application/x-www-form-urlencoded"
                            action="momo.php">
                         <input type="hidden" name="total_cost" value="<?= $total_cost?>">
-                        <input type="hidden" name="order_id" value="<?= $order_detail['order_id'] ?>">
+                        <input type="hidden" name="order_id" value="<?= $total['order_id'] ?>">
                         <button type="submit" name="momo" style="background-color: #f3209f" class="payment_button">
                             Momo
                         </button>
                     </form>
                 </td>
-            </tr>
+            </tr>s
                 <tr>
                     <td>
                         <form class="" method="POST" enctype="application/x-www-form-urlencoded"
                               action="vnpay.php">
                             <input type="hidden" name="total_cost" value="<?= $total_cost?>">
-                            <input type="hidden" name="order_id" value="<?= $order_detail['order_id'] ?>">
-                            <button type="submit" name="redirect" style="background-color: #0d3aea" class="payment_button">
-                                VnPay
+                            <input type="hidden" name="order_id" value="<?= $total['order_id'] ?>">
+                            <button type="submit" name="redirect" style="background-color: #005BAA" class="payment_button">
+                                Pay with VnPay
                             </button>
                         </form>
                     </td>

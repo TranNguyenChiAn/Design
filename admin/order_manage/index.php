@@ -35,7 +35,7 @@ include_once '../connect/close.php';
 
 ?>
 
-    <iframe src="status/pending.php" width="100%" height="620px">
+    <iframe src="status/all.php" width="100%" height="620px">
 
 
 <br>
