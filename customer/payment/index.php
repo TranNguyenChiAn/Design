@@ -174,13 +174,13 @@ if (!isset($_SESSION['email_customer'])) {
     ?>
     <div class="payment">
             <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                <th> Payment Method </th>
             <tr>
                 <td>
                     <button type="submit" name="cash" style="background-color: #2c8c6b" class="payment_button">
                         <a class="link_in_button" href="sendmail.php">
                             Pay with cash
                         </a>
-
                     </button>
                 </td>
             </tr>
@@ -199,7 +199,7 @@ if (!isset($_SESSION['email_customer'])) {
                         </button>
                     </form>
                 </td>
-            </tr>s
+            </tr>
                 <tr>
                     <td>
                         <form class="" method="POST" enctype="application/x-www-form-urlencoded"

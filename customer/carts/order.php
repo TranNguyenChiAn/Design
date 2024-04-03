@@ -2,6 +2,7 @@
 session_start();
 //Kiểm tra đã account chưa
 if(isset($_SESSION['id'])){
+    $admin_id = $_SESSION['id'];
     //Lấy ngày hiện tại
     $date_buy = date('Y-m-d');
     //Lấy status (status mặc định là 0 tương ứng với trạng thái chờ xác nhận của đơn hàng)
@@ -15,8 +16,8 @@ if(isset($_SESSION['id'])){
     //Mở kết nối
     include_once '../connect/open.php';
     //Query thêm dữ liệu lên bảng orders
-    $sqlInsertOrder = "INSERT INTO orders(date_buy, status, customer_id, receiver_name, receiver_phone, receiver_address) 
-                       VALUES ('$date_buy', '$status', '$customer_id', '$receiver_name', '$receiver_phone', '$receiver_address')";
+    $sqlInsertOrder = "INSERT INTO orders(date_buy, status, customer_id,admin_id, receiver_name, receiver_phone, receiver_address) 
+                       VALUES ('$date_buy', '$status', '$customer_id','$admin_id ', '$receiver_name', '$receiver_phone', '$receiver_address')";
     //Chạy query insert dữ liệu lên bảng orders
     mysqli_query($connect, $sqlInsertOrder);
     //query lấy order_id lớn nhất của customer đang account hiện tại

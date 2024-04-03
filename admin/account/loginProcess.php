@@ -9,7 +9,7 @@ $hash_password = md5($password_md5);
 //Mở kết nối
 include_once '../connect/open.php';
 //viết query
-$sql = "SELECT *, COUNT(id) AS count_account FROM admins WHERE email='$email' AND password = '$hash_password'";
+$sql = "SELECT *, COUNT(id) AS count_account FROM admins WHERE email='$email' AND password = '$password'";
 //chạy query
 $accounts = mysqli_query($connect, $sql);
 //Đóng kết nối

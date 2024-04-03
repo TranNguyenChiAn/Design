@@ -18,6 +18,7 @@
 */
 // Mở kết nối đến DB
 $connect = mysqli_connect('localhost', 'root', '', 'design');
+
 ?>
 
 

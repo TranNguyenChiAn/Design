@@ -44,7 +44,7 @@
 <body>
 <!-------------------- HEADER -------------------->
 <?php
-session_start();
+//session_start();
 include_once '../layout/header.php';
 //Mở kết nối
 include_once '../connect/open.php';
@@ -101,7 +101,7 @@ if(isset($_GET['search'])) {
             ?>
                 <div class="col-3" style="">
                     <a href="product_detail.php?id=<?= $clothe['id'] ?>">
-                        <img style="width:278px; height: 278px; object-fit: cover" src="../../image/<?= $clothe['image'] ?>" alt="BEST SELLER" >
+                        <img style="width:278px; height: 278px; object-fit: cover" src="../../image/<?= $clothe['image'] ?>" >
                         <?php
                             if($clothe['quantity'] <= 9 and $clothe['quantity'] > 0){
                         ?>
